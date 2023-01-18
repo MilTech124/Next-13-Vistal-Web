@@ -23,8 +23,10 @@
 }
 .car{
    animation-name: car;
-   animation-duration: 9s;
+   animation-duration: 10s;
    animation-iteration-count: infinite;
+   animation-timing-function: ease-in-out;
+
 }
 
 @keyframes car {

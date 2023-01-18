@@ -2,17 +2,18 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import React from "react";
 
-function NavMobile({ links }) {
+function NavMobile({ links,openMenu}) {
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
-
+  
   return (
-    <div className="absolute top-[75px] left-0 bg-white/95 shadow-xl w-[70vw] ">
-      <nav className="ml-auto pr-[5vw]">
+    <div className="absolute top-[75px] left-0 bg-white/95 shadow-xl w-[100vw] ">
+      <nav className="ml-auto w-full">
         <ul className="flex flex-col gap-8 px-5 py-10">
           {links.map((link) => (
             <Link
+              onClick={()=>(openMenu())}
               key={link.name}
               href={link.link}
               className={classNames(
@@ -29,7 +30,8 @@ function NavMobile({ links }) {
         </ul>
       </nav>
     </div>
-  );
+  )
+
 }
 
 export default NavMobile;

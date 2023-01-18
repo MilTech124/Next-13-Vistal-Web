@@ -39,13 +39,13 @@ function kontakt() {
             pytania. Wykonujemy usługi na terenie całego kraju.
           </p>
           <div className="flex gap-20">
-            <a href="tel:+48 693344132">
+            <a href="tel:+48 693344132" className="p-1 rounded-md hover:scale-110 hover:bg-slate-100/50">
               <img src="/svg/wphone.svg" alt="icon" className="w-16" />
             </a>
-            <a href="mailto:kontakt@vistal-garaze-blaszane.pl">
+            <a href="mailto:kontakt@vistal-garaze-blaszane.pl" className="p-1 rounded-md hover:scale-110 hover:bg-slate-100/50" >
               <img src="/svg/wmail.svg" alt="icon" className="w-16" />
             </a>
-            <a href="">
+            <a href="https://www.facebook.com/ProducentVistalGarazeBlaszane" className="p-1 rounded-md hover:scale-110 hover:bg-slate-100/50">
               <img src="/svg/wface.svg" alt="icon" className="w-16" />
             </a>
           </div>

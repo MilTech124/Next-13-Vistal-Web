@@ -54,14 +54,14 @@ function Hero({}) {
           </div>
           <div className="flex flex-col basis-1/3 font-normal items-end">
             <div className="mt-5 w-full text-black flex gap-7 p-6 rounded-l-lg bg-white">
-              <Link href="/kalkulator">
+              <Link href="/kalkulator" className="hover:scale-110 transition-all">
                 <div className="flex items-center gap-1 cursor-pointer">
                   <img src="/svg/calculator.svg" />
                   Kalkulator
                 </div>
               </Link>
 
-              <Link href="/sklep">
+              <Link href="/sklep" className="hover:scale-110 transition-all">
                 <div className="flex items-center gap-1 cursor-pointer">
                   <img src="/svg/shop.svg" />
                   Sklep
