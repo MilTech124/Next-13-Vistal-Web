@@ -1,6 +1,6 @@
 import React from "react";
-import Filters from "../components/Shoop/Filters";
-import Heading from "../components/ui/Heading";
+import Garages from "../../components/Shoop/Garages";
+import Heading from "../../components/ui/Heading";
 
 function sklep() {
 
@@ -8,8 +8,7 @@ function sklep() {
   return (
     <section id="sklep">
       <Heading title="Garaże Blaszane" />
-      <Filters/>
-    
+      <Garages/>    
     </section>
   );
 }

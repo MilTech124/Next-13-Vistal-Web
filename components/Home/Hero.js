@@ -34,7 +34,7 @@ function Hero({}) {
         }}
         navigation={false}
         modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper relative"
+        className="mySwiper relative max-sm:h-[70vh]"
       >
         <div className="absolute text-white font-bold top-0 left-0 z-10 max-sm:flex-col-reverse  flex flex-row justify-between !important ">
           <div className="bg-black/50 shadow-xl rounded-r-xl basis-2/3 p-[65px] max-sm:p-5 lg:mt-[30vh]">

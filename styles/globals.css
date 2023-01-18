@@ -15,3 +15,9 @@
 .centered{
    text-align: -webkit-center;
 }
+
+.last:last-child{
+   content:'scss';
+   border: 10px; ;
+
+}

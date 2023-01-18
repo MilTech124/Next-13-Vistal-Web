@@ -5,7 +5,7 @@ import { garages } from "../../data/data";
 import { Bounce } from "react-awesome-reveal";
 
 function Popular() {
-  const [more, setMore] = useState(1);
+  const [more, setMore] = useState(2);
   return (
     <section
       id="popular"

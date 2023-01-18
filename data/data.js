@@ -31,7 +31,7 @@ export const garages = [
         title:'Garaż Akrylowy 5mx10m',
         text:'idealne dla dwoch samochodów',
         prize:3700,
-        popular:true
+        popular:true,        
     },
     {
         id:14,
