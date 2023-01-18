@@ -16,7 +16,7 @@ function Filters() {
   return (
     <>
       {/* FILTERS */}
-      <div className="flex pl-10 gap-5 max-sm:pl-2 max-sm:gap-2 flex-wrap ">
+      <div className="flex pt-10 pl-10 gap-5 max-sm:pl-2 max-sm:gap-2 flex-wrap ">
         {nameFilters.map((name) => (
           <button
             key={name}

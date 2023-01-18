@@ -21,3 +21,16 @@
    border: 10px; ;
 
 }
+.car{
+   animation-name: car;
+   animation-duration: 9s;
+   animation-iteration-count: infinite;
+}
+
+@keyframes car {
+   0% {right:50px;bottom:20px; rotate: 0deg; content: 'x';}
+   25% {right:70px;bottom:150px ; rotate: -90deg;}
+   50% {right:200px;bottom:150px; rotate:-180deg; }
+   75% {right:200px;bottom:100px; rotate:-300deg}  
+   100% {right:50px;bottom:20px; rotate: -360deg;}
+}
