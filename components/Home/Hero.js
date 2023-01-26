@@ -14,10 +14,15 @@ import { useState } from "react";
 import { data } from "../../data/data";
 import Link from "next/link";
 
-const { ocynkowe, akrylowe, drewnopodobne, kojce } = data;
+// const { ocynkowe, akrylowe, drewnopodobne, kojce } = data;
 
-function Hero({}) {
+function Hero({data}) {
   const css = { width: "100%", height: "94vh", objectFit: "cover" };
+  const ocynkowe = data.acf.photo_gallery['ocynkowe-glowna'][2]
+  const akrylowe = data.acf.photo_gallery['akrylowe-glowna'][1]
+  const drewnopodobne =data.acf.photo_gallery['drewnopodobne-glowna'][0]
+  const kojce =data.acf.photo_gallery['kojce-glowna'][3]
+ 
 
   const [chosed, setChosed] = useState(drewnopodobne);
 
@@ -113,12 +118,12 @@ function Hero({}) {
         {chosed.map((item, index) => (
           <SwiperSlide key={index}>
             <Image
-              src={item}
+              src={item.full_image_url}
               style={css}
               width="960"
               height="720"
               className="img-fluid"
-              alt={item}
+              alt={item.id}
               priority
             />
           </SwiperSlide>

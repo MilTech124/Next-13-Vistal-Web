@@ -1,10 +1,10 @@
 import React from "react";
 import Garage from "../ui/Garage";
 import { useState } from "react";
-import { garages } from "../../data/data";
+// import { garages } from "../../data/data";
 import { Bounce } from "react-awesome-reveal";
 
-function Popular() {
+function Popular({garages}) {
   const [more, setMore] = useState(2);
   return (
     <section
@@ -20,9 +20,9 @@ function Popular() {
       </p>
       <div className=" pt-10 flex flex-col gap-5">
         {garages.slice(0, more).map((garage) => (
-          <Bounce key={garage.title}>
+          <Bounce key={garage.id}>
             {" "}
-            {garage.popular && <Garage garage={garage} />}
+            {garage.acf.popularny && <Garage garage={garage} />}
           </Bounce>
         ))}
       </div>

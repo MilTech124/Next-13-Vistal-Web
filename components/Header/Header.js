@@ -21,8 +21,8 @@ function Header() {
       link: "/wycena",
     },
     {
-      name: "Galeria",
-      link: "/galeria",
+      name: "Realizacje",
+      link: "/realizacje",
     },
     {
       name: "Kontakt",

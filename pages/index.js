@@ -7,26 +7,28 @@ import PopularGarage from "../components/Home/PopularGarage";
 import { Fade } from "react-awesome-reveal";
 import Modal from "../components/ui/Modal";
 
-function Home({data}) {
-
+function Home({data,garages}) {
+  
   return (
-    <>
-     <Fade><Hero/></Fade>
+    <>  
+     <Fade><Hero data={data}/></Fade>
       <Fade><MakeGround/></Fade>
-      <PopularGarage/>
+      <PopularGarage garages={garages}/>
       <Fade><ColorsOfGarage/></Fade>      
     </>
   );
 }
 
-// export const getStaticProps = async () => {
-//   const response = await axios.get(`http://localhost:10016/wp-json/wp/v2`)
+export const getStaticProps = async () => {
+  const hero = await axios.get(process.env.WP_HOME)
+  const garages = await axios.get(process.env.WP_GARAGES)
 
-//   return {
-//     props: {
-//       data: response.data,
-//     },
-//   };
-// }
+  return {
+    props: {
+      data: hero.data,
+      garages:garages.data
+    },
+  };
+}
 
 export default Home;
