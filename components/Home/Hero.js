@@ -16,13 +16,12 @@ import Link from "next/link";
 
 // const { ocynkowe, akrylowe, drewnopodobne, kojce } = data;
 
-function Hero({data}) {
+function Hero({ data }) {
   const css = { width: "100%", height: "94vh", objectFit: "cover" };
-  const ocynkowe = data.acf.photo_gallery['ocynkowe-glowna'][2]
-  const akrylowe = data.acf.photo_gallery['akrylowe-glowna'][1]
-  const drewnopodobne =data.acf.photo_gallery['drewnopodobne-glowna'][0]
-  const kojce =data.acf.photo_gallery['kojce-glowna'][3]
- 
+  const ocynkowe = data.acf.photo_gallery["ocynkowe-glowna"][2];
+  const akrylowe = data.acf.photo_gallery["akrylowe-glowna"][1];
+  const drewnopodobne = data.acf.photo_gallery["drewnopodobne-glowna"][0];
+  const kojce = data.acf.photo_gallery["kojce-glowna"][3];
 
   const [chosed, setChosed] = useState(drewnopodobne);
 
@@ -59,13 +58,15 @@ function Hero({data}) {
           </div>
           <div className="flex flex-col basis-1/3 font-normal items-end">
             <div className="mt-5 w-full text-black flex gap-7 p-6 rounded-l-lg bg-white">
-              <Link href="/kalkulator" className="hover:scale-110 transition-all">
+              <Link
+                href="/kalkulator"
+                className="hover:scale-110 transition-all"
+              >
                 <div className="flex items-center gap-1 cursor-pointer">
                   <img src="/svg/calculator.svg" />
                   Kalkulator
                 </div>
               </Link>
-
               <Link href="/sklep" className="hover:scale-110 transition-all">
                 <div className="flex items-center gap-1 cursor-pointer">
                   <img src="/svg/shop.svg" />
@@ -74,43 +75,47 @@ function Hero({data}) {
               </Link>
             </div>
             <div className="pt-[20%]  max-sm:hidden text-xl font-bold flex flex-col text-black gap-5">
-              <Slide direction='right'>
-              <div
-                onClick={() => setChosed(drewnopodobne)}
-                className="bg-white/50 transition-all p-10 cursor-pointer px-20 text-center rounded-l-lg hover:bg-red-700 hover:text-white"
-                style={
-                  chosed == drewnopodobne ? { backgroundColor: "grey" } : null
-                }
-              >
-                Drewnopodobne
-              </div>
+              <Slide direction="right">
+                <div
+                  onClick={() => setChosed(drewnopodobne)}
+                  className="bg-white/50 transition-all p-10 cursor-pointer px-20 text-center rounded-l-lg hover:bg-red-700 hover:text-white"
+                  style={
+                    chosed == drewnopodobne ? { backgroundColor: "grey" } : null
+                  }
+                >
+                  Drewnopodobne
+                </div>
               </Slide>
-              <Slide direction='right'>
-              <div
-                onClick={() => setChosed(akrylowe)}
-                className="bg-white/50 transition-all p-10 px-20 cursor-pointer text-center rounded-l-lg hover:bg-red-700 hover:text-white"
-                style={chosed == akrylowe ? { backgroundColor: "grey" } : null}
-              >
-                Aktylowe
-              </div>
+              <Slide direction="right">
+                <div
+                  onClick={() => setChosed(akrylowe)}
+                  className="bg-white/50 transition-all p-10 px-20 cursor-pointer text-center rounded-l-lg hover:bg-red-700 hover:text-white"
+                  style={
+                    chosed == akrylowe ? { backgroundColor: "grey" } : null
+                  }
+                >
+                  Aktylowe
+                </div>
               </Slide>
-              <Slide direction='right'>
-              <div
-                onClick={() => setChosed(ocynkowe)}
-                className="bg-white/50 transition-all p-10 px-20 cursor-pointer text-center rounded-l-lg hover:bg-red-700 hover:text-white"
-                style={chosed == ocynkowe ? { backgroundColor: "grey" } : null}
-              >
-                Ocynkowe
-              </div>
+              <Slide direction="right">
+                <div
+                  onClick={() => setChosed(ocynkowe)}
+                  className="bg-white/50 transition-all p-10 px-20 cursor-pointer text-center rounded-l-lg hover:bg-red-700 hover:text-white"
+                  style={
+                    chosed == ocynkowe ? { backgroundColor: "grey" } : null
+                  }
+                >
+                  Ocynkowe
+                </div>
               </Slide>
-              <Slide direction='right'>
-              <div
-                onClick={() => setChosed(kojce)}
-                className="bg-white/50 p-10 px-20 cursor-pointer text-center rounded-l-lg transition-all hover:bg-red-700 hover:text-white"
-                style={chosed == kojce ? { backgroundColor: "grey" } : null}
-              >
-                Kojce
-              </div>
+              <Slide direction="right">
+                <div
+                  onClick={() => setChosed(kojce)}
+                  className="bg-white/50 p-10 px-20 cursor-pointer text-center rounded-l-lg transition-all hover:bg-red-700 hover:text-white"
+                  style={chosed == kojce ? { backgroundColor: "grey" } : null}
+                >
+                  Kojce
+                </div>
               </Slide>
             </div>
           </div>
@@ -124,7 +129,7 @@ function Hero({data}) {
               height="720"
               className="img-fluid"
               alt={item.id}
-              priority
+              priority              
             />
           </SwiperSlide>
         ))}

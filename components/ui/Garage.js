@@ -3,12 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 
 function Garage({ garage }) {
-  const slug=garage.slug
-  
+  const slug = garage.slug;
+
   return (
     <div className=" shadow-lg lg:w-[52rem] max-md:w-[50vw] h-[150px] min-w-[350px] rounded-md flex justify-between items-center  bg-gray-500 ">
       {/* IMAGE */}
-      <Link className="!w-[200px] min-w-[200px] max-sm:min-w-0  h-[150px] max-sm:min-w-40" href={`/sklep/${slug}`}>
+      <Link
+        className="!w-[200px] min-w-[200px] max-sm:min-w-0  h-[150px] max-sm:min-w-40"
+        href={`/sklep/${slug}`}
+      >
         <Image
           src={garage.acf.obrazy[0].full_image_url}
           width={250}
@@ -21,7 +24,9 @@ function Garage({ garage }) {
       {/* NAZWA GARAŻU */}
       <div className="text-left pl-5 mr-auto text-white text-lg font-medium max-sm:text-sm">
         <h3>{garage.acf.tytul}</h3>
-        <p className="text-sm pt-5 font-normal max-sm:hidden">{garage.acf.male_info}</p>
+        <p className="text-sm pt-5 font-normal max-sm:hidden">
+          {garage.acf.male_info}
+        </p>
       </div>
 
       {/* CENA GARAZU  */}
@@ -32,7 +37,7 @@ function Garage({ garage }) {
       </div>
 
       <Link
-        className="bg-yellow-300 text-center w-10 h-full rounded-r-md zamow cursor-pointer 
+        className="bg-yellow-300 text-center min-w-10 h-full rounded-r-md zamow cursor-pointer 
       text-lg font-bold hover: hover:w-10 transition-all ease-in-out"
         href="/zamów"
       >
