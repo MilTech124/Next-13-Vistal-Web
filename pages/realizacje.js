@@ -19,7 +19,7 @@ function galleria({ data }) {
         columnClassName="my-masonry-grid_column"
       >
         {data.acf.realizacje.map((img) => (
-          <Fade>
+          <Fade key={img.key}>
             <Image
               src={img.full_image_url}
               width={1920}
