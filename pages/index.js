@@ -5,7 +5,8 @@ import Hero from "../components/Home/Hero";
 import MakeGround from "../components/Home/MakeGround";
 import PopularGarage from "../components/Home/PopularGarage";
 import { Fade } from "react-awesome-reveal";
-import Modal from "../components/ui/Modal";
+
+
 
 function Home({data,garages}) {
   
@@ -14,7 +15,7 @@ function Home({data,garages}) {
      <Fade><Hero data={data}/></Fade>
       <Fade><MakeGround/></Fade>
       <PopularGarage garages={garages}/>
-      <Fade><ColorsOfGarage/></Fade>      
+      <Fade><ColorsOfGarage/></Fade>        
     </>
   );
 }
@@ -28,6 +29,7 @@ export const getStaticProps = async () => {
       data: hero.data,
       garages:garages.data
     },
+    revalidate: 100, 
   };
 }
 

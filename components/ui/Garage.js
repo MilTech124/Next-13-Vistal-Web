@@ -2,8 +2,12 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { useDispatch } from "react-redux";
+import { change } from "../../store/reducers/modal.reducer";
+
 function Garage({ garage }) {
   const slug = garage.slug;
+  const dispatch = useDispatch();
 
   return (
     <div className=" shadow-lg lg:w-[52rem] max-md:w-[50vw] h-[150px] min-w-[350px] rounded-md flex justify-between items-center  bg-gray-500 ">
@@ -36,15 +40,27 @@ function Garage({ garage }) {
         </p>
       </div>
 
-      <Link
+      <div
         className="bg-yellow-300 text-center min-w-10 h-full rounded-r-md zamow cursor-pointer 
       text-lg font-bold hover: hover:w-10 transition-all ease-in-out"
-        href="/zamów"
       >
-        <div className="bg-yellow-300 w-8 h-full rounded-r-md zamow cursor-pointer text-lg font-bold hover:translate-x-2 hover:w-10 transition-all ease-in-out">
+        <div
+          onClick={() =>
+            dispatch(
+              change({
+                payload: {
+                  title: garage.acf.tytul,
+                  prize: garage.acf.cena,
+                  link: `https://vistal-garaze-blaszane.pl/sklep/${slug}`,
+                },
+              })
+            )
+          }
+          className="bg-yellow-300 w-8 h-full rounded-r-md zamow cursor-pointer text-lg font-bold hover:translate-x-2 hover:w-10 transition-all ease-in-out"
+        >
           Zamów
         </div>
-      </Link>
+      </div>
     </div>
   );
 }

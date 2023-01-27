@@ -1,9 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector, useDispatch } from 'react-redux'
+import {change} from '../../store/reducers/modal.reducer'
 
-function Modal({info,link}) {
-  const [open, setOpen] = useState(true);
 
-  if (open) {
+function Modal() {
+  
+  const visible = useSelector((state) => state.modal.visible)
+  const title = useSelector((state) => state.modal.title)
+  const dispatch = useDispatch()
+
+  const sendMail=()=>{
+    console.log(title.payload.title);
+    window.open(`mailto:kontakt@vistal-garaze-blaszane.pl?subject=Strona&body=garaz:${title.payload.title}cena:${title.payload.prize}link:${title.payload.link}`);
+  }
+
+  if (visible) {
     return (
       <>
         <div className="bg-black/50 fixed z-20 flex justify-center items-center top-0 left-0 w-full h-full">
@@ -19,15 +30,14 @@ function Modal({info,link}) {
                   <img src="/svg/wphone.svg" />
                 </div>
               </a>
-              <a href="mailto:kontakt@vistal-garaze-blaszane.pl">
-                {" "}
-                <div onClick={()=>(setTimeout(()=>{setOpen(false)},2000))} className="bg-slate-600 p-2 rounded-md hover:bg-yellow-500 transition-all cursor-pointer">
+              
+                <div onClick={()=>sendMail()} className="bg-slate-600 p-2 rounded-md hover:bg-yellow-500 transition-all cursor-pointer">
                   <img src="/svg/wmail.svg" />
                 </div>
-              </a>
+              
             </div>
 
-            <div onClick={()=>(setOpen(false))} className="text-xl font-bold mt-5 p-5 flex justify-center bg-slate-500 hover:bg-yellow-500 transition-all cursor-pointer">
+            <div onClick={()=>dispatch(change({payload:{title:'',prize:null,link:null}}))} className="text-xl font-bold mt-5 p-5 flex justify-center bg-slate-500 hover:bg-yellow-500 transition-all cursor-pointer">
               Cofnij
             </div>
           </div>

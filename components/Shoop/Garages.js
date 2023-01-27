@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-// import { garages } from "../../data/data";
 import { Fade } from "react-awesome-reveal";
 import Garage from "../ui/Garage";
 
-
-function Filters({garages}) {
+function Filters({ garages }) {
   const [filter, setFilter] = useState("Drewnopodobne");
   const nameFilters = [
     "Drewnopodobne",
@@ -32,17 +30,21 @@ function Filters({garages}) {
 
       {/* FILTERS */}
 
-        
       <div className="pt-10 flex items-center flex-col gap-5">
         {garages.map((garage) => (
-          <Fade key={garage.id}>         
-            {filter==="Drewnopodobne" && garage.acf.rodzaj==="drewnopodobny" ? <Garage garage={garage}/>
-            :filter==="Akrylowe" && garage.acf.rodzaj==="akrylowy" ? <Garage garage={garage}/>
-            :filter==="Kojce" && garage.acf.rodzaj==="kojce" ? <Garage garage={garage}/>            
-            :filter==="Wyprzedaż" && garage.acf.wyprzedaz ? <Garage garage={garage}/>
-            :filter==="Akcesoria" && garage.acf.rodzaj==="akcesoria" ? <Garage garage={garage}/>
-            :null
-          }
+          <Fade key={garage.id}>
+            {filter === "Drewnopodobne" &&
+            garage.acf.rodzaj === "drewnopodobny" ? (
+              <Garage garage={garage} />
+            ) : filter === "Akrylowe" && garage.acf.rodzaj === "akrylowy" ? (
+              <Garage garage={garage} />
+            ) : filter === "Kojce" && garage.acf.rodzaj === "kojce" ? (
+              <Garage garage={garage} />
+            ) : filter === "Wyprzedaż" && garage.acf.wyprzedaz ? (
+              <Garage garage={garage} />
+            ) : filter === "Akcesoria" && garage.acf.rodzaj === "akcesoria" ? (
+              <Garage garage={garage} />
+            ) : null}
           </Fade>
         ))}
       </div>

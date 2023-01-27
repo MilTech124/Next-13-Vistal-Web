@@ -1,7 +1,9 @@
 import Image from "next/image";
 import React from "react";
-import { Fade } from "react-awesome-reveal";
+import { useDispatch } from "react-redux";
+import { change } from "../../store/reducers/modal.reducer";
 
+import { Fade } from "react-awesome-reveal";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -12,6 +14,8 @@ import { Autoplay, Pagination, Navigation } from "swiper";
 import axios from "axios";
 
 function SingleGarage({ garage }) {
+  const dispatch = useDispatch();
+  const slug = garage[0].slug;
 
   return (
     <section className="flex max-sm:flex-col-reverse">
@@ -73,12 +77,14 @@ function SingleGarage({ garage }) {
             </div>
           </Fade>
         ) : null}
-            {garage[0].acf.screw ?   (<Fade>
-          <div className="flex max-w-xs items-center gap-5 text-xl font-semibold">
-            <img src="/svg/shield.svg" alt="icon" />
-            zabezpieczenie antykorozyjne
-          </div>
-        </Fade>):null}
+        {garage[0].acf.screw ? (
+          <Fade>
+            <div className="flex max-w-xs items-center gap-5 text-xl font-semibold">
+              <img src="/svg/shield.svg" alt="icon" />
+              zabezpieczenie antykorozyjne
+            </div>
+          </Fade>
+        ) : null}
       </div>
       {/* ICONS LEFT SIDE */}
       {/*CENTER BELT */}
@@ -111,6 +117,17 @@ function SingleGarage({ garage }) {
             </SwiperSlide>
           ))}
           <button
+            onClick={() =>
+              dispatch(
+                change({
+                  payload: {
+                    title: garage[0].acf.tytul,
+                    prize: garage[0].acf.cena,
+                    link: `https://vistal-garaze-blaszane.pl/sklep/${slug}`,
+                  },
+                })
+              )
+            }
             className="text-3xl font-bold z-10 absolute bottom-[10%] right-[10%] py-5 px-[10%] max-sm:bottom-auto max-sm:top-5  text-white rounded-xl bg-red-700 
                              hover:bg-yellow-500 "
           >
@@ -131,7 +148,7 @@ export const getStaticProps = async ({ params }) => {
     props: {
       garage: garage.data,
     },
-    revalidate: 10,
+    revalidate: 100,
   };
 };
 
