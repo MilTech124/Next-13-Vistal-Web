@@ -1,7 +1,7 @@
 import Image from "next/image";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Slide } from "react-awesome-reveal";
+import { Fade, Slide } from "react-awesome-reveal";
 
 // Import Swiper styles
 import "swiper/css";
@@ -11,12 +11,17 @@ import "swiper/css/navigation";
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper";
 import { useState } from "react";
-import { data } from "../../data/data";
 import Link from "next/link";
 
-// const { ocynkowe, akrylowe, drewnopodobne, kojce } = data;
+// TRANSLATION
+import { useTranslation } from 'next-i18next'
+
+
 
 function Hero({ data }) {
+
+  const { t } = useTranslation("index")
+
   const css = { width: "100%", height: "94vh", objectFit: "cover" };
   const ocynkowe = data.acf.photo_gallery["ocynkowe-glowna"][2];
   const akrylowe = data.acf.photo_gallery["akrylowe-glowna"][1];
@@ -42,35 +47,31 @@ function Hero({ data }) {
       >
         <div className="absolute text-white font-bold top-0 left-0 z-10 max-sm:flex-col-reverse  flex flex-row justify-between !important ">
           <div className="bg-black/50 shadow-xl rounded-r-xl basis-2/3 p-[65px] max-sm:p-5 lg:mt-[30vh]">
-            <h1 className="text-[64px] max-sm:text-xl pb-5">Garaże Blaszane</h1>
+            <h1 className="text-[64px] max-sm:text-xl pb-5">{t("Garaże Blaszane")}</h1>
             <p className="text-2xl max-sm:text-sm ">
-              Szukasz sprawdzonych rozwiązań w dziedzinie garaży? Potrzebujesz
-              modelu idealnie dopasowanego do Twoich potrzeb, który będzie
-              wyróżniał się najwyższą jakością? Zapoznaj się koniecznie z ofertą
-              naszej firmy.<br></br> Zapraszamy do kontaktu oraz bezpłatnej
-              wyceny!
+             {t("text-under")}
             </p>
             <a href="tel:+48 693 344 132">
-              <button className="btn mt-10 text-black py-2 px-10 rounded-lg bg-white">
-                Zadzwoń
+              <button className="btn mt-10 text-black py-2 px-10 rounded-lg bg-white hover:scale-105 transition-all">
+                {t("Zadzwoń")}
               </button>
             </a>
           </div>
           <div className="flex flex-col basis-1/3 font-normal items-end">
             <div className="mt-5 w-full text-black flex gap-7 p-6 rounded-l-lg bg-white">
               <Link
-                href="/kalkulator"
+                href="/konfigurator"
                 className="hover:scale-110 transition-all"
               >
                 <div className="flex items-center gap-1 cursor-pointer">
                   <img src="/svg/calculator.svg" />
-                  Kalkulator
+                  {t("Konfigurator")}
                 </div>
               </Link>
               <Link href="/sklep" className="hover:scale-110 transition-all">
                 <div className="flex items-center gap-1 cursor-pointer">
                   <img src="/svg/shop.svg" />
-                  Sklep
+                  {t("Sklep")}
                 </div>
               </Link>
             </div>
@@ -83,7 +84,7 @@ function Hero({ data }) {
                     chosed == drewnopodobne ? { backgroundColor: "grey" } : null
                   }
                 >
-                  Drewnopodobne
+                  {t("Drewnopodobne")}
                 </div>
               </Slide>
               <Slide direction="right">
@@ -94,7 +95,7 @@ function Hero({ data }) {
                     chosed == akrylowe ? { backgroundColor: "grey" } : null
                   }
                 >
-                  Aktylowe
+                  {t("Aktylowe")}
                 </div>
               </Slide>
               <Slide direction="right">
@@ -105,7 +106,7 @@ function Hero({ data }) {
                     chosed == ocynkowe ? { backgroundColor: "grey" } : null
                   }
                 >
-                  Ocynkowe
+                  {t("Ocynkowe")}
                 </div>
               </Slide>
               <Slide direction="right">
@@ -114,7 +115,7 @@ function Hero({ data }) {
                   className="bg-white/50 p-10 px-20 cursor-pointer text-center rounded-l-lg transition-all hover:bg-red-700 hover:text-white"
                   style={chosed == kojce ? { backgroundColor: "grey" } : null}
                 >
-                  Kojce
+                  {t("Kojce")}
                 </div>
               </Slide>
             </div>
@@ -129,7 +130,7 @@ function Hero({ data }) {
               height="720"
               className="img-fluid"
               alt={item.id}
-              priority              
+              priority
             />
           </SwiperSlide>
         ))}

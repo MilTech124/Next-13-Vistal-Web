@@ -4,7 +4,7 @@ import Image from "next/image";
 function Hero() {
   return (
     <div className="relative">
-        <Image src="/o-nas.jpg" width={1286} height={657} alt="garaz-vistal" className="w-full max-md:h-[600px]" />
+        <Image src="/o-nas.jpg" width={1286} height={657} alt="garaz-vistal" className="w-full max-md:h-[600px]"/>
         <div className="absolute text-center p-10 max-md:p-2 max-lg:p-2  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  text-white bg-black/50 rounded-md">
           <h1 className="text-xl max-lg:text-sm font-bold">
             Vistal-producent garaży blaszanych

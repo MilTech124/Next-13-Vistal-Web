@@ -8,29 +8,37 @@ import { Fade } from "react-awesome-reveal";
 
 
 
-function Home({data,garages}) {
-  
+function Home({ data, garages }) {
+
+
   return (
-    <>  
-     <Fade><Hero data={data}/></Fade>
-      <Fade><MakeGround/></Fade>
-      <PopularGarage garages={garages}/>
-      <Fade><ColorsOfGarage/></Fade>        
+    <>
+      <Fade>
+        <Hero data={data} />
+      </Fade>
+      <Fade>
+        <MakeGround />
+      </Fade>
+      <PopularGarage garages={garages} />
+      <Fade delay={100}>
+        <ColorsOfGarage />
+      </Fade>
     </>
   );
 }
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-export const getStaticProps = async () => {
-  const hero = await axios.get(process.env.WP_HOME)
-  const garages = await axios.get(process.env.WP_GARAGES)
-
+export const getStaticProps = async ({ locale }) => {
+  const hero = await axios.get(process.env.WP_HOME);
+  const garages = await axios.get(process.env.WP_GARAGES);
   return {
     props: {
+      ...(await serverSideTranslations(locale, ["common", "footer","menu","index"])),
       data: hero.data,
-      garages:garages.data
+      garages: garages.data,
     },
-    revalidate: 100, 
+    revalidate: 100,
   };
-}
+};
 
 export default Home;

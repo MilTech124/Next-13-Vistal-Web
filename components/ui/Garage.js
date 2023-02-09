@@ -26,7 +26,7 @@ function Garage({ garage }) {
       </Link>
 
       {/* NAZWA GARAŻU */}
-      <div className="text-left pl-5 mr-auto text-white text-lg font-medium max-sm:text-sm">
+      <div className="text-left pl-5 mr-auto pt-5  bg-gray-500 h-full max-sm:items-center max-sm:flex text-white text-lg font-medium max-sm:text-sm">
         <h3>{garage.acf.tytul}</h3>
         <p className="text-sm pt-5 font-normal max-sm:hidden">
           {garage.acf.male_info}

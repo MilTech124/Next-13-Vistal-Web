@@ -2,7 +2,11 @@ import Image from "next/image";
 import React from "react";
 import { Bounce } from "react-awesome-reveal";
 
+// TRANSLATION
+import { useTranslation } from 'next-i18next'
+
 function Footer() {
+  const { t } = useTranslation("footer")
   const bgStyle = {
     backgroundImage: "url('/bgfooter.jpeg')",
     backgroundPosition: "center",
@@ -24,7 +28,7 @@ function Footer() {
             alt="logo-vistal"
           />
           <h4 className="font-bold text-lg">
-            Vistal - producent garaży blaszanych.
+            Vistal - {t('producent garaży blaszanych')}
           </h4>
           <p className="px-5">
             Serdecznie zapraszamy do kontaktu i skorzystania z bezpłatnej
@@ -107,4 +111,6 @@ function Footer() {
   );
 }
 
+
 export default Footer;
+

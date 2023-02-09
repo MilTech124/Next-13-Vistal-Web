@@ -5,27 +5,37 @@ import SocialsNav from "../SocialsNav";
 import Burger from "./Burger";
 import NavMobile from "./NavMobile";
 import { motion } from "framer-motion";
+import ChangeLang from "../ui/ChangeLang";
+
+//translate
+import { useTranslation } from 'next-i18next'
+
+
+
+
 
 function Header() {
+  const { t } = useTranslation("menu")
+
   const links = [
     {
-      name: "Strona Główna",
+      name: t("Strona Główna"),
       link: "/",
     },
     {
-      name: "O Nas",
+      name: t("O Nas"),
       link: "/onas",
     },
     {
-      name: "Wycena",
+      name: t("Wycena"),
       link: "/wycena",
     },
     {
-      name: "Realizacje",
+      name: t("Realizacje"),
       link: "/realizacje",
     },
     {
-      name: "Kontakt",
+      name: t("Kontakt"),
       link: "/kontakt",
     },
   ];
@@ -62,6 +72,7 @@ function Header() {
           </div>
         </div>
       </container>
+      <ChangeLang/>
     </header>
   );
 }
