@@ -1,10 +1,12 @@
 import React from "react";
 import Garage from "../ui/Garage";
 import { useState } from "react";
-// import { garages } from "../../data/data";
 import { Bounce } from "react-awesome-reveal";
 
-function Popular({garages}) {
+// TRANSLATION
+import { useTranslation } from "next-i18next";
+
+function Popular({ garages }) {
   const [more, setMore] = useState(2);
   return (
     <section

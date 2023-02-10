@@ -69,10 +69,7 @@ function MakeGround() {
         <div className="text-center text-black  pt-5 px-5 ">
           <h3 className="text-xl font-bold">{t("Przygotowanie podłoża")}</h3>
           <p className="pt-10 pb-5">
-            Przygotowanie podłoża pod garaż leży po stronie klienta. W celu
-            ułatwienia Państwu prawidłowego przygotowania poniżej przedstawiamy
-            schemat różnych sposobów jego przygotowania,które gwarantuje dobre
-            użytkowanie garażu przez wiele lat.
+            {t("Text-1")}
           </p>
 
           <Swiper

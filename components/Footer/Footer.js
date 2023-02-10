@@ -31,9 +31,7 @@ function Footer() {
             Vistal - {t('producent garaży blaszanych')}
           </h4>
           <p className="px-5">
-            Serdecznie zapraszamy do kontaktu i skorzystania z bezpłatnej
-            wyceny. Nasi konsultanci chętnie odpowiedzą na wszystkie Państwa
-            pytania.Działamy na terenie całego kraju.
+           {t("zapraszamy-text")}
           </p>
           <div>
             <div className="flex justify-around pt-5">
