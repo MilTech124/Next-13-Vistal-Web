@@ -45,7 +45,7 @@ function MakeGround() {
       img: "/images/wylewka.jpg",
       list: (
         <ol className="text-left pt-5">
-          <h3 className="text-xl font-bold">Wylewka betonowa</h3>
+          <h3 className="text-xl font-bold">{t("Wylewka betonowa")}</h3>
           <li>{t("pw1")}</li>
           <li>{t("pw2")}</li>
         </ol>
