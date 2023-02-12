@@ -37,7 +37,7 @@ function Footer() {
             <div className="flex justify-around pt-5">
               <div>
                 <p>
-                  <b>Godziny pracy:</b>
+                  <b>{t("Godziny")}</b>
                 </p>
                 <p>pn-pt: 8:00-17:00</p>
                 <p>sobota: 9:00-16:00</p>
@@ -67,7 +67,7 @@ function Footer() {
                   </a>
                   <div className="text-sm">
                     <img src="/svg/politic.svg" />
-                    Polityka prywatności
+                   {t("Polityka prywatności")}
                   </div>
                 </div>
               </div>
