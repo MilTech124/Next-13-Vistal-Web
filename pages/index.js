@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { i18n } from "next-i18next";
 import ColorsOfGarage from "../components/Home/ColorsOfGarage";
 import Hero from "../components/Home/Hero";
 import MakeGround from "../components/Home/MakeGround";
@@ -31,6 +32,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 export const getStaticProps = async ({ locale }) => {
   const hero = await axios.get(process.env.WP_HOME);
   const garages = await axios.get(process.env.WP_GARAGES);
+  await i18n?.reloadResources();
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common", "footer","menu","index"])),
