@@ -8,14 +8,10 @@ import { motion } from "framer-motion";
 import ChangeLang from "../ui/ChangeLang";
 
 //translate
-import { useTranslation } from 'next-i18next'
-
-
-
-
+import { useTranslation } from "next-i18next";
 
 function Header() {
-  const { t } = useTranslation("menu")
+  const { t } = useTranslation("menu");
 
   const links = [
     {
@@ -64,7 +60,7 @@ function Header() {
               className="md:hidden absolute top-0 left-0 active: "
             >
               {" "}
-              <NavMobile links={links} openMenu={openMenu}/>
+              <NavMobile links={links} openMenu={openMenu} />
             </motion.div>
           )}
           <div className="max-md:hidden">
@@ -72,7 +68,7 @@ function Header() {
           </div>
         </div>
       </container>
-      <ChangeLang/>
+      <ChangeLang />
     </header>
   );
 }

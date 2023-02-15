@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 function ChangeLang() {
   const { locale, locales, push, asPath } = useRouter();
   return (
-    <div className="absolute bottom-[-250px] left-0 p-5   bg-white rounded-r-lg flex flex-col gap-5">
+    <div className="absolute bottom-[-90vh] left-[-20px] hover:left-0 p-5 transition-all bg-white rounded-r-lg flex flex-col gap-5">
       <img
         onClick={() => push(asPath, undefined, { locale: "pl" })}
         src="/flag/pl.png"

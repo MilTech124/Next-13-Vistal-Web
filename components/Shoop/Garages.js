@@ -1,23 +1,27 @@
 import React, { useState } from "react";
 import { Fade } from "react-awesome-reveal";
 import Garage from "../ui/Garage";
+// TRANSLATION
+import { useTranslation } from 'next-i18next'
 
-function Filters({ garages }) {
-  const [filter, setFilter] = useState("Drewnopodobne");
+function Filters({ garages}) {
+  const { t } = useTranslation("sklep")
+
+  const [filter, setFilter] = useState(t("Drewnopodobne"));
   const nameFilters = [
-    "Drewnopodobne",
-    "Akrylowe",
-    "Ocynk",
-    "Kojce",
-    "Akcesoria",
-    "Wyprzedaż",
+    t("Drewnopodobne"),
+    t("Akrylowe"),
+    t("Ocynk"),
+    t("Kojce"),
+    t("Akcesoria"),
+    t("Wyprzedaż"),
   ];
   return (
     <>
       {/* FILTERS */}
       <div className="flex pt-10 pl-10 gap-5 max-sm:pl-2 max-sm:gap-2 flex-wrap ">
         {nameFilters.map((name) => (
-          <button
+          <button type="button"
             key={name}
             onClick={() => setFilter(name)}
             style={filter === name ? { backgroundColor: "grey" } : null}
@@ -33,16 +37,16 @@ function Filters({ garages }) {
       <div className="pt-10 flex items-center flex-col gap-5">
         {garages.map((garage) => (
           <Fade key={garage.id}>
-            {filter === "Drewnopodobne" &&
+            {filter === t("Drewnopodobne") &&
             garage.acf.rodzaj === "drewnopodobny" ? (
               <Garage garage={garage} />
-            ) : filter === "Akrylowe" && garage.acf.rodzaj === "akrylowy" ? (
+            ) : filter === t("Akrylowe") && garage.acf.rodzaj === "akrylowy" ? (
               <Garage garage={garage} />
-            ) : filter === "Kojce" && garage.acf.rodzaj === "kojce" ? (
+            ) : filter === t("Kojce") && garage.acf.rodzaj === "kojce" ? (
               <Garage garage={garage} />
-            ) : filter === "Wyprzedaż" && garage.acf.wyprzedaz ? (
+            ) : filter === t("Wyprzedaż") && garage.acf.wyprzedaz ? (
               <Garage garage={garage} />
-            ) : filter === "Akcesoria" && garage.acf.rodzaj === "akcesoria" ? (
+            ) : filter === t("Akcesoria") && garage.acf.rodzaj === "akcesoria" ? (
               <Garage garage={garage} />
             ) : null}
           </Fade>
@@ -51,5 +55,6 @@ function Filters({ garages }) {
     </>
   );
 }
+
 
 export default Filters;

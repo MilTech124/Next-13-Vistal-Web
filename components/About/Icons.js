@@ -1,8 +1,11 @@
 import Image from "next/image";
 import React from "react";
 import { Bounce } from "react-awesome-reveal";
+// TRANSLATION
+import { useTranslation } from 'next-i18next'
 
 function Icons() {
+  const { t } = useTranslation("onas")
   return (
     <div className="flex flex-col items-center max-md:gap-10">
       <Bounce>
@@ -14,8 +17,7 @@ function Icons() {
             className="max-md:w-40"
           />
           <p className="max-w-md text-center font-semibold">
-            Jesteśmy producentem kupując prosto od nas pomijasz sklepy oraz ich
-            prowizje przez co nasze produkty są w bezkonkurencyjnej cenie.
+           {t("jestesmy-producent")}
           </p>
         </div>
       </Bounce>
@@ -28,8 +30,7 @@ function Icons() {
             className="max-md:w-40"
           />
           <p className="max-w-md text-center font-semibold">
-            Odpowiednie dobrane materiały oraz profesjonalnie wykonany montaż są
-            składowymi solidnego wykonania jakie świadczymy dla Was.
+            {t("odpowiednie-materialy")}
           </p>
         </div>
       </Bounce>
@@ -43,8 +44,7 @@ function Icons() {
             className="max-md:w-40"
           />
           <p className="max-w-md text-center font-semibold">
-            Jesteśmy producentem kupując prosto od nas pomijasz sklepy oraz ich
-            prowizje przez co nasze produkty są w bezkonkurencyjnej cenie.
+           {t("bezkonkurencyjne-ceny")}
           </p>
         </div>
       </Bounce>
@@ -58,8 +58,7 @@ function Icons() {
             className="max-md:w-40"
           />
           <p className="max-w-md text-center font-semibold">
-            Wszystkie nasze zlecenia wykonujemy w terminie aby klient był
-            zadowolony z nowego nabytku.
+          {t("terminowosc")}
           </p>
         </div>
       </Bounce>

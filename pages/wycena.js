@@ -5,8 +5,11 @@ import { useState, useRef } from "react";
 import { Fade } from "react-awesome-reveal";
 import { useRouter } from "next/router";
 import emailjs from "@emailjs/browser";
+// TRANSLATION
+import { useTranslation } from 'next-i18next'
 
 function wycena() {
+  const { t } = useTranslation("wycena")
   const router = useRouter();
   const form = useRef();
   const [formData, setFormData] = useState({
@@ -18,9 +21,9 @@ function wycena() {
     gate: "Uchylna",
     door: "Nie",
     window: "Nie",
-    name: "",
-    surname: "",
-    email: "",
+    name: null,
+    surname: null,
+    email: null,
     area: "",
   });  
 
@@ -32,10 +35,8 @@ function wycena() {
   };
 
   const onSubmit = (e) => {
-    e.preventDefault();
-
-    
-    emailjs
+    e.preventDefault();   
+      emailjs
       .sendForm(
         "service_3j3n0o7",
         "template_7p1w20q",
@@ -52,21 +53,15 @@ function wycena() {
       );
 
     alert("Pomyslnie wysłano");
-    router.push("/");
+    router.push("/");      
   };
 
   return (
     <>
-      <Heading title={"Indywidualna Wycena"} />
+      <Heading title={t("Indywidualna Wycena")} />
 
-      <p className="p-10 max-sm:p2 text-lg">
-        Serdecznie zapraszamy do kontaktu i skorzystania z bezpłatnej wyceny.
-        Oferujemy garaże blaszane standardowe oraz na zyczenie klienta.
-        wykonujemy garaże w dowolnej konfiguracji tzn. dowolna szerokość,
-        długość, rodzaj dachu, kolor poszczególnych elementów, ilość bram
-        garażowych, rodzaj itp...
-        <br></br> Zapraszam do skorzystania z poniższego mini konfriguratora
-        oraz przesłanie informacji.
+      <p className="p-10 max-sm:p2 text-lg" style={{ whiteSpace: 'pre-wrap' }}>
+      {t("text-wycena")}
       </p>
       <form
         onSubmit={onSubmit}
@@ -116,8 +111,8 @@ function wycena() {
                   placeholder="Szerokość"
                   onChange={onChange}
                 >
-                  <option>Jednospadowy</option>
-                  <option>Dwuspadowy</option>
+                  <option>{t("Jednospadowy")}</option>
+                  <option>{t("Dwuspadowy")}</option>
                 </select>
               </div>
             </Fade>
@@ -131,9 +126,9 @@ function wycena() {
                   className="border-solid text-center border-2 border-black w-[150px] rounded-md py-2 px-5"
                   onChange={onChange}
                 >
-                  <option>Akrylowa</option>
-                  <option>Drewnopodobny</option>
-                  <option>Ocynk</option>
+                  <option>{t("Akrylowa")}</option>
+                  <option>{t("Drewnopodobny")}</option>
+                  <option>{t("Ocynk")}</option>
                 </select>
               </div>
             </Fade>
@@ -147,8 +142,8 @@ function wycena() {
                   className="border-solid text-center border-2 border-black w-[150px] rounded-md py-2 px-5"
                   onChange={onChange}
                 >
-                  <option>Trapezowa</option>
-                  <option>Blachodachówka</option>
+                  <option>{t("Trapezowa")}</option>
+                  <option>{t("Blachodachówka")}</option>
                 </select>
               </div>
             </Fade>
@@ -162,9 +157,9 @@ function wycena() {
                   className="border-solid text-center border-2 border-black w-[150px] rounded-md py-2 px-5"
                   onChange={onChange}
                 >
-                  <option>Uchylna</option>
-                  <option>Dwuskrzydłowa</option>
-                  <option>Roleta</option>
+                  <option>{t("Uchylna")}</option>
+                  <option>{t("Dwuskrzydłowa")}</option>
+                  <option>{t("Roleta")}</option>
                 </select>
               </div>
             </Fade>
@@ -178,8 +173,8 @@ function wycena() {
                   className="border-solid text-center border-2 border-black w-[150px] rounded-md py-2 px-5"
                   onChange={onChange}
                 >
-                  <option>Nie</option>
-                  <option>Tak</option>
+                  <option>{t("Nie")}</option>
+                  <option>{t("Tak")}</option>
                 </select>
               </div>
             </Fade>
@@ -193,7 +188,7 @@ function wycena() {
                   className="border-solid text-center border-2 border-black w-[150px] rounded-md py-2 px-5"
                   onChange={onChange}
                 >
-                  <option>Nie</option>
+                  <option>{t("Nie")}</option>
                   <option>80x60</option>
                   <option>100x60</option>
                   <option>120x100</option>
@@ -206,7 +201,7 @@ function wycena() {
           <div className="basis-2/5 ">
             <div className="flex justify-evenly">
               <div className="flex flex-col items-center ">
-                <label htmlFor="name">Imię</label>
+                <label htmlFor="name">{t("Imię")}</label>
                 <input
                   onChange={onChange}
                   required
@@ -217,7 +212,7 @@ function wycena() {
                 />
               </div>
               <div className="flex flex-col items-center ">
-                <label htmlFor="name">Nazwisko</label>
+                <label htmlFor="name">{t("Nazwisko")}</label>
                 <input
                   onChange={onChange}
                   required
@@ -245,14 +240,14 @@ function wycena() {
               id="area"
               name="area"
               className="border-solid min-w-[92%] h-[50%] border-2 border-black rounded-md m-5 "
-              placeholder="Informacje Dodatkowe"
+              placeholder={t("Informacje Dodatkowe")}
             />
           </div>
         </div>
 
         <button
           type="submit"
-          className="bg-red-700 py-5 px-20 mt-10 rounded-lg shadow-lg text-xl text-white font-bold"
+          className="bg-red-700 hover:bg-red-500 py-5 px-20 mt-10 rounded-lg shadow-lg text-xl text-white font-bold"
         >
           Wyślij
         </button>
@@ -260,5 +255,16 @@ function wycena() {
     </>
   );
 }
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
+export const getStaticProps = async ({ locale }) => {
+ 
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common", "footer","menu","wycena"],null,['pl','sk'])),  
+    },
+  
+  };
+};
 
 export default wycena;

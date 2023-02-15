@@ -1,8 +1,12 @@
 import Image from "next/image";
 import React from "react";
 import Heading from "../components/ui/Heading";
+// TRANSLATION
+import { useTranslation } from 'next-i18next'
 
 function kontakt() {
+  // eslint-disable-next-line
+  const { t } = useTranslation("kontakt")
   return (
     <>
       <Heading title="Kontakt" />
@@ -31,12 +35,10 @@ function kontakt() {
         <div className="text-white max-md:w-auto flex flex-col bg-slate-500 pt-10 pb-20 px-10 gap-7 items-center text-center w-[50%] shadow-lg rounded-lg">
           <h1 className="text-5xl font-bold">Vistal</h1>
           <h2 className="text-4xl font-semibold">
-            Producent Garaży Blaszanych
+            {t("producent")}
           </h2>
           <p>
-            Serdecznie zapraszamy do kontaktu oraz skorzystania z bezpłatnej
-            wyceny. Nasi konsultanci chętnie odpowiedzą na wszystkie Państwa
-            pytania. Wykonujemy usługi na terenie całego kraju.
+           {t("text-kontakt")}
           </p>
           <div className="flex gap-20">
             <a href="tel:+48 693344132" className="p-1 rounded-md hover:scale-110 hover:bg-slate-100/50">
@@ -54,5 +56,17 @@ function kontakt() {
     </>
   );
 }
+
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
+export const getStaticProps = async ({ locale }) => {
+ 
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common", "footer","menu","kontakt"],null,['pl','sk'])),  
+    },
+  
+  };
+};
 
 export default kontakt;

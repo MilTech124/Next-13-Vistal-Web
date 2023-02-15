@@ -20,7 +20,7 @@ function SingleGarage({ garage }) {
   return (
     <section className="flex max-sm:flex-col-reverse">
       {/* ICONS LEFT SIDE */}
-      <div className="p-10 flex flex-col basis-1/3 gap-10 ">
+      <div className="p-10 flex flex-col min-w-[25%] basis-1/3 gap-10 ">
         <Fade>
           {" "}
           <Image className="" src="/vistal-logo.jpg" width={150} height={50} />

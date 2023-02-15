@@ -1,18 +1,17 @@
 import Image from "next/image";
 import React from "react";
+// TRANSLATION
+import { useTranslation } from 'next-i18next'
+
 
 function ColorsOfGarage() {
+  const { t } = useTranslation("index")
+
   return (
     <section id="colors-of-garage" className="container mx-auto text-center">
-      <h2 className="text-4xl font-bold text-red-700 py-5">Kolory garaży blaszanych</h2>
+      <h2 className="text-4xl font-bold text-red-700 py-5">{t("Kolory garaży blaszanych")}</h2>
       <p>
-        Różne odcienie brązu, wiśni, grafitu, srebrnego, bieli, czerni czy
-        szarości powinny przypaść do gustu osobom ceniącym klasyczny design. W
-        palecie dostępne są również bardziej wyraziste barwy – np. zielony,
-        żółty, niebieski, głęboka czerwień, piaskowy. Dzięki temu kolory garaży
-        blaszanych z powodzeniem można dopasować np. do elewacji domu lub innych
-        budynków znajdujących się na działce, koloru ogrodzenia oraz elementów
-        architektury ogrodowej.
+        {t("Kolor-text")}
       </p>
       <Image
       src='/colors.jpg'
