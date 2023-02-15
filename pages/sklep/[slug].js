@@ -6,8 +6,8 @@ import { Fade } from "react-awesome-reveal";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // TRANSLATION
-import { useTranslation } from 'next-i18next'
-import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
+import { useRouter, locales } from "next/router";
 
 // Import Swiper styles
 import "swiper/css";
@@ -18,9 +18,9 @@ import axios from "axios";
 
 function SingleGarage({ garage }) {
   const { locale } = useRouter();
-  const { t } = useTranslation("garaz")
+  const { t } = useTranslation("garaz");
   const dispatch = useDispatch();
-  const slug = garage[0].slug; 
+  const slug = garage[0].slug;
 
   return (
     <section className="flex max-sm:flex-col-reverse">
@@ -145,30 +145,34 @@ function SingleGarage({ garage }) {
 }
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-export const getStaticProps = async ({ params,locale }) => {
+export const getServerSideProps = async ({ params, locale }) => {
   const garage = await axios.get(
     `${process.env.WP_GARAGES}/?slug=${params.slug}`
   );
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "footer","menu","garaz"],null,['pl','sk'])),
+      ...(await serverSideTranslations(locale,["common", "footer", "menu", "garaz"],null,["pl", "sk",])),
       garage: garage.data,
-    },
-    revalidate: 100,
+    },    
   };
 };
 
-export async function getStaticPaths({locale}) {
-  const response = await axios(process.env.WP_GARAGES);
-  const paths = response.data.map((path) => ({ params: { slug: path.slug } ,locale: locale,}));
+// export async function getStaticPaths({ locales }) {
+//   const response = await axios(process.env.WP_GARAGES);
+//   const paths = [];
 
-  return {
-    paths,
-    //this option below renders in the server (at request time) pages that were not rendered at build time
-    //e.g when a new blogpost is added to the app
-    fallback: true,
-  };
-}
+//   response.data.forEach((path) => {
+//     locales.forEach((locale) => {
+//       paths.push({ params: { slug: path.slug }, locale });
+//     });
+//     console.log(paths);
+//   });
+
+//   return {
+//     paths,
+//     fallback: true,
+//   };
+// }
 
 export default SingleGarage;
