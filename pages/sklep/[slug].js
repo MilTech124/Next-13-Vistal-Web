@@ -2,9 +2,12 @@ import Image from "next/image";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { change } from "../../store/reducers/modal.reducer";
-
 import { Fade } from "react-awesome-reveal";
 import { Swiper, SwiperSlide } from "swiper/react";
+
+// TRANSLATION
+import { useTranslation } from 'next-i18next'
+import { useRouter } from "next/router";
 
 // Import Swiper styles
 import "swiper/css";
@@ -14,8 +17,10 @@ import { Autoplay, Pagination, Navigation } from "swiper";
 import axios from "axios";
 
 function SingleGarage({ garage }) {
+  const { locale } = useRouter();
+  const { t } = useTranslation("garaz")
   const dispatch = useDispatch();
-  const slug = garage[0].slug;
+  const slug = garage[0].slug; 
 
   return (
     <section className="flex max-sm:flex-col-reverse">
@@ -138,29 +143,31 @@ function SingleGarage({ garage }) {
     </section>
   );
 }
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async ({ params,locale }) => {
   const garage = await axios.get(
     `${process.env.WP_GARAGES}/?slug=${params.slug}`
   );
 
   return {
     props: {
+      ...(await serverSideTranslations(locale, ["common", "footer","menu","garaz"],null,['pl','sk'])),
       garage: garage.data,
     },
     revalidate: 100,
   };
 };
 
-export async function getStaticPaths() {
+export async function getStaticPaths({locale}) {
   const response = await axios(process.env.WP_GARAGES);
-  const paths = response.data.map((path) => ({ params: { slug: path.slug } }));
+  const paths = response.data.map((path) => ({ params: { slug: path.slug } ,locale: locale,}));
 
   return {
     paths,
     //this option below renders in the server (at request time) pages that were not rendered at build time
     //e.g when a new blogpost is added to the app
-    fallback: false,
+    fallback: true,
   };
 }
 
