@@ -33,7 +33,7 @@ export const getStaticProps = async ({ locale }) => {
   const garages = await axios.get(process.env.WP_GARAGES);  
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "footer","menu","index"],null,['pl','sk'])),
+      ...(await serverSideTranslations(locale, ["common", "footer","menu","index","garaz"],null,['pl','sk'])),
       data: hero.data,
       garages: garages.data,
     },

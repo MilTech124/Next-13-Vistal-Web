@@ -33,11 +33,19 @@ function galleria({ data }) {
     </div>
   );
 }
-export const getStaticProps = async () => {
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
+export const getStaticProps = async ({locale}) => {
   const response = await axios.get(process.env.WP_REALIZATION);
 
   return {
     props: {
+      ...(await serverSideTranslations(
+        locale,
+        ["common", "footer", "menu", "garaz"],
+        null,
+        ["pl", "sk"]
+      )),
       data: response.data,
     },
     revalidate: 100, 

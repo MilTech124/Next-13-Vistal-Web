@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 // TRANSLATION
 import { useTranslation } from "next-i18next";
-import { useRouter, locales } from "next/router";
+import { useRouter } from "next/router";
 
 // Import Swiper styles
 import "swiper/css";
@@ -47,7 +47,11 @@ function SingleGarage({ garage }) {
         <Fade>
           <div className="flex items-center gap-5 text-xl font-semibold">
             <img src="/svg/roof.svg" alt="icon" />
-            {garage[0].acf.dach}
+            {(garage[0].acf.dach = "jednospadowy")
+              ? t("jednospadowy")
+              : (garage[0].acf.paint = "dwuspadowy")
+              ? t("dwuspadowy")
+              : null}
           </div>
         </Fade>
 
@@ -55,22 +59,35 @@ function SingleGarage({ garage }) {
           <Fade>
             <div className="flex items-center gap-5 text-xl font-semibold">
               <img src="/svg/profil.svg" alt="icon" />
-              profil zamknięty
+              {t("profil zamknięty")}
             </div>
           </Fade>
         ) : null}
-
+        {/* RODZAJ BLACHY */}
         <Fade>
           <div className="flex items-center max-w-xs gap-5 text-xl font-semibold">
             <img src="/svg/paint.svg" alt="icon" />
-            {garage[0].acf.paint}
+            {(garage[0].acf.paint = "blacha drewnopodobna")
+              ? t("bDrewnopodobna")
+              : (garage[0].acf.paint = "blacha akrylowa")
+              ? t("bAkrylowa")
+              : (garage[0].acf.paint = "blacha drewnopodobna/akrylowa")
+              ? t("bDrewAakryl")
+              : null}
           </div>
         </Fade>
-
+        {/* RODZAJ BLACHY */}
         <Fade>
           <div className="flex items-center  gap-5 text-xl font-semibold">
             <img src="/svg/gate.svg" alt="icon" />
-            {garage[0].acf.rodzaj_bramy}
+
+            {(garage[0].acf.rodzaj_bramy = "uchylna")
+              ? t("uchylna")
+              : (garage[0].acf.rodzaj_bramy = "dwuskrzydłowa")
+              ? t("dwuskrzydłowa")
+              : (garage[0].acf.rodzaj_bramy = "roleta")
+              ? t("roleta")
+              : null}
           </div>
         </Fade>
 
@@ -78,7 +95,7 @@ function SingleGarage({ garage }) {
           <Fade>
             <div className="flex items-center gap-5 text-xl font-semibold">
               <img src="/svg/screw.svg" alt="icon" />
-              nity pod kolor
+              {t("nity pod kolor")}
             </div>
           </Fade>
         ) : null}
@@ -86,7 +103,7 @@ function SingleGarage({ garage }) {
           <Fade>
             <div className="flex max-w-xs items-center gap-5 text-xl font-semibold">
               <img src="/svg/shield.svg" alt="icon" />
-              zabezpieczenie antykorozyjne
+              {t("zabezpieczenie antykorozyjne")}
             </div>
           </Fade>
         ) : null}
@@ -152,9 +169,14 @@ export const getServerSideProps = async ({ params, locale }) => {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale,["common", "footer", "menu", "garaz"],null,["pl", "sk",])),
+      ...(await serverSideTranslations(
+        locale,
+        ["common", "footer", "menu", "garaz"],
+        null,
+        ["pl", "sk"]
+      )),
       garage: garage.data,
-    },    
+    },
   };
 };
 

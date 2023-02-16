@@ -34,7 +34,7 @@ function Filters({ garages}) {
 
       {/* FILTERS */}
 
-      <div className="pt-10 flex items-center flex-col gap-5">
+      <div className="py-10 flex items-center flex-col gap-5">
         {garages.map((garage) => (
           <Fade key={garage.id}>
             {filter === t("Drewnopodobne") &&

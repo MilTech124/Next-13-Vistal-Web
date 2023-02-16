@@ -5,9 +5,15 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { change } from "../../store/reducers/modal.reducer";
 
+// TRANSLATION
+import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
+
 function Garage({ garage }) {
-  const slug = garage.slug;
-  const dispatch = useDispatch();
+  const slug = garage.slug
+  const dispatch = useDispatch()
+  const { locale } = useRouter()
+  const { t } = useTranslation("garaz");
 
   return (
     <div className=" shadow-lg lg:w-[52rem] max-md:w-[50vw] h-[150px] min-w-[350px] rounded-md flex justify-between items-center  bg-gray-500 ">
@@ -27,16 +33,23 @@ function Garage({ garage }) {
 
       {/* NAZWA GARAŻU */}
       <div className="text-left pl-5 mr-auto pt-5  bg-gray-500 h-full max-sm:items-center max-sm:flex text-white text-lg font-medium max-sm:text-sm">
-        <h3>{garage.acf.tytul}</h3>
-        <p className="text-sm pt-5 font-normal max-sm:hidden">
-          {garage.acf.male_info}
+        <h3>{(locale==="pl") ? garage.acf.tytul
+            : (locale==="sk") ? garage.acf['tytuł-sk']
+            : (locale ==="hu") ? garage.acf['tytuł-hu']
+            : null}</h3>
+        <p className="text-sm pt-5 font-normal max-sm:hidden">          
+          {(locale==="pl") ? garage.acf.male_info
+            : (locale==="sk") ? garage.acf.infosk
+            : (locale ==="hu") ? garage.acf.infohu
+            : null}
         </p>
       </div>
 
       {/* CENA GARAZU  */}
       <div className="bg-red-700 h-full flex items-center ">
         <p className="text-2xl max-sm:text-sm font-bold text-white  text-center  md:w-[150px] px-5">
-          {garage.acf.cena} zł
+          {(locale==="pl") ? (garage.acf.cena +" zł")
+          :(garage.acf.cenaEur + " €")} 
         </p>
       </div>
 
@@ -58,7 +71,7 @@ function Garage({ garage }) {
           }
           className="bg-yellow-300 w-8 h-full rounded-r-md zamow cursor-pointer text-lg font-bold hover:translate-x-2 hover:w-10 transition-all ease-in-out"
         >
-          Zamów
+          {t("Zamow")}
         </div>
       </div>
     </div>
