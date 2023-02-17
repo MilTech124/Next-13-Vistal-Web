@@ -13,6 +13,7 @@ function Filters({ garages}) {
     t("Akrylowe"),
     t("Ocynk"),
     t("Kojce"),
+    t("Warstwowe"),
     t("Akcesoria"),
     t("Wyprzedaż"),
   ];
@@ -43,6 +44,10 @@ function Filters({ garages}) {
             ) : filter === t("Akrylowe") && garage.acf.rodzaj === "akrylowy" ? (
               <Garage garage={garage} />
             ) : filter === t("Kojce") && garage.acf.rodzaj === "kojce" ? (
+              <Garage garage={garage} />
+            ) : filter === t("Ocynk") && garage.acf.rodzaj === "ocynkowy" ? (
+              <Garage garage={garage} />
+            ) : filter === t("Warstwowe") && garage.acf.rodzaj === "warstwowy" ? (
               <Garage garage={garage} />
             ) : filter === t("Wyprzedaż") && garage.acf.wyprzedaz ? (
               <Garage garage={garage} />

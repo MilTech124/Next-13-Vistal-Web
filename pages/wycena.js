@@ -249,7 +249,7 @@ function wycena() {
           type="submit"
           className="bg-red-700 hover:bg-red-500 py-5 px-20 mt-10 rounded-lg shadow-lg text-xl text-white font-bold"
         >
-          Wyślij
+          {t("Wyślij")}
         </button>
       </form>
     </>

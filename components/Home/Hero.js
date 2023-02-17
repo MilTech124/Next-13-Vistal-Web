@@ -14,21 +14,18 @@ import { useState } from "react";
 import Link from "next/link";
 
 // TRANSLATION
-import { useTranslation } from 'next-i18next'
-
-
+import { useTranslation } from "next-i18next";
 
 function Hero({ data }) {
-
-  const { t } = useTranslation("index")
+  const { t } = useTranslation("index");
 
   const css = { width: "100%", height: "94vh", objectFit: "cover" };
   const ocynkowe = data.acf.photo_gallery["ocynkowe-glowna"][2];
   const akrylowe = data.acf.photo_gallery["akrylowe-glowna"][1];
   const drewnopodobne = data.acf.photo_gallery["drewnopodobne-glowna"][0];
-  const kojce = data.acf.photo_gallery["kojce-glowna"][3];
-
-  const [chosed, setChosed] = useState(drewnopodobne);
+  const kojce = data.acf.photo_gallery["kojce-glowna"][4];
+  const warstwowe = data.acf.photo_gallery.warstwowe[3];
+  const [chosed, setChosed] = useState(warstwowe);
 
   return (
     <>
@@ -47,9 +44,14 @@ function Hero({ data }) {
       >
         <div className="absolute w-full text-white font-bold top-0 left-0 z-10 max-sm:flex-col-reverse  flex flex-row justify-between !important ">
           <div className="bg-black/50 shadow-xl rounded-r-xl basis-2/3 p-[65px] max-sm:p-5 lg:mt-[30vh]">
-            <h1 className="text-[64px] max-sm:text-xl pb-5">{t("Garaże Blaszane")}</h1>
-            <p className="text-2xl max-sm:text-sm " style={{ whiteSpace: 'pre-wrap' }}>
-             {t("text-under")}
+            <h1 className="text-[64px] max-sm:text-xl pb-5">
+              {t("Garaże Blaszane")}
+            </h1>
+            <p
+              className="text-2xl max-sm:text-sm "
+              style={{ whiteSpace: "pre-wrap" }}
+            >
+              {t("text-under")}
             </p>
             <a href="tel:+48 693 344 132">
               <button className="btn mt-10 text-black py-2 px-10 rounded-lg bg-white hover:scale-105 transition-all">
@@ -75,7 +77,7 @@ function Hero({ data }) {
                 </div>
               </Link>
             </div>
-            <div className="pt-[20%]  max-sm:hidden text-xl font-bold flex flex-col text-black gap-5">
+            <div className="pt-[10%]  max-sm:hidden text-xl font-bold flex flex-col text-black gap-5">
               <Slide direction="right">
                 <div
                   onClick={() => setChosed(drewnopodobne)}
@@ -107,6 +109,17 @@ function Hero({ data }) {
                   }
                 >
                   {t("Ocynkowe")}
+                </div>
+              </Slide>
+              <Slide direction="right">
+                <div
+                  onClick={() => setChosed(warstwowe)}
+                  className="bg-white/50 transition-all p-10 px-20 cursor-pointer text-center rounded-l-lg hover:bg-red-700 hover:text-white"
+                  style={
+                    chosed == warstwowe ? { backgroundColor: "grey" } : null
+                  }
+                >
+                  {t("Warstwowe")}
                 </div>
               </Slide>
               <Slide direction="right">
