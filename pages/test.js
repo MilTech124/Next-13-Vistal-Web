@@ -6,7 +6,7 @@ import LightBulb from "../components/Configurator/LightBulb";
 import { OrbitControls } from "@react-three/drei";
 
 
-function test() {
+function Test() {
     const [box,setBox]=useState()
   return (
     <div id="canvas-container" className="w-[100vw] h-[100vh]">
@@ -22,4 +22,4 @@ function test() {
   );
 }
 
-export default test;
+export default Test;
