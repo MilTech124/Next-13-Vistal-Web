@@ -7,7 +7,7 @@ import { useTranslation } from 'next-i18next'
 
 function Popular({ garages }) {
   const { t } = useTranslation("index")
-  const [more, setMore] = useState(2);
+  const [more, setMore] = useState(5);
   return (
     <section
       id="popular"

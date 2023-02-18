@@ -47,9 +47,9 @@ function SingleGarage({ garage }) {
         <Fade>
           <div className="flex items-center gap-5 text-xl font-semibold">
             <img src="/svg/roof.svg" alt="icon" />
-            {(garage[0].acf.dach = "jednospadowy")
+            {(garage[0].acf.dach === "jednospadowy")
               ? t("jednospadowy")
-              : (garage[0].acf.paint = "dwuspadowy")
+              : (garage[0].acf.dach === "dwuspadowy")
               ? t("dwuspadowy")
               : null}
           </div>
@@ -67,12 +67,14 @@ function SingleGarage({ garage }) {
         <Fade>
           <div className="flex items-center max-w-xs gap-5 text-xl font-semibold">
             <img src="/svg/paint.svg" alt="icon" />
-            {(garage[0].acf.paint = "blacha drewnopodobna")
+            {(garage[0].acf.paint === "blacha drewnopodobna")
               ? t("bDrewnopodobna")
-              : (garage[0].acf.paint = "blacha akrylowa")
+              : (garage[0].acf.paint === "blacha akrylowa")
               ? t("bAkrylowa")
-              : (garage[0].acf.paint = "blacha drewnopodobna/akrylowa")
+              : (garage[0].acf.paint === "blacha drewnopodobna/akrylowa")
               ? t("bDrewAakryl")
+              : (garage[0].acf.paint === "ocynk")
+              ? t("ocynk")
               : null}
           </div>
         </Fade>
@@ -81,12 +83,14 @@ function SingleGarage({ garage }) {
           <div className="flex items-center  gap-5 text-xl font-semibold">
             <img src="/svg/gate.svg" alt="icon" />
 
-            {(garage[0].acf.rodzaj_bramy = "uchylna")
+            {(garage[0].acf.rodzaj_bramy === "uchylna")
               ? t("uchylna")
-              : (garage[0].acf.rodzaj_bramy = "dwuskrzydłowa")
+              : (garage[0].acf.rodzaj_bramy === "dwuskrzydlowa")
               ? t("dwuskrzydłowa")
-              : (garage[0].acf.rodzaj_bramy = "roleta")
+              : (garage[0].acf.rodzaj_bramy === "roleta")
               ? t("roleta")
+              : (garage[0].acf.rodzaj_bramy === "drzwi")
+              ? t("drzwi")
               : null}
           </div>
         </Fade>
@@ -164,7 +168,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 export const getServerSideProps = async ({ params, locale }) => {
   const garage = await axios.get(
-    `${process.env.WP_GARAGES}/?slug=${params.slug}`
+    `${process.env.WP_SINGLE_GARAGES}/?slug=${params.slug}`
   );
 
   return {
