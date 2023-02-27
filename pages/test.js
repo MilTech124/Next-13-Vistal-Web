@@ -33,15 +33,13 @@ function Test() {
           onChange={onChange}
         />
         width
-        <input
-          className="bg-slate-300 rounded-lg"
+        <input    className="bg-slate-300 rounded-lg"
           id="width"
           type="text"
           value={box.width}
           onChange={onChange}
         />depth
-        <input
-          className="bg-slate-300 rounded-lg"
+        <input className="bg-slate-300 rounded-lg"
           id="depth"
           type="text"
           value={box.depth}
