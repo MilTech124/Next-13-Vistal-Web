@@ -10,22 +10,24 @@ import * as THREE from "three";
 export function Blaszak(props) {
   const { nodes, materials } = useGLTF('/configurator/garaze.glb')
   const {width,height,depth,windowMeasure,window,windowPosition,glass,door,gutter}=props.box
-  // ROOF CORDINATE
+  const {gate}=props
+
+  // ROOF CORDINATE START
   let temp=0.10
   const roof = () => {  
     if(depth>2.5 && depth<8){return temp-(depth*0.009)}else if(depth>7){return temp-(depth*0.008)}
     else {return temp+(depth*0.001)}
   }
-  // ROOF CORDINATE
+  // ROOF CORDINATE END
  
   // MATERIAL
   const Doortxt = useTexture({
     map:"./configurator/texture/ocynk1.jpg",   
   })
-  Doortxt.map.repeat.set(1,1)
+  Doortxt.map.repeat.set(1.2,1)
   Doortxt.map.wrapS=Doortxt.map.wrapT = THREE.RepeatWrapping
   // MATERIAL  
-   // MATERIAL
+  // MATERIAL
    const ocynkTxt = useTexture({
     map:"./configurator/texture/ocynk1v2.jpg",   
   })
@@ -37,10 +39,10 @@ export function Blaszak(props) {
     <group {...props} dispose={null}>
       <group >
         <mesh geometry={nodes.bryla.geometry} material={materials.drzwi} position={[0, 1.25, 0]} scale={[depth/2.5,1,width/2.5]} >
-        <meshStandardMaterial {...ocynkTxt} metalness="1" />
+        <meshStandardMaterial {...ocynkTxt} metalness="1" roughness={0.4} />
         </mesh>
         <mesh geometry={nodes.dach.geometry} material={materials.drzwi} position={[0, 2.38, 0]} rotation={[0, 0, roof()]} scale={[depth/2.5,1,width/2.5]}>
-         <meshStandardMaterial {...ocynkTxt} metalness="1" />
+         <meshStandardMaterial {...ocynkTxt} metalness="1" roughness={0.4}/>
         </mesh>
         {gutter
         ?<group>
@@ -85,7 +87,7 @@ export function Blaszak(props) {
       {door 
       ? <group>
           <mesh geometry={nodes['drzwi-male-bok'].geometry} material={materials.drzwi} position={[0.35, 0.99, 1.27*width/2.5]} rotation={[Math.PI / 2, 0, 0]} >
-            <meshStandardMaterial {...Doortxt} metalness="1" />
+            <meshStandardMaterial {...Doortxt} metalness="1" roughness={0.4} />
           </mesh>
           <mesh geometry={nodes['dzwi-male-obramowka'].geometry} material={materials.czarny} position={[0.35, 1.01, 1.26*width/2.5]} rotation={[Math.PI / 2, 0, 0]} />
           <mesh geometry={nodes.Klamka.geometry} material={materials.klamki} position={[0.01*depth/2.5, 1.04, 1.26*width/2.5]} />
@@ -93,15 +95,36 @@ export function Blaszak(props) {
      :null}
      
 
-      
-      <mesh geometry={nodes['dzwi-calosc'].geometry} position={[1.27*depth/2.5, 1.16, 0]} rotation={[0, 0, -Math.PI / 2]} >
-        <meshStandardMaterial {...Doortxt} metalness="1" />        
-      </mesh>
+      {/* GATES START */}
+
+      {gate==="Uchylna"
+      ? <group>
+          <mesh geometry={nodes['dzwi-calosc'].geometry} position={[1.27*depth/2.5, 1.16, 0]} rotation={[0, 0, -Math.PI / 2]} >
+            <meshStandardMaterial {...Doortxt} metalness="1"  roughness={0.4}/>        
+          </mesh>
+          <mesh geometry={nodes.pokretlo.geometry} material={materials.klamki} position={[1.28*depth/2.5, 1.18, 0]} />
+        </group>
+      :null}
+
+      {gate==="Naboki"
+      ? <group>
+          <mesh geometry={nodes['podwojnedzwi-front001'].geometry} material={materials['drzwi.003']} position={[1.27*depth/2.5, 1.16, 0.57]} rotation={[0, 0, -Math.PI / 2]} >
+            <meshStandardMaterial {...Doortxt} metalness="1" roughness={0.4} />
+          </mesh>
+          <mesh geometry={nodes.klamkafront.geometry} material={materials['klamki.001']} position={[1.27*depth/2.5, 1.18, -0.07]} rotation={[0, Math.PI / 2, 0]} />
+        </group>
+      :null
+      }
+     
       <mesh geometry={nodes.ramka003.geometry} material={materials.czarny} position={[1.26*depth/2.5, 1.16, 0]} rotation={[0, 0, -Math.PI / 2]} />
-      <mesh geometry={nodes['podwojnedzwi-front001'].geometry} material={materials['drzwi.003']} position={[1.27, 1.16, 0.57]} rotation={[0, 0, -Math.PI / 2]} />
-      <mesh geometry={nodes.pokretlo.geometry} material={materials.klamki} position={[1.28*depth/2.5, 1.18, 0]} />
-      <mesh geometry={nodes.klamkafront.geometry} material={materials['klamki.001']} position={[1.27*depth/2.5, 1.18, -0.07]} rotation={[0, Math.PI / 2, 0]} />
+      
+      
+      
+      {/* GATES START */}
+
+      {/* GLASS START */}
       {glass ? <mesh geometry={nodes.swietlik.geometry} material={materials['Material.001']} position={[0.8, 2.20, 1.26*width/2.5]} rotation={[Math.PI / 2, 0, 0]} />:null}
+      {/* GLASS END */}
      
       {/* SHOW WINDOW AND POSITION*/}
       {window&&windowPosition==="Lewa"
