@@ -8,36 +8,123 @@ import { useGLTF, useTexture } from '@react-three/drei'
 import * as THREE from "three";
 
 export function Blaszak(props) {
-  const { nodes, materials } = useGLTF('/configurator/blaszak.glb')
-  const {width,height,depth}=props.box
+  const { nodes, materials } = useGLTF('/configurator/garaze.glb')
+  const {width,height,depth,windowMeasure,window,windowPosition,glass,door,gutter}=props.box
   // ROOF CORDINATE
   let temp=0.10
   const roof = () => {  
-    if(depth>2.5){return temp-(depth*0.009)}
+    if(depth>2.5 && depth<8){return temp-(depth*0.009)}else if(depth>7){return temp-(depth*0.008)}
     else {return temp+(depth*0.001)}
   }
   // ROOF CORDINATE
+ 
   // MATERIAL
-  const ocynkTxt = useTexture({
-    map:"./configurator/texture/blaszak_img0.jpg",   
+  const Doortxt = useTexture({
+    map:"./configurator/texture/ocynk1.jpg",   
+  })
+  Doortxt.map.repeat.set(1,1)
+  Doortxt.map.wrapS=Doortxt.map.wrapT = THREE.RepeatWrapping
+  // MATERIAL  
+   // MATERIAL
+   const ocynkTxt = useTexture({
+    map:"./configurator/texture/ocynk1v2.jpg",   
   })
   ocynkTxt.map.repeat.set(1.2*width/2.7,1)
-  ocynkTxt.map.wrapS=ocynkTxt.map.wrapT=THREE.RepeatWrapping
+  ocynkTxt.map.wrapS = ocynkTxt.map.wrapT = THREE.RepeatWrapping
   // MATERIAL
 
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.calosc.geometry} position={[0, 1.25, 0]} scale={[depth/2.5,1,width/2.5]} >
+      <group >
+        <mesh geometry={nodes.bryla.geometry} material={materials.drzwi} position={[0, 1.25, 0]} scale={[depth/2.5,1,width/2.5]} >
         <meshStandardMaterial {...ocynkTxt} metalness="1" />
+        </mesh>
+        <mesh geometry={nodes.dach.geometry} material={materials.drzwi} position={[0, 2.38, 0]} rotation={[0, 0, roof()]} scale={[depth/2.5,1,width/2.5]}>
+         <meshStandardMaterial {...ocynkTxt} metalness="1" />
+        </mesh>
+        {gutter
+        ?<group>
+            <mesh geometry={nodes.spust.geometry} material={materials['Rynny.002']} position={[-1.31 *depth/2.5, 1.19, -1.28*width/2.5]} rotation={[Math.PI, -1.3, Math.PI]} />
+            <mesh geometry={nodes.rynna.geometry} material={materials['Rynny.002']} position={[-1.32 *depth/2.5, 2.21, 0]} rotation={[-Math.PI / 2, Math.PI / 2,0]} scale={[1,width/2.5,1]} />          
+          </group>
+        :null}
+        
+
+      </group>
+
+      <group visible={false}>
+        <mesh geometry={nodes.bryla1.geometry} material={materials.drzwi} position={[0, 1.25, 0]} />
+        <mesh geometry={nodes.dach1.geometry} material={materials.drzwi} position={[0, 2.55, 0]} rotation={[0, 0, -0.08]} />
+        <mesh geometry={nodes.spust1.geometry} material={materials['Rynny.001']} position={[1.28, 1.29, -1.25]} rotation={[Math.PI, -1.3, Math.PI]} />
+        <mesh geometry={nodes.rynna1.geometry} material={materials['Rynny.001']} position={[1.3, 2.43, 0]} rotation={[-Math.PI / 2, Math.PI / 2, 0]} />
+      </group>
+     
+      <group visible={false}>
+        <mesh geometry={nodes.dach2.geometry} material={materials.drzwi} position={[0, 2.57, -0.01]} rotation={[0.08, -1.57, 0]} />
+        <mesh geometry={nodes.bryla2.geometry} material={materials['drzwi.007']} position={[0, 1.25, 0]} />
+        <mesh geometry={nodes.spust2.geometry} material={materials['Rynny.003']} position={[-1.22, 1.3, 1.3]} />
+        <mesh geometry={nodes.rynna2.geometry} material={materials['Rynny.003']} position={[0.03, 2.45, 1.3]} rotation={[0, 0, -Math.PI / 2]} />
+      </group>
+
+      <group visible={false}>       
+        <mesh geometry={nodes.dach3.geometry} material={materials.drzwi} position={[0, 2.58, 0.04]} rotation={[-0.08, 1.57, 0]} />
+        <mesh geometry={nodes.rynna3.geometry} material={materials.Rynny} position={[-0.04, 2.45, -1.3]} rotation={[0, 0, -Math.PI / 2]} />
+        <mesh geometry={nodes.spust3.geometry} material={materials.Rynny} position={[-1.22, 1.29, -1.29]} />
+        <mesh geometry={nodes.bryla3.geometry} material={materials['drzwi.008']} position={[0, 1.25, 0]} />
+      </group>
+
+      <group visible={false}>
+      <mesh geometry={nodes.dach4.geometry} material={materials.drzwi} position={[0, 2.64, 0.65]} rotation={[0.26, -Math.PI / 2, 0]} />
+      <mesh geometry={nodes.rynna4.geometry} material={materials.Rynny} position={[-0.04, 2.45, -1.3]} rotation={[0, 0, -Math.PI / 2]} />
+      <mesh geometry={nodes.spust4.geometry} material={materials.Rynny} position={[-1.22, 1.29, -1.29]} />
+      <mesh geometry={nodes.bryla4.geometry} material={materials['drzwi.008']} position={[0, 1.25, 0]} />
+      <mesh geometry={nodes.dach4v2.geometry} material={materials['drzwi.009']} position={[0, 2.65, -0.63]} rotation={[-0.26, Math.PI / 2, 0]} />
+      <mesh geometry={nodes.spust4v2.geometry} material={materials['Rynny.004']} position={[-1.27, 1.3, 1.3]} />
+      <mesh geometry={nodes.rynna4v2.geometry} material={materials['Rynny.004']} position={[-0.02, 2.45, 1.3]} rotation={[0, 0, -Math.PI / 2]} />
+      </group>
+      {door 
+      ? <group>
+          <mesh geometry={nodes['drzwi-male-bok'].geometry} material={materials.drzwi} position={[0.35, 0.99, 1.27*width/2.5]} rotation={[Math.PI / 2, 0, 0]} >
+            <meshStandardMaterial {...Doortxt} metalness="1" />
+          </mesh>
+          <mesh geometry={nodes['dzwi-male-obramowka'].geometry} material={materials.czarny} position={[0.35, 1.01, 1.26*width/2.5]} rotation={[Math.PI / 2, 0, 0]} />
+          <mesh geometry={nodes.Klamka.geometry} material={materials.klamki} position={[0.01*depth/2.5, 1.04, 1.26*width/2.5]} />
+        </group>
+     :null}
+     
+
+      
+      <mesh geometry={nodes['dzwi-calosc'].geometry} position={[1.27*depth/2.5, 1.16, 0]} rotation={[0, 0, -Math.PI / 2]} >
+        <meshStandardMaterial {...Doortxt} metalness="1" />        
       </mesh>
-      <mesh geometry={nodes.dach.geometry}  position={[0, 2.38, 0]} rotation={[0, 0, roof()]} scale={[depth/2.5,1,width/2.5]}>
-        <meshStandardMaterial {...ocynkTxt} metalness="1" />
-      </mesh>
-      <mesh geometry={nodes.ramka.geometry} material={materials.czarny} position={[1.26*depth/2.5, 1.16, 0]} rotation={[0, 0, -Math.PI / 2]} />
-      <mesh geometry={nodes['drzwi-cale'].geometry} material={materials.drzwi} position={[1.27*depth/2.5, 1.16, 0]} rotation={[0, 0, -Math.PI / 2]} />
-      <mesh geometry={nodes.klamka.geometry} material={materials.klamki} position={[1.28*depth/2.5, 1.18, 0]} />
-    </group>
+      <mesh geometry={nodes.ramka003.geometry} material={materials.czarny} position={[1.26*depth/2.5, 1.16, 0]} rotation={[0, 0, -Math.PI / 2]} />
+      <mesh geometry={nodes['podwojnedzwi-front001'].geometry} material={materials['drzwi.003']} position={[1.27, 1.16, 0.57]} rotation={[0, 0, -Math.PI / 2]} />
+      <mesh geometry={nodes.pokretlo.geometry} material={materials.klamki} position={[1.28*depth/2.5, 1.18, 0]} />
+      <mesh geometry={nodes.klamkafront.geometry} material={materials['klamki.001']} position={[1.27*depth/2.5, 1.18, -0.07]} rotation={[0, Math.PI / 2, 0]} />
+      {glass ? <mesh geometry={nodes.swietlik.geometry} material={materials['Material.001']} position={[0.8, 2.20, 1.26*width/2.5]} rotation={[Math.PI / 2, 0, 0]} />:null}
+     
+      {/* SHOW WINDOW AND POSITION*/}
+      {window&&windowPosition==="Lewa"
+      ? <group position={[(1*depth/2.5)-windowMeasure*0.008,1.90,1.26*width/2.5]} rotation={[Math.PI / 1,0,0]}>
+          <mesh geometry={nodes.Cube002.geometry} material={materials.Material} />
+          <mesh geometry={nodes.Cube002_1.geometry} material={materials.okno} />
+        </group>
+        :null}     
+      {window&&windowPosition==="Prawa"
+      ? <group position={[(1*depth/2.5)-windowMeasure*0.008,1.90,-1.26*width/2.5]} rotation={[0,0,0]}>
+          <mesh geometry={nodes.Cube002.geometry} material={materials.Material} />
+          <mesh geometry={nodes.Cube002_1.geometry} material={materials.okno} />
+        </group>
+        :null}     
+      {window&&windowPosition==="Tył"
+      ? <group position={[-1.26*depth/2.5,1.60,-0.4*width+windowMeasure*0.008]} rotation={[0, Math.PI / 2, 0]}>
+          <mesh geometry={nodes.Cube002.geometry} material={materials.Material} />
+          <mesh geometry={nodes.Cube002_1.geometry} material={materials.okno} />
+        </group>
+        :null}     
+      {/* SHOW WINDOW */}
+      </group>
   )
 }
 
-useGLTF.preload('/configurator/blaszak.glb')
+useGLTF.preload('/configurator/garaze.glb')
