@@ -117,7 +117,7 @@ function Test() {
             onChange={onChange}
           >
             {widthValue.map((value) => (
-              <MenuItem value={value}>{value} m</MenuItem>
+              <MenuItem key={value}>{value} m</MenuItem>
             ))}
           </Select>
         </FormControl>
@@ -132,7 +132,7 @@ function Test() {
             onChange={onChange}
           >
             {widthValue.map((value) => (
-              <MenuItem value={value}>{value} m</MenuItem>
+              <MenuItem key={value} value={value}>{value} m</MenuItem>
             ))}
           </Select>
         </FormControl>
