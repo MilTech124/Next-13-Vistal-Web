@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import {OrbitControls,Environment,ContactShadows,BakeShadows} from "@react-three/drei";
 import { Blaszak } from "../components/Configurator/Blaszak";
@@ -18,7 +18,9 @@ import Gate from "../components/Configurator/Gate";
 function Test() {
   const widthValue = [2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8];
   const [current,setCurrent]=useState(null)
-  const [color,setColor]=useState('red')
+  const [color,setColor]=useState('ocynk')
+  const [gateColor,setGateColor]= useState('ocynk')
+  const [gateColorType,setGateColorType]=useState('ocynk')
   const [colorType,setColorType]=useState('ocynkowa')
   const [gate,setGate]=useState('Uchylna')
   const [box, setBox] = useState({    
@@ -29,11 +31,13 @@ function Test() {
     door: false,
     glass: false,
     gutter:false,
-    windowPosition: "Prawa",
+    tilesRoof:false,
+    windowPosition:"Prawa",
     windowMeasure: 30,
   });
-  const env ="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/2k/scythian_tombs_2k.hdr"
+  const env ="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/2k/approaching_storm_2k.hdr"
 
+  useEffect(()=>{},box.tilesRoof)
   // FUNCTION
   const onChange = (e) => {
     setBox((prevState) => ({
@@ -52,16 +56,12 @@ function Test() {
       [e.target.name]: e.target.checked,
     }));
   };
-
-  
-
-  // FUNCTION
-  console.log(box);
-  console.log(current);
+  // FUNCTION 
+ 
 
   return (
     <div id="canvas-container" className="w-[100vw] h-[90vh] relative">
-      {/* SETTING RIGHT SIDE START*/}
+      {/* SETTING LEFT SIDE START*/}
       <div className="absolute top-5 flex flex-col z-50 gap-5 bg-white/50 p-10 rounded-r-lg">
         <FormControlLabel
             control={
@@ -107,10 +107,21 @@ function Test() {
             }
             label="Świetlik"
           />
+        <FormControlLabel
+            control={
+              <Switch
+                name="tilesRoof"
+                onChange={onChangeSwitch}
+                checked={box.tilesRoof}
+                label="Blachodachówka"
+              />
+            }
+            label="Blachodachówka"
+          />
       </div>
-       {/* SETTING RIGHT SIDE END*/}
+       {/* SETTING LEFT SIDE END*/}
 
-       {/* SETTING LEFT SIDE START*/}
+       {/* SETTING RIGHT SIDE START*/}
       <div className="absolute right-0 top-5 w-[200px] flex flex-col z-50 gap-5 bg-white/50 p-10 rounded-l-lg">
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Szerokość</InputLabel>
@@ -142,7 +153,7 @@ function Test() {
             ))}
           </Select>
         </FormControl>
-       
+        {/* WINDOW SETTINGS        */}
         {box.window && current==="window"? (
           <div>
             <RadioGroup name="windowPosition" row aria-labelledby="demo-row-radio-buttons-group-label"         
@@ -168,10 +179,12 @@ function Test() {
             />
           </div>
         ) : null}
-
-        <Colors color={color} setColor={setColor} colorType={colorType} setColorType={setColorType} />
+        {/* WINDOW SETTINGS        */}
+        
+        <Colors color={color} current={current} setColor={setColor} colorType={colorType} setColorType={setColorType} 
+        gateColor={gateColor} setGateColor={setGateColor} gateColorType={gateColorType} setGateColorType={setGateColorType}/>
       </div>
-       {/* SETTING LEFT SIDE END*/}
+       {/* SETTING RIGHT SIDE END*/}
       
       {/* SETTING CENTER START */}
       <div className="absolute  left-1/2 transform -translate-x-1/2 z-50  bg-white/50 p-5 rounded-b-lg">
@@ -183,12 +196,12 @@ function Test() {
       <Canvas shadows camera={{ position: [10, 6, 12], fov: 30 }}>
         <Environment
           files={env}
-          ground={{ height: 5, radius: 40, scale: 17 }}
+          ground={{ height: 5, radius: 40, scale: 20}}
         />
         <ambientLight color={"white"} intensity={0.5} />
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
         <pointLight position={[-10, -5, -10]} />
-        <Blaszak box={box} gate={gate}/>
+        <Blaszak box={box} gate={gate} color={color} gateColor={gateColor}/>
         <OrbitControls minPolarAngle={0} maxPolarAngle={Math.PI / 2.1} />
         <ContactShadows
           position={[0, -0, 0]}
@@ -196,8 +209,7 @@ function Test() {
           scale={20}
           blur={2.5}
           far={8}
-        />
-        <BakeShadows />
+        />          
       </Canvas>
     </div>
   );
