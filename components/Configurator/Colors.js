@@ -24,10 +24,18 @@ function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColo
     {colorType==="acrilic"
     ?   <div>
             <p>Kolory</p>
-            <div className='flex gap-1'>
-                <button onClick={()=>{setColor("ocynk")}} className='p-4 w-4 bg-slate-300 rounded-full' style={color==="ocynk" ? borderStyle : null}></button>
-                <button className='p-4 w-4 bg-slate-300 rounded-full'></button>
-                <button className='p-4 w-4 bg-slate-300 rounded-full'></button>
+            <div className='flex gap-1 flex-wrap'>
+            <button onClick={()=>{setColor("#D4AC6E")}} className='p-4 w-4 bg-[#D4AC6E] rounded-full' style={color ? borderStyle : null}></button>
+                <button onClick={()=>{setColor("#5D181F")}} className='p-4 w-4 bg-[#5D181F] rounded-full' style={color ? borderStyle : null}></button>               
+                <button onClick={()=>{setColor("#7B231E")}} className='p-4 w-4 bg-[#7B231E] rounded-full' style={color ? borderStyle : null}></button>               
+                <button onClick={()=>{setColor("#015080")}} className='p-4 w-4 bg-[#015080] rounded-full' style={color ? borderStyle : null}></button>               
+                <button onClick={()=>{setColor("#46593A")}} className='p-4 w-4 bg-[#46593A] rounded-full' style={color ? borderStyle : null}></button>               
+                <button onClick={()=>{setColor("#3C3F45")}} className='p-4 w-4 bg-[#3C3F45] rounded-full' style={color ? borderStyle : null}></button>               
+                <button onClick={()=>{setColor("#8C4932")}} className='p-4 w-4 bg-[#8C4932] rounded-full' style={color ? borderStyle : null}></button>               
+                <button onClick={()=>{setColor("#5B403A")}} className='p-4 w-4 bg-[#5B403A] rounded-full' style={color ? borderStyle : null}></button>               
+                <button onClick={()=>{setColor("#101012")}} className='p-4 w-4 bg-[#101012] rounded-full' style={color ? borderStyle : null}></button>               
+                <button onClick={()=>{setColor("#A2A2A2")}} className='p-4 w-4 bg-[#A2A2A2] rounded-full' style={color ? borderStyle : null}></button>               
+                <button onClick={()=>{setColor("#FCFFFE")}} className='p-4 w-4 bg-[#FCFFFE] rounded-full' style={color ? borderStyle : null}></button> 
             </div>
         </div>
     :null
@@ -63,10 +71,18 @@ function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColo
 
     {gateColorType==="acrilic"
     ?<div>
-            <div className='flex gap-1'>
-                <button onClick={()=>{setColor("ocynk")}} className='p-4 w-4 bg-slate-300 rounded-full' style={color==="ocynk" ? borderStyle : null}></button>
-                <button className='p-4 w-4 bg-slate-300 rounded-full'></button>
-                <button className='p-4 w-4 bg-slate-300 rounded-full'></button>
+            <div className='flex gap-1 flex-wrap'>
+                <button onClick={()=>{setGateColor("#D4AC6E")}} className='p-4 w-4 bg-[#D4AC6E] rounded-full' style={gateColor ? borderStyle : null}></button>
+                <button onClick={()=>{setGateColor("#5D181F")}} className='p-4 w-4 bg-[#5D181F] rounded-full' style={gateColor ? borderStyle : null}></button>               
+                <button onClick={()=>{setGateColor("#7B231E")}} className='p-4 w-4 bg-[#7B231E] rounded-full' style={gateColor ? borderStyle : null}></button>               
+                <button onClick={()=>{setGateColor("#015080")}} className='p-4 w-4 bg-[#015080] rounded-full' style={gateColor ? borderStyle : null}></button>               
+                <button onClick={()=>{setGateColor("#46593A")}} className='p-4 w-4 bg-[#46593A] rounded-full' style={gateColor ? borderStyle : null}></button>               
+                <button onClick={()=>{setGateColor("#3C3F45")}} className='p-4 w-4 bg-[#3C3F45] rounded-full' style={gateColor ? borderStyle : null}></button>               
+                <button onClick={()=>{setGateColor("#8C4932")}} className='p-4 w-4 bg-[#8C4932] rounded-full' style={gateColor ? borderStyle : null}></button>               
+                <button onClick={()=>{setGateColor("#5B403A")}} className='p-4 w-4 bg-[#5B403A] rounded-full' style={gateColor ? borderStyle : null}></button>               
+                <button onClick={()=>{setGateColor("#101012")}} className='p-4 w-4 bg-[#101012] rounded-full' style={gateColor ? borderStyle : null}></button>               
+                <button onClick={()=>{setGateColor("#A2A2A2")}} className='p-4 w-4 bg-[#A2A2A2] rounded-full' style={gateColor ? borderStyle : null}></button>               
+                <button onClick={()=>{setGateColor("#FCFFFE")}} className='p-4 w-4 bg-[#FCFFFE] rounded-full' style={gateColor ? borderStyle : null}></button>                         
             </div>
         </div>
 :null

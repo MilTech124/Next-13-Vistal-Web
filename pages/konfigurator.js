@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import {OrbitControls,Environment,ContactShadows,BakeShadows} from "@react-three/drei";
 import { Blaszak } from "../components/Configurator/Blaszak";
@@ -34,10 +34,15 @@ function Test() {
     tilesRoof:false,
     windowPosition:"Prawa",
     windowMeasure: 30,
+    glassPosition:"Prawa",
+    glassMeasure:30,
+    doorPosition:"Prawa",
+    doorMeasure:30
   });
   const env ="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/2k/approaching_storm_2k.hdr"
 
-  useEffect(()=>{},box.tilesRoof)
+  console.log(current);
+
   // FUNCTION
   const onChange = (e) => {
     setBox((prevState) => ({
@@ -79,7 +84,7 @@ function Test() {
               <Switch
                 name="gutter"
                 onChange={onChangeSwitch}
-                checked={box.guter}
+                checked={box.gutter}
                 label="Rynny"
               />
             }
@@ -125,29 +130,16 @@ function Test() {
       <div className="absolute right-0 top-5 w-[200px] flex flex-col z-50 gap-5 bg-white/50 p-10 rounded-l-lg">
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Szerokość</InputLabel>
-          <Select
-            name="width"
-            labelId="demo-simple-select-label"
-            id="width"
-            value={box.width}
-            label="szerokosc"
-            onChange={onChange}
-          >
+          <Select name="width" labelId="demo-simple-select-label" id="width" value={box.width} label="szerokosc" onChange={onChange}>
             {widthValue.map((value) => (
               <MenuItem key={value} value={value}>{value} m</MenuItem>
             ))}
           </Select>
         </FormControl>
+
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Długość</InputLabel>
-          <Select
-            name="depth"
-            labelId="demo-simple-select-label"
-            id="depth"
-            value={box.depth}
-            label="Długość"
-            onChange={onChange}
-          >
+          <Select name="depth" labelId="demo-simple-select-label" id="depth" value={box.depth} label="Długość" onChange={onChange}>
             {widthValue.map((value) => (
               <MenuItem key={value} value={value}>{value} m</MenuItem>
             ))}
@@ -180,6 +172,62 @@ function Test() {
           </div>
         ) : null}
         {/* WINDOW SETTINGS        */}
+
+         {/* GLASS SETTINGS        */}
+         {box.glass && current==="glass"? (
+          <div>
+            <RadioGroup name="glassPosition" row aria-labelledby="demo-row-radio-buttons-group-label"         
+              value={box.glassPosition}
+              onChange={onChange}
+            >
+              <FormControlLabel value="Lewa" control={<Radio />}label="Lewa"/>
+              <FormControlLabel value="Tył" control={<Radio />} label="Tył" />
+              <FormControlLabel value="Prawa" control={<Radio />}label="Prawa"/>
+            </RadioGroup>
+            <p>Rozmieszczenie od krawędzi</p>
+            <Slider
+              aria-label="rozmieszczenie"
+              name="glassMeasure"
+              defaultValue={30}
+              value={box.glassMeasure}
+              valueLabelDisplay="auto"
+              step={10}
+              marks
+              min={10}
+              max={ box.glassPosition==="Tył" ? box.width * 100 - 10 : box.depth * 100 - 10}
+              onChange={onChange}
+            />
+          </div>
+        ) : null}
+        {/* GLASS SETTINGS        */}
+
+        {/* DOOR SETTINGS        */}
+            {box.door && current==="door"? (
+          <div>
+            <RadioGroup name="doorPosition" row aria-labelledby="demo-row-radio-buttons-group-label"         
+              value={box.doorPosition}
+              onChange={onChange}
+            >
+              <FormControlLabel value="Lewa" control={<Radio />}label="Lewa"/>
+              <FormControlLabel value="Tył" control={<Radio />} label="Tył" />
+              <FormControlLabel value="Prawa" control={<Radio />}label="Prawa"/>
+            </RadioGroup>
+            <p>Rozmieszczenie od krawędzi</p>
+            <Slider
+              aria-label="rozmieszczenie"
+              name="doorMeasure"
+              defaultValue={30}
+              value={box.doorMeasure}
+              valueLabelDisplay="auto"
+              step={10}
+              marks
+              min={10}
+              max={ box.doorPosition==="Tył" ? box.width * 100 - 10 : box.depth * 100 - 10}
+              onChange={onChange}
+            />
+          </div>
+        ) : null}
+        {/* DOOR SETTINGS        */}
         
         <Colors color={color} current={current} setColor={setColor} colorType={colorType} setColorType={setColorType} 
         gateColor={gateColor} setGateColor={setGateColor} gateColorType={gateColorType} setGateColorType={setGateColorType}/>
