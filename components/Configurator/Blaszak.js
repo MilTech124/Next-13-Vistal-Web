@@ -40,18 +40,15 @@ export function Blaszak(props) {
   const colorTxt = useTexture({
     normalMap:"./configurator/texture/ocynkNormal.jpg",
   })
-  colorTxt.normalMap.repeat.set(1.2,1)
+  colorTxt.normalMap.repeat.set(1.2*width/2.7,1)
   colorTxt.normalMap.wrapS=Doortxt.map.wrapT = THREE.RepeatWrapping
   //MATERIAL COLORS
 
   // MATERIAL OCYNK2
    const ocynkTxt = useTexture({
-    map:"./configurator/texture/ocynk1v2.jpg",
-    // normalMap:"./configurator/texture/ocynkNormal.jpg",
+    map:"./configurator/texture/ocynk1v2.jpg",  
   })
   ocynkTxt.map.repeat.set(1.2*width/2.7,1)
-  // ocynkTxt.normalMap.repeat.set(1.2*width/2.7,1)
-  // ocynkTxt.normalMap.wrapS = ocynkTxt.normalMap.wrapT = THREE.RepeatWrapping
   ocynkTxt.map.wrapS = ocynkTxt.map.wrapT = THREE.RepeatWrapping
   // MATERIAL OCYNK2
 
@@ -141,25 +138,25 @@ export function Blaszak(props) {
     <group {...props} dispose={null}>
       <group visible={roof==='spadTyl'} >
         <mesh geometry={nodes.bryla.geometry} castShadow material={materials.drzwi} position={[0, 1.25, 0]} scale={[depth/2.5,1,width/2.5]} >
-          {color==="dab"
-          ?<meshStandardMaterial {...wood} metalness="1" roughness={1} color="#D0A102"/>
-          :color==="ocynk"
-          ?<meshStandardMaterial {...ocynkTxt} metalness="1" roughness={0.4}  />
-          :color==="orzech" 
-          ? <meshStandardMaterial {...wood} metalness="1" roughness={0.8} color="#7A5F04"/>
-          :color ? <meshStandardMaterial {...colorTxt} metalness="0.5" roughness={0.8} color={color} /> 
-          :null
-          }
+        {color==="dab"
+            ?<meshStandardMaterial {...wood}  metalness="1" roughness={1} color="#D0A102"/>
+            :color==="ocynk"
+            ?<meshStandardMaterial {...ocynkTxt} metalness="1" roughness={0.4}/>
+            :color==="orzech" 
+            ? <meshStandardMaterial {...wood} metalness="1" roughness={0.8} color="#7A5F04"/>
+            :color ?<meshStandardMaterial {...colorTxt} metalness="0.1" roughness={0.6} color={color} /> 
+            :null
+            }
         </mesh>
         {tilesRoof
         ? <mesh geometry={nodes.dach.geometry} castShadow material={materials.drzwi} position={[0, 2.37, 0]} rotation={[0, 0, roofCordinate()]} scale={[depth/2.5,1,width/2.5]}>         
-            <meshStandardMaterial  {...roofMat}  roughness="0.2"  color="#000"/>   
+            <meshStandardMaterial  {...roofMat}  roughness="0.2"  color="#000"/>
           </mesh>
          :null
         }
          {!tilesRoof
         ? <mesh geometry={nodes.dach.geometry} castShadow material={materials.drzwi} position={[0, 2.38, 0]} rotation={[0, 0, roofCordinate()]} scale={[depth/2.5,1,width/2.5]}>         
-            <meshStandardMaterial  {...ocynkTxt} metalness="1" roughness={0.4}/>        
+            <meshStandardMaterial  {...ocynkTxt} metalness="1" roughness={0.4}/>
           </mesh>
          :null
         }       
@@ -179,7 +176,7 @@ export function Blaszak(props) {
             ?<meshStandardMaterial {...ocynkTxt} metalness="1" roughness={0.4}  />
             :color==="orzech" 
             ? <meshStandardMaterial {...wood} metalness="1" roughness={0.8} color="#7A5F04"/>
-            :color ? <meshStandardMaterial {...ocynkTxt} metalness="1" roughness={1} color={color} /> 
+            :color ?<meshStandardMaterial {...colorTxt} metalness="0.1" roughness={0.6} color={color} /> 
             :null
             }
         </mesh>
@@ -204,7 +201,7 @@ export function Blaszak(props) {
                 ?<meshStandardMaterial {...ocynkTxt} metalness="1" roughness={0.4}  />
                 :color==="orzech" 
                 ? <meshStandardMaterial {...wood} metalness="1" roughness={0.8} color="#7A5F04"/>
-                :color ? <meshStandardMaterial {...ocynkTxt} metalness="1" roughness={1} color={color} /> 
+                :color ?<meshStandardMaterial {...colorTxt} metalness="0.1" roughness={0.6} color={color} /> 
                 :null
                 }
         </mesh>
@@ -225,14 +222,14 @@ export function Blaszak(props) {
       <group visible={roof==='spadPrawy'}>
         <mesh geometry={nodes.bryla3.geometry} castShadow material={materials['drzwi.008']} position={[0, 1.25, 0]}  scale={[depth/2.5,1,width/2.5]}>
         {color==="dab"
-                ?<meshStandardMaterial {...wood} metalness="1" roughness={1} color="#D0A102"/>
-                :color==="ocynk"
-                ?<meshStandardMaterial {...ocynkTxt} metalness="1" roughness={0.4}  />
-                :color==="orzech" 
-                ? <meshStandardMaterial {...wood} metalness="1" roughness={0.8} color="#7A5F04"/>
-                :color ? <meshStandardMaterial {...ocynkTxt} metalness="1" roughness={1} color={color} /> 
-                :null
-                }
+        ?<meshStandardMaterial {...wood} metalness="1" roughness={1} color="#D0A102"/>
+        :color==="ocynk"
+        ?<meshStandardMaterial {...ocynkTxt} metalness="1" roughness={0.4}  />
+        :color==="orzech" 
+        ? <meshStandardMaterial {...wood} metalness="1" roughness={0.8} color="#7A5F04"/>
+        :color ?<meshStandardMaterial {...colorTxt} metalness="0.1" roughness={0.6} color={color} /> 
+        :null
+        }
         </mesh>
         <mesh visible={!tilesRoof} geometry={nodes.dach3.geometry} castShadow material={materials.drzwi} position={[0, 2.59, 0.04]} rotation={[0, 1.57,0.8*-roofCordinateWidth()]} scale={[width/2.5,1,depth/2.5]}>
           <meshStandardMaterial  {...ocynkTxt} metalness="1" roughness={0.4}/>  
@@ -249,13 +246,13 @@ export function Blaszak(props) {
       <group visible={roof==='dwuspad'}>
       <mesh geometry={nodes.bryla4.geometry} castShadow material={materials['drzwi.008']} position={[0, 1.25, 0]} scale={[depth/2.5,1,width/2.5]} >
         {color==="dab"
-                  ?<meshStandardMaterial {...wood} metalness="1" roughness={1} color="#D0A102"/>
-                  :color==="ocynk"
-                  ?<meshStandardMaterial {...ocynkTxt} metalness="1" roughness={0.4}  />
-                  :color==="orzech" 
-                  ? <meshStandardMaterial {...wood} metalness="1" roughness={0.8} color="#7A5F04"/>
-                  :color ? <meshStandardMaterial {...ocynkTxt} metalness="1" roughness={1} color={color} /> 
-                  :null
+        ?<meshStandardMaterial {...wood} metalness="1" roughness={1} color="#D0A102"/>
+        :color==="ocynk"
+        ?<meshStandardMaterial {...ocynkTxt} metalness="1" roughness={0.4}  />
+        :color==="orzech" 
+        ? <meshStandardMaterial {...wood} metalness="1" roughness={0.8} color="#7A5F04"/>
+        :color ?<meshStandardMaterial {...colorTxt} metalness="0.1" roughness={0.6} color={color} /> 
+        :null
         } 
       </mesh>
       <group visible={!tilesRoof} scale={[depth/2.5,1,width/2.5]}>
@@ -389,7 +386,6 @@ export function Blaszak(props) {
       position={[2+depth/2.5, 0.2, 0]}
       lineHeight={0.8}
       rotation={[0, Math.PI / 2, 0]}
-      font="/Ki-Medium.ttf"
       fontSize={1}
       material-toneMapped={false}
       anchorX="center"
