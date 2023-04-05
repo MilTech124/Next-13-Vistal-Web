@@ -20,6 +20,10 @@ export function Blaszak(props) {
     if(depth>2.5 && depth<8){return temp-(depth*0.009)}else if(depth>7){return temp-(depth*0.008)}
     else {return temp+(depth*0.001)}
   }
+  const roofCordinateWidth = () => {  
+    if(width>2.5 && width<8){return temp-(width*0.009)}else if(width>7){return temp-(width*0.008)}
+    else {return temp+(width*0.001)}
+  }
   // ROOF CORDINATE END
 
   //-------------------------------------------MATERIALS--------------------------------
@@ -174,38 +178,105 @@ export function Blaszak(props) {
             :null
             }
         </mesh>
-        <mesh visible={tilesRoof} geometry={nodes.dach1.geometry} castShadow material={materials.drzwi} position={[0, 2.52, 0]} rotation={[0, 0, -roofCordinate()*0.7]} scale={[depth/2.5,1,width/2.5]} >
-        <meshStandardMaterial  {...roofMat}  roughness="0.2"  color="#000"/>   
+        <mesh visible={tilesRoof} geometry={nodes.dach1.geometry} castShadow material={materials.drzwi} position={[0, 2.55, 0]} rotation={[0, 0, -roofCordinate()*0.7]} scale={[depth/2.5,1,width/2.5]} >
+          <meshStandardMaterial  {...roofMat}  roughness="0.2"  color="#000"/>   
         </mesh>
         <mesh visible={!tilesRoof} geometry={nodes.dach1.geometry} castShadow material={materials.drzwi} position={[0, 2.57, 0]} rotation={[0, 0, -roofCordinate()*0.7]} scale={[depth/2.5,1,width/2.5]} >
-        <meshStandardMaterial  {...ocynkTxt} metalness="1" roughness={0.4}/>        
+          <meshStandardMaterial  {...ocynkTxt} metalness="1" roughness={0.4}/>        
         </mesh>
-        <mesh geometry={nodes.spust1.geometry} castShadow material={materials['Rynny.001']} position={[1.28, 1.29, -1.25]} rotation={[Math.PI, -1.3, Math.PI]} />
-        <mesh geometry={nodes.rynna1.geometry}castShadow  material={materials['Rynny.001']} position={[1.3, 2.43, 0]} rotation={[-Math.PI / 2, Math.PI / 2, 0]} />
+        <group visible={gutter}>
+          <mesh geometry={nodes.spust1.geometry} castShadow material={materials['Rynny.001']} position={[1.28*depth/2.5, 1.29, -1.25*width/2.5]} rotation={[Math.PI, -1.3, Math.PI]} />
+          <mesh geometry={nodes.rynna1.geometry}castShadow  material={materials['Rynny.001']} position={[1.3*depth/2.5, 2.43, 0]} rotation={[-Math.PI / 2, Math.PI / 2, 0]} scale={[1,width/2.5,1]} />
+        </group>
+       
       </group>
      
       <group visible={roof==='spadLewy'}>
-        <mesh geometry={nodes.dach2.geometry} castShadow material={materials.drzwi} position={[0, 2.57, -0.01]} rotation={[0.08, -1.57, 0]} />
-        <mesh geometry={nodes.bryla2.geometry} castShadow material={materials['drzwi.007']} position={[0, 1.25, 0]} />
-        <mesh geometry={nodes.spust2.geometry} castShadow material={materials['Rynny.003']} position={[-1.22, 1.3, 1.3]} />
-        <mesh geometry={nodes.rynna2.geometry} castShadow material={materials['Rynny.003']} position={[0.03, 2.45, 1.3]} rotation={[0, 0, -Math.PI / 2]} />
+        <mesh geometry={nodes.bryla2.geometry} castShadow material={materials['drzwi.007']} position={[0, 1.25, 0]} scale={[depth/2.5,1,width/2.5]} >
+          {color==="dab"
+                ?<meshStandardMaterial {...wood} metalness="1" roughness={1} color="#D0A102"/>
+                :color==="ocynk"
+                ?<meshStandardMaterial {...ocynkTxt} metalness="1" roughness={0.4}  />
+                :color==="orzech" 
+                ? <meshStandardMaterial {...wood} metalness="1" roughness={0.8} color="#7A5F04"/>
+                :color ? <meshStandardMaterial {...ocynkTxt} metalness="1" roughness={1} color={color} /> 
+                :null
+                }
+        </mesh>
+
+        <mesh visible={tilesRoof} geometry={nodes.dach2.geometry} castShadow material={materials.drzwi} position={[0, 2.57, -0.0]} rotation={[0, -1.57, -0.8*roofCordinateWidth()]} scale={[width/2.5,1,depth/2.5]} >   
+          <meshStandardMaterial  {...roofMat}  roughness="0.2"  color="#000"/>  
+        </mesh>
+        <mesh visible={!tilesRoof} geometry={nodes.dach2.geometry} castShadow material={materials.drzwi} position={[0, 2.58, -0.0]} rotation={[0, -1.57, -0.8*roofCordinateWidth()]} scale={[width/2.5,1,depth/2.5]} >   
+        <meshStandardMaterial  {...ocynkTxt} metalness="1" roughness={0.4}/>    
+        </mesh>
+        <group visible={gutter}>
+         <mesh geometry={nodes.spust2.geometry} castShadow material={materials['Rynny.003']} position={[-1.22*depth/2.5, 1.3, 1.3*width/2.5]} />
+          <mesh geometry={nodes.rynna2.geometry} castShadow material={materials['Rynny.003']} position={[0.03*depth/2.5, 2.45, 1.3*width/2.5]} rotation={[0, 0, -Math.PI / 2]} scale={[1,depth/2.5,1]} />
+        </group>
+        
       </group>
 
-      <group visible={roof==='spadPrawy'}>       
-        <mesh geometry={nodes.dach3.geometry} castShadow material={materials.drzwi} position={[0, 2.58, 0.04]} rotation={[-0.08, 1.57, 0]} />
-        <mesh geometry={nodes.rynna3.geometry} castShadow material={materials.Rynny} position={[-0.04, 2.45, -1.3]} rotation={[0, 0, -Math.PI / 2]} />
-        <mesh geometry={nodes.spust3.geometry} castShadow material={materials.Rynny} position={[-1.22, 1.29, -1.29]} />
-        <mesh geometry={nodes.bryla3.geometry} castShadow material={materials['drzwi.008']} position={[0, 1.25, 0]} />
+      <group visible={roof==='spadPrawy'}>
+        <mesh geometry={nodes.bryla3.geometry} castShadow material={materials['drzwi.008']} position={[0, 1.25, 0]}  scale={[depth/2.5,1,width/2.5]}>
+        {color==="dab"
+                ?<meshStandardMaterial {...wood} metalness="1" roughness={1} color="#D0A102"/>
+                :color==="ocynk"
+                ?<meshStandardMaterial {...ocynkTxt} metalness="1" roughness={0.4}  />
+                :color==="orzech" 
+                ? <meshStandardMaterial {...wood} metalness="1" roughness={0.8} color="#7A5F04"/>
+                :color ? <meshStandardMaterial {...ocynkTxt} metalness="1" roughness={1} color={color} /> 
+                :null
+                }
+        </mesh>
+        <mesh visible={!tilesRoof} geometry={nodes.dach3.geometry} castShadow material={materials.drzwi} position={[0, 2.59, 0.04]} rotation={[0, 1.57,0.8*-roofCordinateWidth()]} scale={[width/2.5,1,depth/2.5]}>
+          <meshStandardMaterial  {...ocynkTxt} metalness="1" roughness={0.4}/>  
+        </mesh>
+        <mesh visible={tilesRoof} geometry={nodes.dach3.geometry} castShadow material={materials.drzwi} position={[0, 2.57, 0.04]} rotation={[0.8*-roofCordinateWidth(), 1.57,0]} scale={[width/2.5,1,depth/2.5]}>
+          <meshStandardMaterial  {...roofMat}  roughness="0.2"  color="#000"/>   
+        </mesh>
+        <group visible={gutter}>
+          <mesh geometry={nodes.rynna3.geometry} castShadow material={materials.Rynny} position={[-0.04, 2.45, -1.3]} rotation={[0, 0, -Math.PI / 2]} />
+          <mesh geometry={nodes.spust3.geometry} castShadow material={materials.Rynny} position={[-1.22, 1.29, -1.29]} />
+        </group>
       </group>
 
       <group visible={roof==='dwuspad'}>
-      <mesh geometry={nodes.dach4.geometry} castShadow material={materials.drzwi} position={[0, 2.64, 0.65]} rotation={[0.26, -Math.PI / 2, 0]} />
-      <mesh geometry={nodes.rynna4.geometry} castShadow material={materials.Rynny} position={[-0.04, 2.45, -1.3]} rotation={[0, 0, -Math.PI / 2]} />
-      <mesh geometry={nodes.spust4.geometry} castShadow material={materials.Rynny} position={[-1.22, 1.29, -1.29]} />
-      <mesh geometry={nodes.bryla4.geometry} castShadow material={materials['drzwi.008']} position={[0, 1.25, 0]} />
-      <mesh geometry={nodes.dach4v2.geometry} castShadow material={materials['drzwi.009']} position={[0, 2.65, -0.63]} rotation={[-0.26, Math.PI / 2, 0]} />
-      <mesh geometry={nodes.spust4v2.geometry} castShadow material={materials['Rynny.004']} position={[-1.27, 1.3, 1.3]} />
-      <mesh geometry={nodes.rynna4v2.geometry} castShadow material={materials['Rynny.004']} position={[-0.02, 2.45, 1.3]} rotation={[0, 0, -Math.PI / 2]} />
+      <mesh geometry={nodes.bryla4.geometry} castShadow material={materials['drzwi.008']} position={[0, 1.25, 0]} scale={[depth/2.5,1,width/2.5]} >
+        {color==="dab"
+                  ?<meshStandardMaterial {...wood} metalness="1" roughness={1} color="#D0A102"/>
+                  :color==="ocynk"
+                  ?<meshStandardMaterial {...ocynkTxt} metalness="1" roughness={0.4}  />
+                  :color==="orzech" 
+                  ? <meshStandardMaterial {...wood} metalness="1" roughness={0.8} color="#7A5F04"/>
+                  :color ? <meshStandardMaterial {...ocynkTxt} metalness="1" roughness={1} color={color} /> 
+                  :null
+        } 
+      </mesh>
+      <group visible={!tilesRoof} scale={[depth/2.5,1,width/2.5]}>
+        <mesh geometry={nodes.dach4.geometry} castShadow material={materials.drzwi} position={[0, 2.64, 0.65]} rotation={[0.26, -Math.PI / 2, 0]} >
+          <meshStandardMaterial  {...ocynkTxt} metalness="1" roughness={0.4}/>   
+        </mesh>
+        <mesh geometry={nodes.dach4v2.geometry} castShadow material={materials['drzwi.009']} position={[0, 2.65, -0.63]} rotation={[-0.26, Math.PI / 2, 0]} >
+          <meshStandardMaterial  {...ocynkTxt} metalness="1" roughness={0.4}/>  
+        </mesh>
+      </group>
+      <group visible={tilesRoof} scale={[depth/2.5,1,width/2.5]}>
+        <mesh geometry={nodes.dach4.geometry} castShadow material={materials.drzwi} position={[0, 2.63, 0.65]} rotation={[0.26, -Math.PI / 2, 0]} >
+        <meshStandardMaterial  {...roofMat}  roughness="0.2"  color="#000"/>      
+        </mesh>
+        <mesh geometry={nodes.dach4v2.geometry} castShadow material={materials['drzwi.009']} position={[0, 2.64, -0.63]} rotation={[-0.27, Math.PI / 2, 0]} >
+        <meshStandardMaterial  {...roofMat}  roughness="0.2"  color="#000"/>    
+        </mesh>
+      </group>
+      <group visible={gutter}>
+        <mesh geometry={nodes.rynna4.geometry} castShadow material={materials.Rynny} position={[-0.04, 2.45, -1.3]} rotation={[0, 0, -Math.PI / 2]} />
+        <mesh geometry={nodes.spust4.geometry} castShadow material={materials.Rynny} position={[-1.22, 1.29, -1.29]} />
+        <mesh geometry={nodes.rynna4v2.geometry} castShadow material={materials['Rynny.004']} position={[-0.02, 2.45, 1.3]} rotation={[0, 0, -Math.PI / 2]} />     
+        <mesh geometry={nodes.spust4v2.geometry} castShadow material={materials['Rynny.004']} position={[-1.27, 1.3, 1.3]} />
+      </group>
+      
+      
       </group>
 
       {/* DOOR START */}
