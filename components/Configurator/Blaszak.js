@@ -27,19 +27,31 @@ export function Blaszak(props) {
   // ROOF CORDINATE END
 
   //-------------------------------------------MATERIALS--------------------------------
-  // MATERIAL OCYNK
+  // MATERIAL DOOR OCYNK
   const Doortxt = useTexture({
-    map:"./configurator/texture/ocynk1.jpg",   
+    map:"./configurator/texture/ocynk1.jpg",
+       
   })
   Doortxt.map.repeat.set(1.2,1)
   Doortxt.map.wrapS=Doortxt.map.wrapT = THREE.RepeatWrapping
-  // MATERIAL  OCYNK
+  // MATERIAL DOOR OCYNK
+  
+  //MATERIAL COLORS
+  const colorTxt = useTexture({
+    normalMap:"./configurator/texture/ocynkNormal.jpg",
+  })
+  colorTxt.normalMap.repeat.set(1.2,1)
+  colorTxt.normalMap.wrapS=Doortxt.map.wrapT = THREE.RepeatWrapping
+  //MATERIAL COLORS
 
   // MATERIAL OCYNK2
    const ocynkTxt = useTexture({
-    map:"./configurator/texture/ocynk1v2.jpg",       
+    map:"./configurator/texture/ocynk1v2.jpg",
+    // normalMap:"./configurator/texture/ocynkNormal.jpg",
   })
   ocynkTxt.map.repeat.set(1.2*width/2.7,1)
+  // ocynkTxt.normalMap.repeat.set(1.2*width/2.7,1)
+  // ocynkTxt.normalMap.wrapS = ocynkTxt.normalMap.wrapT = THREE.RepeatWrapping
   ocynkTxt.map.wrapS = ocynkTxt.map.wrapT = THREE.RepeatWrapping
   // MATERIAL OCYNK2
 
@@ -53,18 +65,11 @@ export function Blaszak(props) {
 
   // MATERIAL WOOD
    const wood = useTexture({
-    map:"./configurator/texture/wood.jpg",  
-    normalMap:"./configurator/texture/normal.jpg" ,
-    bumpMap:"./configurator/texture/bumpwood.jpg" ,
-    
+    map:"./configurator/texture/wood.jpg",
       })
-  wood.map.repeat.set(1.2*width/2.7,1)
-  wood.normalMap.repeat.set(1.2*width/2.7,1)
-  wood.bumpMap.repeat.set(1.2*width/2.7,1)
+  wood.map.repeat.set(1.2*width/2.7,1) 
   wood.map.wrapS = wood.map.wrapT = THREE.RepeatWrapping
-  wood.bumpMap.wrapS = wood.bumpMap.wrapT = THREE.RepeatWrapping
-  wood.normalMap.wrapS = wood.normalMap.wrapT = THREE.RepeatWrapping
-  
+ 
   // MATERIAL WOOD
 
   // MATERIAL WOOD FOR GATE 
@@ -142,7 +147,7 @@ export function Blaszak(props) {
           ?<meshStandardMaterial {...ocynkTxt} metalness="1" roughness={0.4}  />
           :color==="orzech" 
           ? <meshStandardMaterial {...wood} metalness="1" roughness={0.8} color="#7A5F04"/>
-          :color ? <meshStandardMaterial {...ocynkTxt} metalness="1" roughness={1} color={color} /> 
+          :color ? <meshStandardMaterial {...colorTxt} metalness="0.5" roughness={0.8} color={color} /> 
           :null
           }
         </mesh>

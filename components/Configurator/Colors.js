@@ -1,9 +1,9 @@
 import React from 'react'
 import Tooltip from '@mui/material/Tooltip';
 
-function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColorType,gateColor,setGateColor,current}) {
+function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColorType,gateColor,setGateColor}) {
     const borderStyle={
-        border:'solid 2px red',        
+        boxShadow:'0px 0px 5px 5px',
     }
     const colors = [
 		"#D4AC6E",
@@ -21,27 +21,30 @@ function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColo
   return (
     <>
     {/* PLATE MAIN COLOR */}
-    <h4 className='text-xl'>Rodzaj Blachy</h4>
-    <div className='flex justify-between'>
-     
+    
+    <h4 className='text-2xl pb-2'>Rodzaj Blachy Ściany:</h4>
+    <div className='flex justify-between'>     
     <Tooltip title="Ocynkowa">
-        <button onClick={()=>{setColor("ocynk"),setColorType("ocynkowa")}} className='p-7 w-7 bg-slate-300 rounded-full' style={color==="ocynk" ? borderStyle : null}></button>
+        <button onClick={()=>{setColor("ocynk"),setColorType("ocynkowa")}} className='p-7 w-7 h-7 bg-slate-300 rounded-full' style={color==="ocynk" ? borderStyle : null}></button>
     </Tooltip>
     <Tooltip title="Drewnopodobna">
-        <button onClick={()=>{setColorType("wood")}} className='p-7 w-7 bg-amber-700 rounded-full' style={colorType==="wood" ? borderStyle : null}></button>
+        <button onClick={()=>{setColorType("wood")}} className='p-7 w-7 h-7 bg-amber-700 rounded-full' style={colorType==="wood" ? borderStyle : null}></button>
     </Tooltip>
     <Tooltip title="Akrylowa">
-        <button onClick={()=>{setColorType("acrilic")}} className='p-7 w-7 bg-yellow-300 rounded-full' style={colorType==="acrilic" ? borderStyle : null}></button>
+        <button onClick={()=>{setColorType("acrilic")}} className='p-7 w-7 h-7 bg-yellow-300 rounded-full' style={colorType==="acrilic" ? borderStyle : null}></button>
     </Tooltip>
     </div>
     {colorType==="acrilic"
     ?   <div>
             <p>Kolory</p>
-            <div className='flex gap-1 flex-wrap'>           
-           {colors.map((singleColor,index)=>{return <button key={index} onClick={()=>{setColor(singleColor)}} className={"p-5 w-5 bg-["+singleColor+"] rounded-full"} style={singleColor===color ? borderStyle : null}>
-           </button>}          
+            <div className='flex gap-1 flex-wrap'>
+        {colors.map((singleColor,index)=>{return <button key={index} onClick={()=>{setColor(singleColor)}} className={`p-5 w-5 h-5 border rounded-full`} 
+            style={{
+               boxShadow:(color === singleColor) ? '0px 0px 3px 3px' : null,
+                backgroundColor: singleColor
+            }}>
+           </button>}
            )}
-           {color}
             </div>
         </div>
     :null
@@ -50,9 +53,9 @@ function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColo
         ?   <div>
                 <p>Kolory</p>
                 <div className='flex gap-1'>
-                    <button onClick={()=>{setColor("dab")}} className='p-4 w-4 bg-orange-700 rounded-full'
+                    <button onClick={()=>{setColor("dab")}} className='p-5 w-5 h-5 bg-orange-700 rounded-full'
                      style={color==="dab" ? borderStyle : null}></button>
-                    <button onClick={()=>{setColor("orzech")}} className='p-4 w-4 bg-orange-900 rounded-full'
+                    <button onClick={()=>{setColor("orzech")}} className='p-5 w-5 h-5 bg-orange-900 rounded-full'
                      style={color==="orzech" ? borderStyle : null}></button>               
                 </div>
             </div>
@@ -64,13 +67,13 @@ function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColo
     <div className='flex justify-between'>
      
      <Tooltip title="Ocynkowa">
-         <button onClick={()=>{setGateColor("ocynk"),setGateColorType("ocynkowa")}} className='p-7 w-7 bg-slate-300 rounded-full' style={gateColor==="ocynk" ? borderStyle : null}></button>
+         <button onClick={()=>{setGateColor("ocynk"),setGateColorType("ocynkowa")}} className='p-7 w-7 h-7 bg-slate-300 rounded-full' style={gateColor==="ocynk" ? borderStyle : null}></button>
      </Tooltip>
      <Tooltip title="Drewnopodobna">
-         <button onClick={()=>{setGateColorType("wood")}} className='p-7 w-7 bg-amber-700 rounded-full' style={gateColorType==="wood" ? borderStyle : null}></button>
+         <button onClick={()=>{setGateColorType("wood")}} className='p-7 w-7 h-7 bg-amber-700 rounded-full' style={gateColorType==="wood" ? borderStyle : null}></button>
      </Tooltip>
      <Tooltip title="Akrylowa">
-         <button onClick={()=>{setGateColorType("acrilic")}} className='p-7 w-7 bg-yellow-300 rounded-full' style={gateColorType==="acrilic" ? borderStyle : null}></button>
+         <button onClick={()=>{setGateColorType("acrilic")}} className='p-7 w-7 h-7 bg-yellow-300 rounded-full' style={gateColorType==="acrilic" ? borderStyle : null}></button>
      </Tooltip>
      </div>
     </div>    
@@ -78,12 +81,16 @@ function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColo
     {gateColorType==="acrilic"
     ?<div>
             <p>Kolory</p>
-            <div className='flex gap-1 flex-wrap'>               
+            <div className='flex gap-1 flex-wrap'>
                {colors.map((singleColor,index)=>{return <button key={index} onClick={()=>{setGateColor(singleColor)}}
-                className={"p-5 w-5 bg-["+singleColor+"]rounded-full"} style={singleColor===gateColor ? borderStyle : null}>
+                className={"p-5 w-5 h-5 border rounded-full"} 
+                style={{
+                    boxShadow:(gateColor === singleColor) ? '0px 0px 3px 3px' : null,
+                     backgroundColor: singleColor
+                 }}>
                </button>}
                )}
-            </div>          
+            </div>
         </div>
        
 :null
@@ -92,20 +99,17 @@ function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColo
         ?   <div>
                 <p>Kolory</p>
                 <div className='flex gap-1'>
-                    <button onClick={()=>{setGateColor("dab")}} className='p-5 w-5 bg-orange-700 rounded-full'
+                    <button onClick={()=>{setGateColor("dab")}} className='p-5 w-5 h-5 bg-orange-700 rounded-full'
                      style={gateColor==="dab" ? borderStyle : null}></button>
-                    <button onClick={()=>{setGateColor("orzech")}} className='p-5 w-5 bg-orange-900 rounded-full'
+                    <button onClick={()=>{setGateColor("orzech")}} className='p-5 w-5 h-5 bg-orange-900 rounded-full'
                      style={gateColor==="orzech" ? borderStyle : null}></button>               
                 </div>
             </div>
         :null
     }
-    
     {/* PLATE ROOF COLOR */}
     
     {/* PLATE ROOF COLOR */}
-
-    
     </>
   )
 }

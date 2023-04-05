@@ -70,8 +70,9 @@ function Test() {
   return (
     <div id="canvas-container" className="w-[100vw] h-[90vh] relative">
    
-      {/* SETTING LEFT SIDE START*/}
-      <div className="absolute top-5 flex flex-col z-50 gap-5 bg-white/50 p-10 rounded-r-lg">
+{/* SETTING LEFT SIDE START*/}
+      <div className="absolute top-5 flex flex-col z-50  bg-white/50 p-10 rounded-r-lg">
+{/* WINDOW SETTINGS        */}
         <FormControlLabel
             control={
               <Switch
@@ -83,6 +84,34 @@ function Test() {
             }
             label="Okno"
           />
+           
+            {box.window? (
+                <div>
+                  <RadioGroup name="windowPosition" row aria-labelledby="demo-row-radio-buttons-group-label"         
+                    value={box.windowPosition}
+                    onChange={onChange}
+                  >
+                    <FormControlLabel value="Lewa" control={<Radio />}label="Lewa"/>
+                    <FormControlLabel value="Tył" control={<Radio />} label="Tył" />
+                    <FormControlLabel value="Prawa" control={<Radio />}label="Prawa"/>
+                  </RadioGroup>
+                  <p>Rozmieszczenie od krawędzi</p>
+                  <Slider
+                    aria-label="rozmieszczenie"
+                    name="windowMeasure"
+                    defaultValue={30}
+                    value={box.windowMeasure}
+                    valueLabelDisplay="auto"
+                    step={10}
+                    marks
+                    min={10}
+                    max={ box.windowPosition==="Tył" ? box.width * 100 - 10 : box.depth * 100 - 10}
+                    onChange={onChange}
+                  />
+                </div>
+            ) : null}
+{/* WINDOW SETTINGS        */}
+
         <FormControlLabel
             control={
               <Switch
@@ -94,6 +123,7 @@ function Test() {
             }
             label="Rynny"
           />
+{/* DOOR SETTINGS        */}
         <FormControlLabel
             control={
               <Switch
@@ -105,109 +135,8 @@ function Test() {
             }
             label="Drzwi"
           />
-        <FormControlLabel
-            control={
-              <Switch
-                name="glass"
-                onChange={onChangeSwitch}
-                checked={box.glass}
-                label="Świetlik"
-              />
-            }
-            label="Świetlik"
-          />
-        <FormControlLabel
-            control={
-              <Switch
-                name="tilesRoof"
-                onChange={onChangeSwitch}
-                checked={box.tilesRoof}
-                label="Blachodachówka"
-              />
-            }
-            label="Blachodachówka"
-          />
-      </div>
-       {/* SETTING LEFT SIDE END*/}
-
-       {/* SETTING RIGHT SIDE START*/}
-      <div className="absolute right-0 top-5 w-[200px] flex flex-col z-50 gap-2 bg-white/50 p-10 rounded-l-lg">
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Szerokość</InputLabel>
-          <Select name="width" labelId="demo-simple-select-label" id="width" value={box.width} label="szerokosc" onChange={onChange}>
-            {widthValue.map((value) => (
-              <MenuItem key={value} value={value}>{value} m</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Długość</InputLabel>
-          <Select name="depth" labelId="demo-simple-select-label" id="depth" value={box.depth} label="Długość" onChange={onChange}>
-            {widthValue.map((value) => (
-              <MenuItem key={value} value={value}>{value} m</MenuItem>
-            ))}
-          </Select>
-
-        </FormControl>
-        {/* WINDOW SETTINGS        */}
-        {box.window && current==="window"? (
-          <div>
-            <RadioGroup name="windowPosition" row aria-labelledby="demo-row-radio-buttons-group-label"         
-              value={box.windowPosition}
-              onChange={onChange}
-            >
-              <FormControlLabel value="Lewa" control={<Radio />}label="Lewa"/>
-              <FormControlLabel value="Tył" control={<Radio />} label="Tył" />
-              <FormControlLabel value="Prawa" control={<Radio />}label="Prawa"/>
-            </RadioGroup>
-            <p>Rozmieszczenie od krawędzi</p>
-            <Slider
-              aria-label="rozmieszczenie"
-              name="windowMeasure"
-              defaultValue={30}
-              value={box.windowMeasure}
-              valueLabelDisplay="auto"
-              step={10}
-              marks
-              min={10}
-              max={ box.windowPosition==="Tył" ? box.width * 100 - 10 : box.depth * 100 - 10}
-              onChange={onChange}
-            />
-          </div>
-        ) : null}
-        {/* WINDOW SETTINGS        */}
-
-         {/* GLASS SETTINGS        */}
-         {box.glass && current==="glass"? (
-          <div>
-            <RadioGroup name="glassPosition" row aria-labelledby="demo-row-radio-buttons-group-label"         
-              value={box.glassPosition}
-              onChange={onChange}
-            >
-              <FormControlLabel value="Lewa" control={<Radio />}label="Lewa"/>
-              <FormControlLabel value="Tył" control={<Radio />} label="Tył" />
-              <FormControlLabel value="Prawa" control={<Radio />}label="Prawa"/>
-            </RadioGroup>
-            <p>Rozmieszczenie od krawędzi</p>
-            <Slider
-              aria-label="rozmieszczenie"
-              name="glassMeasure"
-              defaultValue={30}
-              value={box.glassMeasure}
-              valueLabelDisplay="auto"
-              step={10}
-              marks
-              min={10}
-              max={ box.glassPosition==="Tył" ? box.width * 100 - 10 : box.depth * 100 - 10}
-              onChange={onChange}
-            />
-          </div>
-        ) : null}
-        {/* GLASS SETTINGS        */}
-
-        {/* DOOR SETTINGS        */}
-            {box.door && current==="door"? (
+          
+          {box.door? (
           <div>
             <RadioGroup name="doorPosition" row aria-labelledby="demo-row-radio-buttons-group-label"         
               value={box.doorPosition}
@@ -233,26 +162,95 @@ function Test() {
             />
           </div>
         ) : null}
-        {/* DOOR SETTINGS        */}
-        
+{/* DOOR SETTINGS        */}
+{/* GLASS SETTINGS        */}
+        <FormControlLabel
+            control={
+              <Switch
+                name="glass"
+                onChange={onChangeSwitch}
+                checked={box.glass}
+                label="Świetlik"
+              />
+            }
+            label="Świetlik"/>
+          
+          {box.glass ? (
+            <div>
+              <RadioGroup name="glassPosition" row aria-labelledby="demo-row-radio-buttons-group-label"         
+                value={box.glassPosition}
+                onChange={onChange}
+              >
+                <FormControlLabel value="Lewa" control={<Radio />}label="Lewa"/>
+                <FormControlLabel value="Tył" control={<Radio />} label="Tył" />
+                <FormControlLabel value="Prawa" control={<Radio />}label="Prawa"/>
+              </RadioGroup>
+              <p>Rozmieszczenie od krawędzi</p>
+              <Slider
+                aria-label="rozmieszczenie"
+                name="glassMeasure"
+                defaultValue={30}
+                value={box.glassMeasure}
+                valueLabelDisplay="auto"
+                step={10}
+                marks
+                min={10}
+                max={ box.glassPosition==="Tył" ? box.width * 100 - 10 : box.depth * 100 - 10}
+                onChange={onChange}
+              />
+            </div>
+          ) : null}
+{/* GLASS SETTINGS        */}
+        <FormControlLabel
+            control={
+              <Switch
+                name="tilesRoof"
+                onChange={onChangeSwitch}
+                checked={box.tilesRoof}
+                label="Blachodachówka"
+              />
+            }
+            label="Blachodachówka"
+          />
+      </div>
+{/* SETTING LEFT SIDE END*/}
+{/* SETTING RIGHT SIDE START*/}
+      <div className="absolute right-0 top-5 w-[200px] flex flex-col z-50 gap-2 bg-white/50 p-10 rounded-l-lg">
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Szerokość</InputLabel>
+          <Select name="width" labelId="demo-simple-select-label" id="width" value={box.width} label="szerokosc" onChange={onChange}>
+            {widthValue.map((value) => (
+              <MenuItem key={value} value={value}>{value} m</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Długość</InputLabel>
+            <Select name="depth" labelId="demo-simple-select-label" id="depth" value={box.depth} label="Długość" onChange={onChange}>
+              {widthValue.map((value) => (
+                <MenuItem key={value} value={value}>{value} m</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         <BasicModal openModal={true} >
           <Colors color={color} current={current} setColor={setColor} colorType={colorType} setColorType={setColorType} 
            gateColor={gateColor} setGateColor={setGateColor} gateColorType={gateColorType} setGateColorType={setGateColorType}/>
         </BasicModal>
        
       </div>
-       {/* SETTING RIGHT SIDE END*/}
+{/* SETTING RIGHT SIDE END*/}
       
-      {/* SETTING CENTER START */}
+{/* SETTING CENTER START */}
       <div className="absolute  left-1/2 transform -translate-x-1/2 z-50  bg-white/50 p-5 rounded-b-lg">
         <Gate gate={gate} setGate={setGate} />
       </div>
-      {/* SETTING CENTER END */}
-      {/* SETTING BOTTOM START */}
+{/* SETTING CENTER END */}
+{/* SETTING BOTTOM START */}
        <div className="absolute bottom-0  left-1/2 transform -translate-x-1/2 z-50  bg-white/50 p-5 rounded-t-lg">
         <RoofType roof={roof} setRoof={setRoof}/>
       </div>
-      {/* SETTING BOTTOM END */}
+{/* SETTING BOTTOM END */}
      
 
       <Canvas shadows camera={{ position: [10, 6, 2], fov: 30 }}>
