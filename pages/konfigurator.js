@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState,Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import {OrbitControls,Environment,ContactShadows,BakeShadows} from "@react-three/drei";
 import { Blaszak } from "../components/Configurator/Blaszak";
+import { BlaszakSpadTyl } from "../components/Configurator/BlaszakSpadTyl";
+
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -22,6 +24,7 @@ function Test() {
   const [current,setCurrent]=useState(null)
   const [color,setColor]=useState('ocynk')
   const [roof,setRoof]=useState('spadTyl')
+  const [roofColor,setRoofColor]=useState('ocynk')
   const [gateColor,setGateColor]= useState('ocynk')
   const [gateColorType,setGateColorType]=useState('ocynk')
   const [colorType,setColorType]=useState('ocynkowa')
@@ -235,7 +238,8 @@ function Test() {
           </FormControl>
         <BasicModal openModal={true} >
           <Colors color={color} current={current} setColor={setColor} colorType={colorType} setColorType={setColorType} 
-           gateColor={gateColor} setGateColor={setGateColor} gateColorType={gateColorType} setGateColorType={setGateColorType}/>
+           gateColor={gateColor} setGateColor={setGateColor} gateColorType={gateColorType} setGateColorType={setGateColorType}
+           roofColor={roofColor} setRoofColor={setRoofColor}/>
         </BasicModal>
        
       </div>
@@ -254,6 +258,7 @@ function Test() {
      
 
       <Canvas shadows camera={{ position: [10, 6, 2], fov: 30 }}>
+      <Suspense fallback={null}>
         <Environment
           files={env}
           ground={{ height: 5, radius: 40, scale: 20}}
@@ -261,7 +266,10 @@ function Test() {
         <ambientLight color={"white"} intensity={0.5} />
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
         <pointLight position={[-10, -5, -10]} />
-        <Blaszak box={box} roof={roof} gate={gate} color={color} gateColor={gateColor}/>
+        <Blaszak box={box} roof={roof} gate={gate} color={color} gateColor={gateColor} roofColor={roofColor} />
+        {/* {roof==="spadTyl"
+        ? <BlaszakSpadTyl box={box} roof={roof} gate={gate} color={color} gateColor={gateColor}/>
+        :null}  */}
         <OrbitControls minPolarAngle={0} maxPolarAngle={Math.PI / 2.1} />
         <ContactShadows
           position={[0, -0, 0]}
@@ -269,7 +277,8 @@ function Test() {
           scale={20}
           blur={2.5}
           far={8}
-        />          
+         />          
+        </Suspense>
       </Canvas>
     </div>
   );
