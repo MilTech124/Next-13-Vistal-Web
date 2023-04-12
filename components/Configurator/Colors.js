@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Tooltip from '@mui/material/Tooltip';
 
 function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColorType,
-    gateColor,setGateColor,roofColor,setRoofColor, direction , setDirection,directionGate,setDirectionGate}) {
+    gateColor,setGateColor,roofColor,setRoofColor,direction,setDirection,directionGate,setDirectionGate}) {
     const borderStyle={
         boxShadow:'0px 0px 5px 5px',
     }
@@ -87,8 +87,7 @@ function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColo
         : <button onClick={()=>{setDirectionGate("Poziom")}} className='w-10 h-10 rotate-90 transition-all'><img src='/configurator/icon/direction.svg'/></button> }
     </Tooltip>
      </div>
-    </div>    
-
+    </div>
     {gateColorType==="acrilic"
     ?<div>
             <p>Kolory</p>

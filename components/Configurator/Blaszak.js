@@ -60,6 +60,21 @@ export function Blaszak(props) {
   colorTxt.map.wrapS = Doortxt.map.wrapT = THREE.RepeatWrapping
   colorTxt.normalMap.wrapS = colorTxt.normalMap.wrapT = THREE.RepeatWrapping
   //MATERIAL COLORS
+  //MATERIAL COLORS ROOF
+  const colorTxtRoof = useTexture({
+    map:"./configurator/texture/ocynk1.jpg",
+    normalMap:"./configurator/texture/ocynkNormal.jpg",
+  })
+  colorTxtRoof.map.repeat.set(2.5*width/2.7,1)
+  colorTxtRoof.normalMap.repeat.set(2.5*width/2.7,1)
+  colorTxtRoof.normalMap.rotation = Math.PI/1
+  colorTxtRoof.map.rotation = Math.PI/1
+  
+  colorTxtRoof.normalMap.repeat.set(1.8*width/2.7,1)
+  colorTxtRoof.map.repeat.set(1.8*width/2.7,1)
+  colorTxtRoof.map.wrapS = colorTxtRoof.map.wrapT = THREE.RepeatWrapping
+  colorTxtRoof.normalMap.wrapS = colorTxt.normalMap.wrapT = THREE.RepeatWrapping
+  //MATERIAL COLORS ROOF
 
   // MATERIAL OCYNK2
    const ocynkTxt = useTexture({
@@ -113,10 +128,16 @@ export function Blaszak(props) {
   const woodGate2 = useTexture({
     map:"./configurator/texture/wood2.jpg",
       })
-  woodGate2.map.repeat.set(1.4,1)
+      if(directionGate==="Poziom"){
+        woodGate2.map.repeat.set(1.4,1)
+        woodGate2.map.rotation = Math.PI/2 
+      }else{
+        woodGate2.map.repeat.set(1.4,1)
+        woodGate2.map.rotation = Math.PI/1
+      }
+  // woodGate2.map.repeat.set(1.4,1)
   woodGate2.map.wrapS = woodGate2.map.wrapT = THREE.RepeatWrapping
-  // wood.map.rotation="1.56"
-  // wood.normaMap.rotation="1.56"
+
   // MATERIAL WOOD FOR GATE 
 
   const gateColorTXT=useTexture({
@@ -198,7 +219,7 @@ export function Blaszak(props) {
       ?<meshStandardMaterial {...ocynkRoofTxt} metalness="1" roughness={0.4}  />
       :roofColor==="orzech" 
       ? <meshStandardMaterial {...wood} metalness="1" roughness={0.8} color="#7A5F04"/>
-      :roofColor ?<meshStandardMaterial {...colorTxt} metalness="0.1" roughness={0.6} color={roofColor} /> 
+      :roofColor ?<meshStandardMaterial {...colorTxtRoof} metalness="0.1" roughness={0.6} color={roofColor} /> 
       :null
       }
     }
