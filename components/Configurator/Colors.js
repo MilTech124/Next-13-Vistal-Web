@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import Tooltip from '@mui/material/Tooltip';
 
-function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColorType,gateColor,setGateColor,roofColor,setRoofColor}) {
+function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColorType,
+    gateColor,setGateColor,roofColor,setRoofColor, direction , setDirection,directionGate,setDirectionGate}) {
     const borderStyle={
         boxShadow:'0px 0px 5px 5px',
     }
@@ -21,8 +22,7 @@ function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColo
     	]
   return (
     <>
-    {/* PLATE MAIN COLOR */}
-    
+{/* PLATE MAIN COLOR */}    
     <h4 className='text-2xl pb-2'>Rodzaj Blachy Ściany:</h4>
     <div className='flex justify-between'>     
     <Tooltip title="Ocynkowa">
@@ -33,6 +33,11 @@ function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColo
     </Tooltip>
     <Tooltip title="Akrylowa">
         <button onClick={()=>{setColorType("acrilic")}} className='p-7 w-7 h-7 bg-yellow-300 rounded-full' style={colorType==="acrilic" ? borderStyle : null}></button>
+    </Tooltip>
+    <Tooltip title="Przetloczenia">
+        {direction==='Poziom' 
+        ?<button onClick={()=>{setDirection("Pion")}} className='w-10 h-10 transition-all'><img src='/configurator/icon/direction.svg'/></button>
+        : <button onClick={()=>{setDirection("Poziom")}} className='w-10 h-10 rotate-90 transition-all'><img src='/configurator/icon/direction.svg'/></button> }
     </Tooltip>
     </div>
     {colorType==="acrilic"
@@ -62,7 +67,7 @@ function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColo
             </div>
         :null
     }
-    {/* PLATE MAIN COLOR */}
+{/* PLATE MAIN COLOR */}
     <div>
     <h4 className='text-xl'>Brama:</h4>
     <div className='flex justify-between'>
@@ -76,6 +81,11 @@ function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColo
      <Tooltip title="Akrylowa">
          <button onClick={()=>{setGateColorType("acrilic")}} className='p-7 w-7 h-7 bg-yellow-300 rounded-full' style={gateColorType==="acrilic" ? borderStyle : null}></button>
      </Tooltip>
+     <Tooltip title="Przetloczenia">
+        {directionGate==='Poziom'
+        ?<button onClick={()=>{setDirectionGate("Pion")}} className='w-10 h-10 transition-all'><img src='/configurator/icon/direction.svg'/></button>
+        : <button onClick={()=>{setDirectionGate("Poziom")}} className='w-10 h-10 rotate-90 transition-all'><img src='/configurator/icon/direction.svg'/></button> }
+    </Tooltip>
      </div>
     </div>    
 
@@ -108,7 +118,7 @@ function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColo
             </div>
         :null
     }
-    {/* PLATE ROOF COLOR */}
+{/* PLATE ROOF COLOR */}
     <div>
     <h4 className='text-xl'>Dach:</h4>
     <div className='flex justify-between'>
@@ -156,7 +166,7 @@ function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColo
     }
 
     
-    {/* PLATE ROOF COLOR */}
+{/* PLATE ROOF COLOR */}
     </>
   )
 }

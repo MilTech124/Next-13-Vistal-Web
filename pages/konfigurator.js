@@ -23,6 +23,8 @@ function Test() {
   
   const [current,setCurrent]=useState(null)
   const [color,setColor]=useState('ocynk')
+  const [direction,setDirection]=useState('pion')
+  const [directionGate,setDirectionGate]=useState('pion')
   const [roof,setRoof]=useState('spadTyl')
   const [roofColor,setRoofColor]=useState('ocynk')
   const [gateColor,setGateColor]= useState('ocynk')
@@ -239,7 +241,8 @@ function Test() {
         <BasicModal openModal={true} >
           <Colors color={color} current={current} setColor={setColor} colorType={colorType} setColorType={setColorType} 
            gateColor={gateColor} setGateColor={setGateColor} gateColorType={gateColorType} setGateColorType={setGateColorType}
-           roofColor={roofColor} setRoofColor={setRoofColor}/>
+           roofColor={roofColor} setRoofColor={setRoofColor} direction={direction} setDirection={setDirection} 
+           directionGate={directionGate} setDirectionGate={setDirectionGate} />
         </BasicModal>
        
       </div>
@@ -266,7 +269,7 @@ function Test() {
         <ambientLight color={"white"} intensity={0.5} />
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
         <pointLight position={[-10, -5, -10]} />
-        <Blaszak box={box} roof={roof} gate={gate} color={color} gateColor={gateColor} roofColor={roofColor} />
+        <Blaszak box={box} roof={roof} gate={gate} color={color} gateColor={gateColor} roofColor={roofColor} direction={direction} directionGate={directionGate} />
         {/* {roof==="spadTyl"
         ? <BlaszakSpadTyl box={box} roof={roof} gate={gate} color={color} gateColor={gateColor}/>
         :null}  */}

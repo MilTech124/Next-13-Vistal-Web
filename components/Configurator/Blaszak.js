@@ -10,9 +10,9 @@ import { Text } from '@react-three/drei'
 
 
 export function Blaszak(props) {
-  const { nodes, materials } = useGLTF('/configurator/garaze.glb')
+  const { nodes, materials } = useGLTF('/configurator/textura.glb')
   const {width,height,depth,windowMeasure,window,windowPosition,glass,door,gutter,tilesRoof,glassMeasure,glassPosition,doorPosition,doorMeasure}=props.box
-  const {gate,color,gateColor,roof,roofColor}=props
+  const {gate,color,gateColor,roof,roofColor,direction,directionGate}=props
 
 
 
@@ -32,19 +32,31 @@ export function Blaszak(props) {
   // MATERIAL DOOR OCYNK
   const Doortxt = useTexture({
     map:"./configurator/texture/ocynk1.jpg",
-       
   })
   Doortxt.map.repeat.set(1.2,1)
-  Doortxt.map.wrapS = Doortxt.map.wrapT = THREE.RepeatWrapping
+  Doortxt.map.wrapS = Doortxt.map.wrapT = THREE.RepeatWrapping  
   // MATERIAL DOOR OCYNK
+
   
   //MATERIAL COLORS
   const colorTxt = useTexture({
     map:"./configurator/texture/ocynk1.jpg",
     normalMap:"./configurator/texture/ocynkNormal.jpg",
   })
-  colorTxt.normalMap.repeat.set(1.2*width/2.7,1)
-  colorTxt.map.repeat.set(1.2*width/2.7,1)
+   
+  if(direction==="Poziom"){
+    colorTxt.map.repeat.set(1.8,1)
+    colorTxt.normalMap.repeat.set(1.8,1)
+    colorTxt.normalMap.rotation = Math.PI/2 
+    colorTxt.map.rotation = Math.PI/2 
+  }else{
+    colorTxt.map.repeat.set(2.5*width/2.7,1)
+    colorTxt.normalMap.repeat.set(2.5*width/2.7,1)
+    colorTxt.normalMap.rotation = Math.PI/1
+    colorTxt.map.rotation = Math.PI/1
+  }
+  colorTxt.normalMap.repeat.set(1.8*width/2.7,1)
+  colorTxt.map.repeat.set(1.8*width/2.7,1)
   colorTxt.map.wrapS = Doortxt.map.wrapT = THREE.RepeatWrapping
   colorTxt.normalMap.wrapS = colorTxt.normalMap.wrapT = THREE.RepeatWrapping
   //MATERIAL COLORS
@@ -52,10 +64,26 @@ export function Blaszak(props) {
   // MATERIAL OCYNK2
    const ocynkTxt = useTexture({
     map:"./configurator/texture/ocynk1v2.jpg",  
-  })
-  ocynkTxt.map.repeat.set(1.2*width/2.7,1)
+  }) 
+  
+  if(direction==="Poziom"){
+    ocynkTxt.map.repeat.set(1.8,1)
+    ocynkTxt.map.rotation = Math.PI/2 
+  }else{
+    ocynkTxt.map.repeat.set(2.5*width/2.7,1)
+    ocynkTxt.map.rotation = Math.PI/1
+  }
   ocynkTxt.map.wrapS = ocynkTxt.map.wrapT = THREE.RepeatWrapping
-  // MATERIAL OCYNK2
+
+  const ocynkRoofTxt = useTexture({
+    map:"./configurator/texture/ocynk1v3.jpg",  
+  }) 
+  ocynkRoofTxt.map.repeat.set(1.8,1)
+  ocynkRoofTxt.map.wrapS = ocynkRoofTxt.map.wrapT = THREE.RepeatWrapping
+  ocynkRoofTxt.map.rotation = Math.PI/1
+
+
+
 
   // MATERIAL OCYNK DOOR
    const ocynkDoor = useTexture({
@@ -63,13 +91,20 @@ export function Blaszak(props) {
   })
   ocynkDoor.map.repeat.set(1.2,1)
   ocynkDoor.map.wrapS = ocynkDoor.map.wrapT = THREE.RepeatWrapping
-  // MATERIAL OCYNK2
+  if(directionGate==="Poziom"){
+    ocynkDoor.map.repeat.set(1.2,1)
+    ocynkDoor.map.rotation = Math.PI/2 
+  }else{
+    ocynkDoor.map.repeat.set(2.5*width/2.7,1)
+    ocynkDoor.map.rotation = Math.PI/1
+  }
+  // MATERIAL OCYNK DOOR
 
   // MATERIAL WOOD
    const wood = useTexture({
     map:"./configurator/texture/wood.jpg",
       })
-  wood.map.repeat.set(1.2*width/2.7,1) 
+  wood.map.repeat.set(1.8*width/2.7,1) 
   wood.map.wrapS = wood.map.wrapT = THREE.RepeatWrapping
  
   // MATERIAL WOOD
@@ -160,7 +195,7 @@ export function Blaszak(props) {
       {return roofColor==="dab"
       ?<meshStandardMaterial {...wood} metalness="1" roughness={1} color="#D0A102"/>
       :roofColor==="ocynk"
-      ?<meshStandardMaterial {...ocynkTxt} metalness="1" roughness={0.4}  />
+      ?<meshStandardMaterial {...ocynkRoofTxt} metalness="1" roughness={0.4}  />
       :roofColor==="orzech" 
       ? <meshStandardMaterial {...wood} metalness="1" roughness={0.8} color="#7A5F04"/>
       :roofColor ?<meshStandardMaterial {...colorTxt} metalness="0.1" roughness={0.6} color={roofColor} /> 
@@ -189,7 +224,6 @@ export function Blaszak(props) {
          {!tilesRoof
         ? <mesh geometry={nodes.dach.geometry} castShadow material={materials.drzwi} position={[0, 2.38, 0]} rotation={[0, 0, roofCordinate()]} scale={[depth/2.5,1,width/2.5]}>         
            <RoofMaterial/>
-     
           </mesh>
          :null
         }       
@@ -208,7 +242,7 @@ export function Blaszak(props) {
           <meshStandardMaterial  {...roofMat}  roughness="0.2"  color="#000"/>   
         </mesh>
         <mesh visible={!tilesRoof} geometry={nodes.dach1.geometry} castShadow material={materials.drzwi} position={[0, 2.57, 0]} rotation={[0, 0, -roofCordinate()*0.7]} scale={[depth/2.5,1,width/2.5]} >
-          <meshStandardMaterial  {...ocynkTxt} metalness="1" roughness={0.4}/>        
+          <RoofMaterial/>        
         </mesh>
         <group visible={gutter}>
           <mesh geometry={nodes.spust1.geometry} castShadow material={materials['Rynny.001']} position={[1.28*depth/2.5, 1.29, -1.25*width/2.5]} rotation={[Math.PI, -1.3, Math.PI]} />
@@ -225,7 +259,7 @@ export function Blaszak(props) {
           <meshStandardMaterial  {...roofMat}  roughness="0.2"  color="#000"/>  
         </mesh>
         <mesh visible={!tilesRoof} geometry={nodes.dach2.geometry} castShadow material={materials.drzwi} position={[0, 2.58, -0.0]} rotation={[0, -1.57, -0.8*roofCordinateWidth()]} scale={[width/2.5,1,depth/2.5]} >   
-        <meshStandardMaterial  {...ocynkTxt} metalness="1" roughness={0.4}/>    
+        <RoofMaterial/>
         </mesh>
         <group visible={gutter}>
          <mesh geometry={nodes.spust2.geometry} castShadow material={materials['Rynny.003']} position={[-1.22*depth/2.5, 1.3, 1.3*width/2.5]} />
@@ -239,7 +273,7 @@ export function Blaszak(props) {
         <GeometryMaterial/>
         </mesh>
         <mesh visible={!tilesRoof} geometry={nodes.dach3.geometry} castShadow material={materials.drzwi} position={[0, 2.59, 0.04]} rotation={[0, 1.57,0.8*-roofCordinateWidth()]} scale={[width/2.5,1,depth/2.5]}>
-          <meshStandardMaterial  {...ocynkTxt} metalness="1" roughness={0.4}/>  
+        <RoofMaterial/>  
         </mesh>
         <mesh visible={tilesRoof} geometry={nodes.dach3.geometry} castShadow material={materials.drzwi} position={[0, 2.57, 0.04]} rotation={[0.8*-roofCordinateWidth(), 1.57,0]} scale={[width/2.5,1,depth/2.5]}>
           <meshStandardMaterial  {...roofMat}  roughness="0.2"  color="#000"/>   
@@ -256,10 +290,10 @@ export function Blaszak(props) {
       </mesh>
       <group visible={!tilesRoof} scale={[depth/2.5,1,width/2.5]}>
         <mesh geometry={nodes.dach4.geometry} castShadow material={materials.drzwi} position={[0, 2.64, 0.65]} rotation={[0.26, -Math.PI / 2, 0]} >
-          <meshStandardMaterial  {...ocynkTxt} metalness="1" roughness={0.4}/>   
+        <RoofMaterial/>
         </mesh>
         <mesh geometry={nodes.dach4v2.geometry} castShadow material={materials['drzwi.009']} position={[0, 2.65, -0.63]} rotation={[-0.26, Math.PI / 2, 0]} >
-          <meshStandardMaterial  {...ocynkTxt} metalness="1" roughness={0.4}/>  
+        <RoofMaterial/>
         </mesh>
       </group>
       <group visible={tilesRoof} scale={[depth/2.5,1,width/2.5]}>
@@ -283,12 +317,7 @@ export function Blaszak(props) {
       ? <group position={depth> 4 ? [(0.9*(depth/2.5))-doorMeasure*0.008,0,0]:[(0.4*(depth/2.5))-doorMeasure*0.006,0,0]}>  
       {/*  */}
           <mesh geometry={nodes['drzwi-male-bok'].geometry} material={materials.drzwi} position={[0.35, 0.99, 1.27*width/2.5]} rotation={[Math.PI / 2, 0, 0]} >
-            {gateColor==="dab" ? <meshStandardMaterial {...woodGate2} metalness="1" roughness={1} color="#D0A102"/>
-              :gateColor==="orzech" ? <meshStandardMaterial {...woodGate2} metalness="1" roughness={0.8} color="#7A5F04"/>
-              :gateColor==="ocynk"  ?<meshStandardMaterial {...ocynkDoor} metalness="1" roughness={0.4}  />
-              :gateColor ? <meshStandardMaterial {...ocynkTxt} metalness="1" roughness={0.8} color={gateColor}/>
-              :<meshStandardMaterial {...Doortxt} metalness="1" roughness={0.4} />
-            }
+          <DoorMaterial/>
           </mesh>
           <mesh geometry={nodes['dzwi-male-obramowka'].geometry} material={materials.czarny} position={[0.35, 1.01, 1.26*width/2.5]} rotation={[Math.PI / 2, 0, 0]} />
           <mesh geometry={nodes.Klamka.geometry} material={materials.klamki} position={[0.01*depth/2.5, 1.04, 1.26*width/2.5]} />
@@ -408,5 +437,5 @@ export function Blaszak(props) {
 }
 
 
-useGLTF.preload('/configurator/garaze.glb')
+useGLTF.preload('/configurator/textura.glb')
 
