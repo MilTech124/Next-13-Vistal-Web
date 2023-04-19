@@ -9,9 +9,6 @@ import {
 import { Blaszak } from "../components/Configurator/Blaszak";
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-
 import Checkbox from "@mui/material/Checkbox";
 
 import InputLabel from "@mui/material/InputLabel";

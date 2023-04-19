@@ -11,7 +11,7 @@ import { Text } from '@react-three/drei'
 
 export function Blaszak(props) {
   const { nodes, materials } = useGLTF('/configurator/textura.glb')
-  const {width,height,depth,windowMeasure,window,windowPosition,glass,door,gutter,tilesRoof,glassMeasure,glassPosition,doorPosition,doorMeasure}=props.box
+  const {width,depth,windowMeasure,window,windowPosition,glass,door,gutter,tilesRoof,glassMeasure,glassPosition,doorPosition,doorMeasure}=props.box
   const {gate,color,gateColor,roof,roofColor,direction,directionGate}=props
 
 
@@ -44,20 +44,19 @@ export function Blaszak(props) {
     normalMap:"./configurator/texture/ocynkNormal.jpg",
   })
    
-  if(direction==="Poziom"){
+  if(direction==="Pion"){
+ 
     colorTxt.map.repeat.set(1.8,1)
     colorTxt.normalMap.repeat.set(1.8,1)
     colorTxt.normalMap.rotation = Math.PI/2 
     colorTxt.map.rotation = Math.PI/2 
-  }else{
+  }else{   
     colorTxt.map.repeat.set(2.5*width/2.7,1)
     colorTxt.normalMap.repeat.set(2.5*width/2.7,1)
     colorTxt.normalMap.rotation = Math.PI/1
     colorTxt.map.rotation = Math.PI/1
   }
-  colorTxt.normalMap.repeat.set(1.8*width/2.7,1)
-  colorTxt.map.repeat.set(1.8*width/2.7,1)
-  colorTxt.map.wrapS = Doortxt.map.wrapT = THREE.RepeatWrapping
+  colorTxt.map.wrapS = colorTxt.map.wrapT = THREE.RepeatWrapping
   colorTxt.normalMap.wrapS = colorTxt.normalMap.wrapT = THREE.RepeatWrapping
   //MATERIAL COLORS
   //MATERIAL COLORS ROOF
@@ -65,15 +64,15 @@ export function Blaszak(props) {
     map:"./configurator/texture/ocynk1.jpg",
     normalMap:"./configurator/texture/ocynkNormal.jpg",
   })
-  colorTxtRoof.map.repeat.set(2.5*width/2.7,1)
-  colorTxtRoof.normalMap.repeat.set(2.5*width/2.7,1)
-  colorTxtRoof.normalMap.rotation = Math.PI/1
-  colorTxtRoof.map.rotation = Math.PI/1
+  // colorTxtRoof.map.repeat.set(2.5*width/2.7,1)
+  // colorTxtRoof.normalMap.repeat.set(2.5*width/2.7,1)
+  // colorTxtRoof.normalMap.rotation = Math.PI/1
+  // colorTxtRoof.map.rotation = Math.PI/1
   
-  colorTxtRoof.normalMap.repeat.set(1.8*width/2.7,1)
-  colorTxtRoof.map.repeat.set(1.8*width/2.7,1)
-  colorTxtRoof.map.wrapS = colorTxtRoof.map.wrapT = THREE.RepeatWrapping
-  colorTxtRoof.normalMap.wrapS = colorTxt.normalMap.wrapT = THREE.RepeatWrapping
+  // colorTxtRoof.normalMap.repeat.set(1.8*width/2.7,1)
+  // colorTxtRoof.map.repeat.set(1.8*width/2.7,1)
+  // colorTxtRoof.map.wrapS = colorTxtRoof.map.wrapT = THREE.RepeatWrapping
+  // colorTxtRoof.normalMap.wrapS = colorTxt.normalMap.wrapT = THREE.RepeatWrapping
   //MATERIAL COLORS ROOF
 
   // MATERIAL OCYNK2
