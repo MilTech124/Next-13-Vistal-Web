@@ -41,12 +41,14 @@ function Header() {
     isOpen(!open);
   };
   return (
-    <header className=" z-[99] relative w-full bg-white h-[75px] text-lg shadow-lg  flex justify-center items-center  ">
+    <header className=" z-[99]  fixed w-full bg-white  text-lg shadow-lg  flex justify-center items-center  ">
       <container className="max-w-[1440px] w-full">
-        <div className=" flex justify-between items-center max-md:place-content-center">
-          <div className="">
+      <SocialsNav />
+        <div className="py-2 flex justify-between items-center max-md:place-content-center">
+          
             <Logo />
-          </div>
+            
+          
           <div className="md:hidden absolute right-5">
             <Burger open={open} openMenu={openMenu} />
           </div>
@@ -64,7 +66,7 @@ function Header() {
             </motion.div>
           )}
           <div className="max-md:hidden">
-            <SocialsNav />
+           
           </div>
         </div>
       </container>

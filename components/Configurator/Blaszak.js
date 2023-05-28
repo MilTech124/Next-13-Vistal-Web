@@ -11,7 +11,7 @@ import { Text } from '@react-three/drei'
 
 export function Blaszak(props) {
   const { nodes, materials } = useGLTF('/configurator/textura.glb')
-  const {width,depth,windowMeasure,window,windowPosition,glass,door,gutter,tilesRoof,glassMeasure,glassPosition,doorPosition,doorMeasure}=props.box
+  const {width,depth,windowMeasure,window,windowPosition,glass,door,gutter,tilesRoof,glassMeasure,glassPosition,doorPosition,doorMeasure,gatePosition}=props.box
   const {gate,color,gateColor,roof,roofColor,direction,directionGate}=props
 
 
@@ -128,10 +128,10 @@ export function Blaszak(props) {
     map:"./configurator/texture/wood2.jpg",
       })
       if(directionGate==="Poziom"){
-        woodGate2.map.repeat.set(1.4,1)
+        woodGate2.map.repeat.set(1,1)
         woodGate2.map.rotation = Math.PI/2 
       }else{
-        woodGate2.map.repeat.set(1.4,1)
+        woodGate2.map.repeat.set(1,1)
         woodGate2.map.rotation = Math.PI/1
       }
   // woodGate2.map.repeat.set(1.4,1)
@@ -170,8 +170,8 @@ export function Blaszak(props) {
   roofMat.aoMap.wrapS = roofMat.aoMap.wrapT = THREE.RepeatWrapping
   roofMat.bumpMap.wrapS = roofMat.bumpMap.wrapT = THREE.RepeatWrapping
   roofMat.roughness.wrapS = roofMat.roughness.wrapT = THREE.RepeatWrapping
-  roofMat.displacementScale=0.1
-  roofMat.bumpScale=0.1
+  roofMat.displacementScale=0.07
+  roofMat.bumpScale=0.3
 
 
   gateColorTXT.map.repeat.set(1.4,1)
@@ -378,7 +378,11 @@ export function Blaszak(props) {
     {/* GATES START */}
 
       {gate==="Uchylna"
-      ? <group>
+      ? <group position={[0,0,
+                        gatePosition==="Lewa" ? (width/2.05)-1.2 :
+                        gatePosition==="Prawa" ? -(width/2.05)+1.2 :
+                        gatePosition==="Środek" ? 0 : 0
+                        ]}>
           <mesh geometry={nodes['dzwi-calosc'].geometry} position={[1.27*depth/2.5, 1.16, 0]} rotation={[0, 0, -Math.PI / 2]} >
           <DoorMaterial/>  
           </mesh>
@@ -387,7 +391,11 @@ export function Blaszak(props) {
       :null}
 
       {gate==="Naboki"
-      ? <group>
+      ? <group position={[0,0,
+        gatePosition==="Lewa" ? (width/2.05)-1.2 :
+        gatePosition==="Prawa" ? -(width/2.05)+1.2 :
+        gatePosition==="Środek" ? 0 : 0
+        ]}>
           <mesh geometry={nodes['podwojnedzwi-front001'].geometry} material={materials['drzwi.003']}  position={[1.27*depth/2.5, 1.16, 0.57]} rotation={[0, 0, -Math.PI / 2]} >
           <DoorMaterial/>  
           </mesh>
@@ -396,7 +404,11 @@ export function Blaszak(props) {
       :null
       }
       {gate==="Roleta"
-      ? <group>
+      ? <group position={[0,0,
+        gatePosition==="Lewa" ? (width/2.05)-1.2 :
+        gatePosition==="Prawa" ? -(width/2.05)+1.2 :
+        gatePosition==="Środek" ? 0 : 0
+        ]}>
           <mesh geometry={nodes['dzwi-calosc'].geometry} position={[1.27*depth/2.5, 1.16, 0]} rotation={[0, 0, -Math.PI / 2]} >
           {gateColor==="dab"
           ?<meshStandardMaterial {...gateTextureSegment} metalness="1" roughness={1} color="#D0A102"/>       
@@ -407,10 +419,14 @@ export function Blaszak(props) {
           }                   
           </mesh>
           <mesh geometry={nodes.pokretlo.geometry} material={materials.klamki} position={[1.28*depth/2.5, 1.18, 0]} />
+       
         </group>
       :null}
      
-      <mesh geometry={nodes.ramka003.geometry} material={materials.czarny} position={[1.26*depth/2.5, 1.16, 0]} rotation={[0, 0, -Math.PI / 2]} />
+      <mesh geometry={nodes.ramka003.geometry} material={materials.czarny} position={[1.26*depth/2.5, 1.16,
+        gatePosition==="Lewa" ? (width/2.05)-1.2 :
+        gatePosition==="Prawa" ? -(width/2.05)+1.2 :
+        gatePosition==="Środek" ? 0 : 0]} rotation={[0, 0, -Math.PI / 2]} />
    
       <Text
       position={[2+depth/2.5, 0.2, 0]}
@@ -421,8 +437,7 @@ export function Blaszak(props) {
       anchorX="center"
       anchorY="middle">
       {'Vistal'}
-      </Text>
-      
+      </Text>      
       
       {/* GATES START */}
 

@@ -77,21 +77,41 @@ function Footer() {
         {/* LEFT FOOTER */}
         {/* RIGHT FOOTER */}
         <div
-          className="flex-1 z-0 relative max-sm:py-5 flex items-center justify-center"
+          className="flex-1 z-0 relative max-sm:py-5 flex flex-col items-center justify-center"
           style={bgStyle}
         >
           <div className="flex z-10 relative p-1 gap-10 ">
             <Bounce>
-              <div className=" bg-white rounded-xl hover:bg-red-700 hover:rotate-3 transition-all">
-                <a href="tel:+48 693 344 132">
+              <div className=" bg-white rounded-xl hover:bg-red-700 hover:rotate-3 transition-all text-lg">
+                <a className="flex flex-col items-center" href="tel:+48 693 344 132">
                   <img src="/svg/fphone.svg" />
+                  Kontakt: +48 693 344 132
                 </a>
               </div>
             </Bounce>
             <Bounce>
-              <div className="bg-white p-1 rounded-xl  hover:bg-red-700 hover:rotate-3 transition-all">
-                <a href="mailto:kontakt@vistal-garaze-blaszane.pl">
+              <div className="bg-white  p-1 rounded-xl  hover:bg-red-700 hover:rotate-3 transition-all">
+                <a className="flex flex-col items-center" href="mailto:kontakt@vistal-garaze-blaszane.pl">
                   <img src="/svg/fmail.svg" />
+                  kontakt@vistal-garaze-blaszane.pl
+                </a>
+              </div>
+            </Bounce>
+          </div>
+          <div className="flex z-10 relative p-1 gap-10 ">
+            <Bounce>
+              <div className=" bg-white rounded-xl hover:bg-red-700 hover:rotate-3 transition-all text-lg">
+                <a className="flex flex-col items-center" href="tel:+48538600019">
+                  <img src="/svg/fphone.svg" />
+                  Sprzedaż: +48 538 600 019
+                </a>
+              </div>
+            </Bounce>
+            <Bounce>
+              <div className="bg-white  p-1 rounded-xl  hover:bg-red-700 hover:rotate-3 transition-all">
+                <a className="flex flex-col items-center" href="mailto:sprzedaz@vistal-garaze-blaszane.pl">
+                  <img src="/svg/fmail.svg" />
+                  sprzedaz@vistal-garaze-blaszane.pl
                 </a>
               </div>
             </Bounce>

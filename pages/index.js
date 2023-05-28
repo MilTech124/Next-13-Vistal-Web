@@ -6,13 +6,21 @@ import MakeGround from "../components/Home/MakeGround";
 import PopularGarage from "../components/Home/PopularGarage";
 import { Fade } from "react-awesome-reveal";
 import Head from "next/head";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+
 
 function Home({ data, garages }) {
+  const Products = useSelector((state) => state.productsReducer.Products);
+
+ 
+
+
   return (
     <>
       <Head>
         <meta charSet="utf-8" />
-        <meta name="description" content="Usługi glazurnicze" />
+        <meta name="description" content="Firma zajmująca się produkcją oraz sprzedażą garaży blaszanych oferuje wysokiej jakości produkty, dostępne w różnych rozmiarach i kolorach" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
@@ -24,7 +32,7 @@ function Home({ data, garages }) {
         <title>Vistal - producent garazy blaszanych</title>
       </Head>
       <Fade>
-        <Hero data={data} />
+        <Hero data={data} Products={Products} />
       </Fade>
       <Fade>
         <MakeGround />

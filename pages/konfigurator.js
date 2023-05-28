@@ -3,8 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import {
   OrbitControls,
   Environment,
-  ContactShadows,
-  BakeShadows,
+  ContactShadows, 
 } from "@react-three/drei";
 import { Blaszak } from "../components/Configurator/Blaszak";
 import Modal from '@mui/material/Modal';
@@ -61,6 +60,7 @@ function Test() {
     width: 2.5,
     depth: 2.5,
     construction: "kątownik",
+    gatePosition: "Środek",
     guard: false,
     warming: false,
     mounting: false,
@@ -77,7 +77,7 @@ function Test() {
     doorMeasure: 30,
   });
   const env =
-    "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/2k/alps_field_2k.hdr";
+    "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/alps_field_1k.hdr";
 
   console.log(current);
 
@@ -368,7 +368,7 @@ function Test() {
             ))}
           </Select>
         </FormControl>
-        <FormControlLabel
+        {/* <FormControlLabel
           control={
             <Checkbox
               name="warming"
@@ -377,7 +377,7 @@ function Test() {
             />
           }
           label="Ocieplenie"
-        />
+        /> */}
         <FormControlLabel
           control={
             <Checkbox
@@ -404,6 +404,25 @@ function Test() {
       {/* SETTING CENTER START */}
       <div className="absolute  left-1/2 transform -translate-x-1/2 z-50  bg-white/50 p-5 rounded-b-lg">
         <Gate gate={gate} setGate={setGate} />
+        <Select
+            name="gatePosition"
+            labelId="demo-simple-select-label"
+            id="gatePosition"
+            value={box.gatePosition}
+            label="Pozycja bramy"
+            onChange={onChange}
+             className="w-full"
+          >
+            <MenuItem value={"Lewa"}>
+              Lewa
+            </MenuItem>
+            <MenuItem value={"Środek"}>
+              Środek
+            </MenuItem>
+            <MenuItem value={"Prawa"}>
+              Prawa
+            </MenuItem>
+        </Select>
       </div>
       {/* SETTING CENTER END */}
       {/* SETTING BOTTOM START */}
@@ -429,7 +448,7 @@ function Test() {
             gateColor={gateColor}
             roofColor={roofColor}
             direction={direction}
-            directionGate={directionGate}
+            directionGate={directionGate}          
           />
           {/* {roof==="spadTyl"
         ? <BlaszakSpadTyl box={box} roof={roof} gate={gate} color={color} gateColor={gateColor}/>

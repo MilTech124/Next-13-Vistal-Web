@@ -11,7 +11,7 @@ export default function Layout({ children }) {
   return (
     <>
       <Header />
-       <main>{children}</main>
+       <main className='pt-[100px]'>{children}</main>
       <Footer/>
     </>
   )

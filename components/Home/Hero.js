@@ -2,6 +2,9 @@ import Image from "next/image";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Fade, Slide } from "react-awesome-reveal";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { change } from "../../store/reducers/products.reducer";
 
 // Import Swiper styles
 import "swiper/css";
@@ -10,14 +13,19 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper";
-import { useState } from "react";
 import Link from "next/link";
 
 // TRANSLATION
 import { useTranslation } from "next-i18next";
 
-function Hero({ data }) {
+function Hero({ data,Products}) {
   const { t } = useTranslation("index");
+
+  const dispatch = useDispatch();
+  const changeProduct = (name) => {
+    dispatch(change(name));
+  
+  };
 
   const css = { width: "100%", height: "94vh", objectFit: "cover" };
   const ocynkowe = data.acf.photo_gallery["ocynkowe-glowna"][2];
@@ -25,7 +33,7 @@ function Hero({ data }) {
   const drewnopodobne = data.acf.photo_gallery["drewnopodobne-glowna"][0];
   const kojce = data.acf.photo_gallery["kojce-glowna"][4];
   const warstwowe = data.acf.photo_gallery.warstwowe[3];
-  const [chosed, setChosed] = useState(warstwowe);
+
 
   return (
     <>
@@ -53,7 +61,7 @@ function Hero({ data }) {
             >
               {t("text-under")}
             </p>
-            <a href="tel:+48 693 344 132">
+            <a href="tel:+48 693344132" className="md:hidden">
               <button className="btn mt-10 text-black py-2 px-10 rounded-lg bg-white hover:scale-105 transition-all">
                 {t("Zadzwoń")}
               </button>
@@ -77,64 +85,26 @@ function Hero({ data }) {
                 </div>
               </Link>
             </div>
-            <div className="pt-[10%]  max-sm:hidden text-xl font-bold flex flex-col text-black gap-5">
-              <Slide direction="right">
-                <div
-                  onClick={() => setChosed(drewnopodobne)}
-                  className="bg-white/50 transition-all p-10 cursor-pointer px-20 text-center rounded-l-lg hover:bg-red-700 hover:text-white"
-                  style={
-                    chosed == drewnopodobne ? { backgroundColor: "grey" } : null
-                  }
-                >
-                  {t("Drewnopodobne")}
-                </div>
-              </Slide>
-              <Slide direction="right">
-                <div
-                  onClick={() => setChosed(akrylowe)}
-                  className="bg-white/50 transition-all p-10 px-20 cursor-pointer text-center rounded-l-lg hover:bg-red-700 hover:text-white"
-                  style={
-                    chosed == akrylowe ? { backgroundColor: "grey" } : null
-                  }
-                >
-                  {t("Aktylowe")}
-                </div>
-              </Slide>
-              <Slide direction="right">
-                <div
-                  onClick={() => setChosed(ocynkowe)}
-                  className="bg-white/50 transition-all p-10 px-20 cursor-pointer text-center rounded-l-lg hover:bg-red-700 hover:text-white"
-                  style={
-                    chosed == ocynkowe ? { backgroundColor: "grey" } : null
-                  }
-                >
-                  {t("Ocynkowe")}
-                </div>
-              </Slide>
-              <Slide direction="right">
-                <div
-                  onClick={() => setChosed(warstwowe)}
-                  className="bg-white/50 transition-all p-10 px-20 cursor-pointer text-center rounded-l-lg hover:bg-red-700 hover:text-white"
-                  style={
-                    chosed == warstwowe ? { backgroundColor: "grey" } : null
-                  }
-                >
-                  {t("Warstwowe")}
-                </div>
-              </Slide>
-              <Slide direction="right">
-                <div
-                  onClick={() => setChosed(kojce)}
-                  className="bg-white/50 p-10 px-20 cursor-pointer text-center rounded-l-lg transition-all hover:bg-red-700 hover:text-white"
-                  style={chosed == kojce ? { backgroundColor: "grey" } : null}
-                >
-                  {t("Kojce")}
-                </div>
-              </Slide>
+            <div className="pt-[1%]  max-sm:hidden text-xl font-bold flex flex-col text-black gap-2">
+              {Products.map((item, index) => (
+                 <Slide direction="right" key={index}>
+                 <Link  href={{
+                  pathname:'/sklep'
+                }} ><div onClick={()=>changeProduct(item)}
+                   className="bg-white/50 transition-all p-2 cursor-pointer px-20 text-center rounded-l-lg hover:bg-red-700 hover:text-white"
+                 >
+                  {item}
+                   {/* {t("item")} */}
+                 </div>
+                 </Link>
+               </Slide>
+              ))}
+             
+       
             </div>
           </div>
         </div>
-        {chosed.map((item, index) => (
+        {drewnopodobne.map((item, index) => (
           <SwiperSlide key={index}>
             <Image
               src={item.full_image_url}
