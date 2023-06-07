@@ -1,13 +1,9 @@
 import React, { useState, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import {
-  OrbitControls,
-  Environment,
-  ContactShadows, 
-} from "@react-three/drei";
+import { OrbitControls, Environment, ContactShadows } from "@react-three/drei";
 import { Blaszak } from "../components/Configurator/Blaszak";
-import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
 
 import InputLabel from "@mui/material/InputLabel";
@@ -27,13 +23,13 @@ import Hello from "../components/Configurator/Hello";
 
 function Test() {
   const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     width: 600,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
+    bgcolor: "background.paper",
+    border: "2px solid #000",
     boxShadow: 24,
     p: 4,
   };
@@ -42,7 +38,7 @@ function Test() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   //MODAL
-  const widthValue = [2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8];
+  const widthValue = [3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8,9];
   const RodzajeKonstrukcji = ["kątownik", "profil", "kątownik wzmocniony"];
 
   const [current, setCurrent] = useState(null);
@@ -55,12 +51,14 @@ function Test() {
   const [gateColorType, setGateColorType] = useState("ocynk");
   const [colorType, setColorType] = useState("ocynkowa");
   const [gate, setGate] = useState("Uchylna");
+  const [gate2, setGate2] = useState("Uchylna");
   const [box, setBox] = useState({
     height: 2.5,
-    width: 2.5,
-    depth: 2.5,
+    width: 5,
+    depth: 4,
     construction: "kątownik",
     gatePosition: "Środek",
+    gatePosition2: "Brak",
     guard: false,
     warming: false,
     mounting: false,
@@ -307,8 +305,13 @@ function Test() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-           <Hello/>
-           <button className="py-3 px-5 border-2 mt-2 rounded-md" onClick={handleClose} >Rozumiem</button>
+            <Hello />
+            <button
+              className="py-3 px-5 border-2 mt-2 rounded-md"
+              onClick={handleClose}
+            >
+              Rozumiem
+            </button>
           </Box>
         </Modal>
 
@@ -368,16 +371,6 @@ function Test() {
             ))}
           </Select>
         </FormControl>
-        {/* <FormControlLabel
-          control={
-            <Checkbox
-              name="warming"
-              onChange={onChangeSwitch}
-              checked={box.warming}
-            />
-          }
-          label="Ocieplenie"
-        /> */}
         <FormControlLabel
           control={
             <Checkbox
@@ -405,24 +398,36 @@ function Test() {
       <div className="absolute  left-1/2 transform -translate-x-1/2 z-50  bg-white/50 p-5 rounded-b-lg">
         <Gate gate={gate} setGate={setGate} />
         <Select
-            name="gatePosition"
+          name="gatePosition"
+          labelId="demo-simple-select-label"
+          id="gatePosition"
+          value={box.gatePosition}
+          label="Pozycja bramy"
+          onChange={onChange}
+          className="w-full"
+        >
+          <MenuItem value={"Lewa"}>Lewa</MenuItem>
+          <MenuItem value={"Środek"}>Środek</MenuItem>
+          <MenuItem value={"Prawa"}>Prawa</MenuItem>
+        </Select>
+        {/* //Gate 2 */}
+        {box.width >= 6 ? <Gate gate={gate2} setGate={setGate2} /> : null}
+        {box.width >= 6 ? (
+          <Select
+            name="gatePosition2"
             labelId="demo-simple-select-label"
-            id="gatePosition"
-            value={box.gatePosition}
+            id="gatePosition2"
+            value={box.gatePosition2}
             label="Pozycja bramy"
             onChange={onChange}
-             className="w-full"
+            className="w-full"
           >
-            <MenuItem value={"Lewa"}>
-              Lewa
-            </MenuItem>
-            <MenuItem value={"Środek"}>
-              Środek
-            </MenuItem>
-            <MenuItem value={"Prawa"}>
-              Prawa
-            </MenuItem>
-        </Select>
+           {gatePosition!="Brak" ? <MenuItem value={"Brak"}>Brak</MenuItem> :null} 
+           {box.gatePosition!="Lewa" && box.width>=6  ?<MenuItem value={"Lewa"}>Lewa</MenuItem> :null}
+           {box.gatePosition!="Środek" && box.width>=6 ? <MenuItem value={"Środek"}>Środek</MenuItem> :null}
+            <MenuItem value={"Prawa"}>Prawa</MenuItem>
+          </Select>
+        ) : null}
       </div>
       {/* SETTING CENTER END */}
       {/* SETTING BOTTOM START */}
@@ -444,16 +449,19 @@ function Test() {
             box={box}
             roof={roof}
             gate={gate}
+            gate2={gate2}
             color={color}
             gateColor={gateColor}
             roofColor={roofColor}
             direction={direction}
-            directionGate={directionGate}          
+            directionGate={directionGate}
           />
-          {/* {roof==="spadTyl"
-        ? <BlaszakSpadTyl box={box} roof={roof} gate={gate} color={color} gateColor={gateColor}/>
-        :null}  */}
-          <OrbitControls minPolarAngle={0} maxPolarAngle={Math.PI / 2.1} />
+          <OrbitControls
+            minPolarAngle={0}
+            maxDistance={20}
+            minDistance={10}
+            maxPolarAngle={Math.PI / 2.1}
+          />
           <ContactShadows
             position={[0, -0, 0]}
             opacity={1.75}
@@ -462,7 +470,6 @@ function Test() {
             far={8}
           />
         </Suspense>
-    
       </Canvas>
     </div>
   );
