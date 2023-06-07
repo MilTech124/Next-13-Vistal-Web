@@ -29,6 +29,7 @@ function Filters({ garages }) {
         {" "}
         {Products.map((name) => (
           <button
+          key={name}
             type="button"
             style={filter === name ? { backgroundColor: "grey" } : null}
             onClick={() => changeProduct(name)}
