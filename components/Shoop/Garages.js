@@ -5,12 +5,15 @@ import { useDispatch } from "react-redux";
 import { change } from "../../store/reducers/products.reducer";
 import { useSelector } from "react-redux";
 // TRANSLATION
-import { useTranslation } from 'next-i18next'
+import { useTranslation } from "next-i18next";
 
-function Filters({ garages}) {
-  const { t } = useTranslation("sklep")
-  const dispatch = useDispatch()
-  const currentProduct = useSelector((state) => state.productsReducer.currentproduct);
+function Filters({ garages }) {
+  const { t } = useTranslation("sklep");
+  const dispatch = useDispatch();
+  const currentProduct = useSelector(
+    (state) => state.productsReducer.currentproduct
+  );
+  const Products = useSelector((state) => state.productsReducer.Products);
 
   const changeProduct = (name) => {
     dispatch(change(name));
@@ -18,26 +21,18 @@ function Filters({ garages}) {
   };
 
   const [filter, setFilter] = useState(currentProduct);
-  const nameFilters = [
-    t("Drewnopodobne"),
-    t("Akrylowe"),
-    t("Ocynk"),
-    t("Kojce"),
-    t("Warstwowe"),
-    t("Akcesoria"),
-    t("Wyprzedaż"),
-  ];
   return (
     <>
-    {currentProduct}
       {/* FILTERS */}
-      <div className="flex pt-10 pl-10 gap-5 max-sm:pl-2 max-sm:gap-2 flex-wrap ">
-        {nameFilters.map((name) => (
-          <button type="button"
-            key={name}
-            onClick={() => changeProduct(name)}
+
+      <div>
+        {" "}
+        {Products.map((name) => (
+          <button
+            type="button"
             style={filter === name ? { backgroundColor: "grey" } : null}
-            className="bg-red-700 last:bg-yellow-500 text-md text-white font-semibold py-2 px-5 max-sm:px-2 rounded-xl hover:bg-yellow-400 transition-all"
+            onClick={() => changeProduct(name)}
+            className="bg-red-700 mr-2 mt-2 text-md text-white font-semibold py-2 px-5 max-sm:px-2 rounded-lg hover:bg-yellow-400 transition-all"
           >
             {name}
           </button>
@@ -46,24 +41,14 @@ function Filters({ garages}) {
 
       {/* FILTERS */}
 
+      <h2 className="text-2xl pt-2 font-semibold">{currentProduct}</h2>
+
       <div className="py-10 flex items-center flex-col gap-5">
         {garages.map((garage) => (
           <Fade key={garage.id}>
-            {filter === t("Drewnopodobne") &&
-            garage.acf.rodzaj === "drewnopodobny" ? (
+            {garage.acf.rodzaj === currentProduct ? (
               <Garage garage={garage} />
-            ) : filter === t("Akrylowe") && garage.acf.rodzaj === "akrylowy" ? (
-              <Garage garage={garage} />
-            ) : filter === t("Kojce") && garage.acf.rodzaj === "kojce" ? (
-              <Garage garage={garage} />
-            ) : filter === t("Ocynk") && garage.acf.rodzaj === "ocynkowy" ? (
-              <Garage garage={garage} />
-            ) : filter === t("Warstwowe") && garage.acf.rodzaj === "warstwowy" ? (
-              <Garage garage={garage} />
-            ) : filter === t("Wyprzedaż") && garage.acf.wyprzedaz ? (
-              <Garage garage={garage} />
-            ) : filter === t("Akcesoria") && garage.acf.rodzaj === "akcesoria" ? (
-              <Garage garage={garage} />
+           
             ) : null}
           </Fade>
         ))}
@@ -71,6 +56,5 @@ function Filters({ garages}) {
     </>
   );
 }
-
 
 export default Filters;

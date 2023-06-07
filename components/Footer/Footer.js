@@ -36,11 +36,11 @@ function Footer() {
           <div>
             <div className="flex justify-around pt-5">
               <div>
-                <p>
+                {/* <p>
                   <b>{t("Godziny")}</b>
                 </p>
                 <p>pn-pt: 8:00-17:00</p>
-                <p>sobota: 9:00-16:00</p>
+                <p>sobota: 9:00-16:00</p> */}
                 <div className="flex justify-center pt-5 gap-5 ">
                   <a
                     className="hover:rotate-6 transition-all"
@@ -61,7 +61,7 @@ function Footer() {
                 <div className="flex gap-5 flex-col">
                   <a
                     className="hover:rotate-6 transition-all"
-                    href="https://www.facebook.com/ProducentVistalGarazeBlaszane"
+                    href="https://www.facebook.com/VistalGaraze"
                   >
                     <img src="/svg/fwhite.svg" />
                   </a>

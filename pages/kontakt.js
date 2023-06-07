@@ -41,15 +41,28 @@ function kontakt() {
            {t("text-kontakt")}
           </p>
           <div className="flex gap-20">
-            <a href="tel:+48 693344132" className="p-1 rounded-md hover:scale-110 hover:bg-slate-100/50">
+            <a href="tel:+48 693344132" className="p-1 flex flex-col items-center rounded-md hover:scale-110 hover:bg-slate-100/50">
               <img src="/svg/wphone.svg" alt="icon" className="w-16" />
+              Kontakt: +48 693344132
             </a>
-            <a href="mailto:kontakt@vistal-garaze-blaszane.pl" className="p-1 rounded-md hover:scale-110 hover:bg-slate-100/50" >
+            <a href="mailto:kontakt@vistal-garaze-blaszane.pl" className="p-1 flex flex-col items-center rounded-md hover:scale-110 hover:bg-slate-100/50" >
               <img src="/svg/wmail.svg" alt="icon" className="w-16" />
+              kontakt@vistal-garaze-blaszane.pl
             </a>
-            <a href="https://www.facebook.com/ProducentVistalGarazeBlaszane" className="p-1 rounded-md hover:scale-110 hover:bg-slate-100/50">
+            <a href="https://www.facebook.com/VistalGaraze" className="p-1 rounded-md hover:scale-110 hover:bg-slate-100/50">
               <img src="/svg/wface.svg" alt="icon" className="w-16" />
             </a>
+          </div>
+          <div className="flex gap-20">
+            <a href="tel:+48 538600019" className="p-1 flex flex-col items-center rounded-md hover:scale-110 hover:bg-slate-100/50">
+              <img src="/svg/wphone.svg" alt="icon" className="w-16" />
+              Sprzedaż: +48 538600019
+            </a>
+            <a href="mailto:sprzedaz@vistal-garaze-blaszane.pl" className="p-1 flex flex-col items-center rounded-md hover:scale-110 hover:bg-slate-100/50" >
+              <img src="/svg/wmail.svg" alt="icon" className="w-16" />
+              sprzedaz@vistal-garaze-blaszane.pl
+            </a>
+           
           </div>
         </div>
       </div>
