@@ -61,7 +61,7 @@ function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColo
     ?   <div>
             <p>Kolory</p>
             <div className='flex gap-1 flex-wrap'>
-        {colors.map((singleColor,index)=>{return <div><button key={index} onClick={()=>{(setColor(singleColor), setColorRAL(colorsRAL[index]))}} className={`p-5 w-5 h-5 border rounded-full`} 
+        {colors.map((singleColor,index)=>{return <div key={index}><button key={index} onClick={()=>{(setColor(singleColor), setColorRAL(colorsRAL[index]))}} className={`p-5 w-5 h-5 border rounded-full`} 
             style={{
                boxShadow:(color === singleColor) ? '0px 0px 3px 3px' : null,
                 backgroundColor: singleColor
@@ -117,7 +117,7 @@ function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColo
     ?<div>
             <p>Kolory</p>
             <div className='flex gap-1 flex-wrap'>
-               {colors.map((singleColor,index)=>{return <div><button key={index} onClick={()=>{setGateColor(singleColor), setGateColorRAL(colorsRAL[index])}}
+               {colors.map((singleColor,index)=>{return <div key={index}><button key={index} onClick={()=>{setGateColor(singleColor), setGateColorRAL(colorsRAL[index])}}
                 className={"p-5 w-5 h-5 border rounded-full"} 
                 style={{
                     boxShadow:(gateColor === singleColor) ? '0px 0px 3px 3px' : null,
@@ -170,7 +170,7 @@ function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColo
     ?<div>
             <p>Kolory</p>
             <div className='flex gap-1 flex-wrap'>
-               {colors.map((singleColor,index)=>{return <div><button key={index} onClick={()=>{setRoofColor(singleColor),setRoofColorRAL(colorsRAL[index])}}
+               {colors.map((singleColor,index)=>{return <div key={index}><button key={index} onClick={()=>{setRoofColor(singleColor),setRoofColorRAL(colorsRAL[index])}}
                 className={"p-5 w-5 h-5 border rounded-full"} 
                 style={{
                     boxShadow:(roofColor === singleColor) ? '0px 0px 3px 3px' : null,
