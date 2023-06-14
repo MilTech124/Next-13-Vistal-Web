@@ -2,11 +2,14 @@ import React, { useState, Suspense } from "react"
 import { Canvas } from "@react-three/fiber"
 import { OrbitControls, Environment, ContactShadows } from "@react-three/drei"
 import { Blaszak } from "../components/Configurator/Blaszak"
-import emailjs from "@emailjs/browser"
+import emailjs, { send } from "@emailjs/browser"
 import Colors from "../components/Configurator/Colors"
 import Gate from "../components/Configurator/Gate"
 import RoofType from "../components/Configurator/RoofType"
 import BasicModal from "../components/Configurator/Dialog"
+import SendOrder from "../components/Configurator/SendOrder"
+import { motion } from "framer-motion"
+import { useRouter } from "next/router"
 
 import Hello from "../components/Configurator/Hello"
 
@@ -21,7 +24,6 @@ import Switch from "@mui/material/Switch"
 import FormControlLabel from "@mui/material/FormControlLabel"
 import Slider from "@mui/material/Slider"
 import Radio from "@mui/material/Radio"
-import Input from "@mui/material/Input"
 import RadioGroup from '@mui/material/RadioGroup';
 
 
@@ -39,22 +41,16 @@ function Test() {
     boxShadow: 24,
     p: 4,
   }
-  //MODAL
-  const [open, setOpen] = React.useState(true)
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
+  const router= useRouter()
+  const [open, setOpen] = React.useState(true) 
+  const [openModal2, setOpenModal2] = React.useState(false) 
   const ariaLabel = { 'aria-label': 'description' };
 
 
-
-
-  
-  //MODAL
   const widthValue = [3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8,9]
   const RodzajeKonstrukcji = ["kątownik", "profil", "kątownik wzmocniony"]
 
-  const [current, setCurrent] = useState(null)
-  const [name, setName] = useState("")
+  const [current, setCurrent] = useState(null) 
   const [color, setColor] = useState("ocynk")
   const [colorRAL, setColorRAL] = useState("ocynk")
   const [direction, setDirection] = useState("pion")
@@ -69,7 +65,6 @@ function Test() {
   const [colorType, setColorType] = useState("ocynkowa")
   const [gate, setGate] = useState("Uchylna")
   const [gate2, setGate2] = useState("Uchylna") 
-  const [zamowienie, setZamowienie] = useState(false)
   const [box, setBox] = useState({   
     height: 2.5,
     width: 5,
@@ -77,8 +72,7 @@ function Test() {
     construction: "kątownik",
     gatePosition: "Środek",
     gatePosition2: "Brak",
-    guard: false,
-    warming: false,
+    guard: false,   
     mounting: false,
     window: false,
     door: false,
@@ -91,14 +85,26 @@ function Test() {
     glassMeasure: 30,
     doorPosition: "Prawa",
     doorMeasure: 30,
+   
+  })
+  const [valuation, setValuation] = useState({  
+    name: "",
+    surname: "",
+    email: "",
+    phone: "",
+    street: "",
+    city: "",
+    postCode: "",
+    comments: "",
     transport: false,
+
   })
   const env =
     "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/alps_field_1k.hdr"
-
-  console.log(current)
-
   // FUNCTION
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
+  const handleCloseModal=()=>{setOpenModal2(false)}
   const onChange = (e) => {
     setBox((prevState) => ({
       ...prevState,
@@ -117,12 +123,61 @@ function Test() {
     }))
   }
 
+
   const onSubmit = () => {
+    const valuationService = {
+      name: valuation.name,
+      surname: valuation.surname,
+      email: valuation.email,
+      phone: valuation.phone,
+      street: valuation.street,
+      city: valuation.city,
+      postCode: valuation.postCode,
+      comments: valuation.comments,
+      transport: valuation.transport,
+      height: box.height,
+      width: box.width,
+      depth: box.depth,
+      construction: box.construction,
+      gatePosition: box.gatePosition,
+      gatePosition2: box.gatePosition2,
+      guard: box.guard,
+      mounting: box.mounting,
+      window: box.window,
+      door: box.door,
+      glass: box.glass,
+      gutter: box.gutter,
+      tilesRoof: box.tilesRoof,
+      windowPosition: box.windowPosition,
+      windowMeasure: box.windowMeasure,
+      glassPosition: box.glassPosition,
+      glassMeasure: box.glassMeasure,
+      doorPosition: box.doorPosition,
+      doorMeasure: box.doorMeasure,
+      color:  colorType==="acrilic" ?  colorRAL : color,
+      // colorRAL: colorRAL,
+      direction: direction,
+      directionGate: directionGate,
+      roof: roof,
+      roofColorType: roofColorType,
+      roofColor: roofColorType==="acrilic" ? roofColorRAL : roofColor,
+      // roofColorRAL: roofColorRAL,
+      gateColor:gateColorType==="acrilic" ? gateColorRAL : gateColor,
+      // gateColorRAL: gateColorRAL,
+      gateColorType: gateColorType,
+      colorType: colorType,
+      gate: gate,
+      gate2: gate2,
+    }
+    if (valuation.name === ""||valuation.surname === ""||valuation.email === ""||valuation.phone === ""||valuation.street === ""||valuation.city === ""||valuation.postCode === "") {
+      alert("Uzupełnij wszystkie pola")
+      return
+    }
     emailjs
     .send(
       "service_3j3n0o7",
       "template_r72xmpk",
-      valuation,
+      valuationService,
       "oQq1UWWWHKs-7vYwK"
     )
     .then(
@@ -138,56 +193,9 @@ function Test() {
   router.push("/")
 }
   // FUNCTION
-
+ 
   //COMOPONENTS
-  const SendOrder = () => { 
-    const chandleChange = (e) => {
-      setName(e.target.value)
-    }
-    return (
-      <>
-      <h3 className="text-2xl p-2">Potwierdzenie zamówienia :</h3>
-      <div className="flex">
-        <div>
-          <ul>
-            <li>Wysokość: {box.height}m</li>
-            <li>Szerokość: {box.width}m</li>
-            <li>Głębokość: {box.depth}m</li>
-            <li>Konstrukcja: {box.construction}</li>
-            {colorType==="acrilic" ? <li>Kolor: {colorRAL}</li> :<li>Kolor: {color}</li>}      
-            <li>Kierunek przetłoczeń garażu: {direction}</li>    
-            {gateColorType==="acrilic" ? <li>Kolor bramy: {gateColorRAL}</li> :<li>Kolor bramy: {gateColor}</li>}
-            <li>Kierunek przetłoczeń bramy: {directionGate}</li>      
-            {roofColorType==="acrilic" ? <li>Kolor dachu: {roofColorRAL}</li> :<li>Kolor dachu: {roofColor}</li>}
-            <li>Typ dachu: {roof}</li>
-            <li>Typ bramy: {gate}</li>
-            <li>Pozycja bramy:{box.gatePosition}</li>
-            {box.width >=6 ?<li>Typ bramy 2: {gate2}</li> :null}
-            {box.width >=6 ?<li>Pozycja bramy:{box.gatePosition2}</li> :null}
-            <li>Okno: {box.window ? "Tak" : "Nie"}</li>
-            {box.window ? <><li>Okno po stronie: {box.windowPosition}</li></> :null} 
-            {box.window ? <><li>Pozycja okna {box.windowMeasure}cm</li></> :null}      
-            <li>Drzwi: {box.door ? "Tak" : "Nie"}</li>
-            {box.door ? <><li>Drzwi po stronie: {box.doorPosition}</li></> :null}
-            {box.door ? <><li>Pozycja drzwi {box.doorMeasure}cm</li></> :null}
-            <li>Świetlik: {box.glass ? "Tak" : "Nie"}</li>
-            {box.glass ? <><li>Świetlik po stronie: {box.glassPosition}</li></> :null}
-            {box.glass ? <><li>Pozycja świetlika {box.glassMeasure}cm</li></> :null}
-            <li>Orynnowanie: {box.gutter ? "Tak" : "Nie"}</li>
-            <li>Montaż: {box.mounting ? "Tak" : "Nie"}</li>
-            <li>Transport: {box.transport ? "Tak" : "Nie"}</li>
-            {name}
-          </ul> 
-        </div>
-        <div>
-          <h4>Dane kontaktowe:</h4>
-         <Input inputProps={ariaLabel}  placeholder="Imie" value={name} type="text" onChange={chandleChange} name="name" id="name"/>
-        </div>
-      </div>
 
-      </>
-    )
-  }
 
   //COMOPONENTS
 
@@ -408,19 +416,38 @@ function Test() {
           </Box>
         </Modal>
         <Modal
-          open={zamowienie}
-          onClose={!zamowienie}
+          open={openModal2}
+          onClose={setOpenModal2}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <SendOrder />
-            <button
-              className="py-3 px-5 border-2 mt-2 rounded-md"
-              onClick={() => setZamowienie(false)}
+            <SendOrder valuation={valuation} setValuation={setValuation} 
+             width={box.width} depth={box.depth}  color={color} 
+              direction={direction} colorRAL={colorRAL} colorType={color}  construction={box.construction}
+              roofColorType={roofColorType} roofColor={roofColor} roofColorRAL={roofColorRAL}
+              roof={roof} gate={gate} window={box.window} glass={box.glass}
+              door={box.door} doorPosition={box.doorPosition} doorMeasure={box.doorMeasure}
+              glassPosition={box.glassPosition} glassMeasure={box.glassMeasure}
+              windowPosition={box.windowPosition} windowMeasure={box.windowMeasure}
+              gutter={box.gutter} mounting={box.mounting} transport={box.transport}
+              gateColorType={gateColorType} gateColor={gateColor} gateColorRAL={gateColorRAL}
+              gatePosition={box.gatePosition} gatePosition2={box.gatePosition2} gate2={gate2} directionGate={directionGate}
+            />
+            <Button
+              variant="contained"
+              className="bg-blue-500 mr-2"
+              onClick={() => onSubmit()}
             >
-              Wyślij zamówienie
-            </button>
+              Wyślij
+            </Button>
+            <Button 
+              variant="contained"
+              className="bg-red-500"
+              onClick={() => setOpenModal2(false)}
+            >
+              Wróć do konfiguratora
+            </Button>
           </Box>
         </Modal>
         
@@ -552,13 +579,24 @@ function Test() {
       </div>
       {/* SETTING BOTTOM END */}
 
-      {/* SETTING RIGHT SIDE START */}
+      {/* SETTING BOTTOM RIGHT SIDE START */}
+   
       <div className="absolute bottom-5 right-10 z-10"> 
-        <Button onClick={()=>setZamowienie(true)} variant="contained" color="error" className="bg-red-500" size="large">Zamów Wycenę</Button>
+      <motion.div animate={{ scale: [1, 1.2, 1.2, 1, 1],
+                  }}
+    transition={{
+      duration: 5,
+      ease: "easeInOut",
+      times: [0, 0.2, 0.5, 0.8, 1],
+      repeat: Infinity,
+      repeatDelay: 5
+     }}>
+        <Button onClick={()=>setOpenModal2(true)} variant="contained" color="error" className="bg-red-500" size="large">Zamów Wycenę</Button>
+        </motion.div>
         <p className="text-white text-center">Zamów wycenę ustalonej konfiguracji</p>
       </div>
-     
-      {/* SETTING RIGHT SIDE END */}
+  
+      {/* SETTING BOTTOM RIGHT SIDE END */}
 
       <Canvas shadows camera={{ position: [10, 6, 2], fov: 30 }}>
         <Suspense fallback={null}>
