@@ -1,25 +1,31 @@
-import React, { useState, Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Environment, ContactShadows } from "@react-three/drei";
-import { Blaszak } from "../components/Configurator/Blaszak";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
-import Checkbox from "@mui/material/Checkbox";
+import React, { useState, Suspense } from "react"
+import { Canvas } from "@react-three/fiber"
+import { OrbitControls, Environment, ContactShadows } from "@react-three/drei"
+import { Blaszak } from "../components/Configurator/Blaszak"
+import emailjs from "@emailjs/browser"
+import Colors from "../components/Configurator/Colors"
+import Gate from "../components/Configurator/Gate"
+import RoofType from "../components/Configurator/RoofType"
+import BasicModal from "../components/Configurator/Dialog"
 
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import Switch from "@mui/material/Switch";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Slider from "@mui/material/Slider";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import Colors from "../components/Configurator/Colors";
-import Gate from "../components/Configurator/Gate";
-import RoofType from "../components/Configurator/RoofType";
-import BasicModal from "../components/Configurator/Dialog";
-import Hello from "../components/Configurator/Hello";
+import Hello from "../components/Configurator/Hello"
+
+import Modal from "@mui/material/Modal"
+import Box from "@mui/material/Box"
+import Checkbox from "@mui/material/Checkbox"
+import InputLabel from "@mui/material/InputLabel"
+import MenuItem from "@mui/material/MenuItem"
+import FormControl from "@mui/material/FormControl"
+import Select from "@mui/material/Select"
+import Switch from "@mui/material/Switch"
+import FormControlLabel from "@mui/material/FormControlLabel"
+import Slider from "@mui/material/Slider"
+import Radio from "@mui/material/Radio"
+import Input from "@mui/material/Input"
+
+
+
+import { Button} from "@mui/material"
 
 function Test() {
   const style = {
@@ -32,27 +38,39 @@ function Test() {
     border: "2px solid #000",
     boxShadow: 24,
     p: 4,
-  };
+  }
   //MODAL
-  const [open, setOpen] = React.useState(true);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  //MODAL
-  const widthValue = [3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8,9];
-  const RodzajeKonstrukcji = ["kątownik", "profil", "kątownik wzmocniony"];
+  const [open, setOpen] = React.useState(true)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
+  const ariaLabel = { 'aria-label': 'description' };
 
-  const [current, setCurrent] = useState(null);
-  const [color, setColor] = useState("ocynk");
-  const [direction, setDirection] = useState("pion");
-  const [directionGate, setDirectionGate] = useState("pion");
-  const [roof, setRoof] = useState("spadTyl");
-  const [roofColor, setRoofColor] = useState("ocynk");
-  const [gateColor, setGateColor] = useState("ocynk");
-  const [gateColorType, setGateColorType] = useState("ocynk");
-  const [colorType, setColorType] = useState("ocynkowa");
-  const [gate, setGate] = useState("Uchylna");
-  const [gate2, setGate2] = useState("Uchylna");
-  const [box, setBox] = useState({
+
+
+
+  
+  //MODAL
+  const widthValue = [3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8,9]
+  const RodzajeKonstrukcji = ["kątownik", "profil", "kątownik wzmocniony"]
+
+  const [current, setCurrent] = useState(null)
+  const [name, setName] = useState("")
+  const [color, setColor] = useState("ocynk")
+  const [colorRAL, setColorRAL] = useState("ocynk")
+  const [direction, setDirection] = useState("pion")
+  const [directionGate, setDirectionGate] = useState("pion")
+  const [roof, setRoof] = useState("spadTyl")
+  const [roofColorType,setRoofColorType]= useState("ocynkowa")
+  const [roofColor, setRoofColor] = useState("ocynk")
+  const [roofColorRAL, setRoofColorRAL] = useState("ocynk")
+  const [gateColor, setGateColor] = useState("ocynk")
+  const [gateColorRAL, setGateColorRAL] = useState("ocynk")
+  const [gateColorType, setGateColorType] = useState("ocynk")
+  const [colorType, setColorType] = useState("ocynkowa")
+  const [gate, setGate] = useState("Uchylna")
+  const [gate2, setGate2] = useState("Uchylna") 
+  const [zamowienie, setZamowienie] = useState(false)
+  const [box, setBox] = useState({   
     height: 2.5,
     width: 5,
     depth: 4,
@@ -73,31 +91,106 @@ function Test() {
     glassMeasure: 30,
     doorPosition: "Prawa",
     doorMeasure: 30,
-  });
+    transport: false,
+  })
   const env =
-    "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/alps_field_1k.hdr";
+    "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/alps_field_1k.hdr"
 
-  console.log(current);
+  console.log(current)
 
   // FUNCTION
   const onChange = (e) => {
     setBox((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
-    }));
-  };
+    }))
+  }
 
   const onChangeSwitch = (e) => {
     if (e.target.checked) {
-      setCurrent(e.target.name);
+      setCurrent(e.target.name)
     }
-    console.log(e.target.checked);
+    console.log(e.target.checked)
     setBox((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.checked,
-    }));
-  };
+    }))
+  }
+
+  const onSubmit = () => {
+    emailjs
+    .send(
+      "service_3j3n0o7",
+      "template_r72xmpk",
+      valuation,
+      "oQq1UWWWHKs-7vYwK"
+    )
+    .then(
+      (result) => {
+        console.log(result.text)
+      },
+      (error) => {
+        console.log(error.text)
+      }
+    )
+
+  alert("Pomyslnie wysłano")
+  router.push("/")
+}
   // FUNCTION
+
+  //COMOPONENTS
+  const SendOrder = () => { 
+    const chandleChange = (e) => {
+      setName(e.target.value)
+    }
+    return (
+      <>
+      <h3 className="text-2xl p-2">Potwierdzenie zamówienia :</h3>
+      <div className="flex">
+        <div>
+          <ul>
+            <li>Wysokość: {box.height}m</li>
+            <li>Szerokość: {box.width}m</li>
+            <li>Głębokość: {box.depth}m</li>
+            <li>Konstrukcja: {box.construction}</li>
+            {colorType==="acrilic" ? <li>Kolor: {colorRAL}</li> :<li>Kolor: {color}</li>}      
+            <li>Kierunek przetłoczeń garażu: {direction}</li>    
+            {gateColorType==="acrilic" ? <li>Kolor bramy: {gateColorRAL}</li> :<li>Kolor bramy: {gateColor}</li>}
+            <li>Kierunek przetłoczeń bramy: {directionGate}</li>      
+            {roofColorType==="acrilic" ? <li>Kolor dachu: {roofColorRAL}</li> :<li>Kolor dachu: {roofColor}</li>}
+            <li>Typ dachu: {roof}</li>
+            <li>Typ bramy: {gate}</li>
+            <li>Pozycja bramy:{box.gatePosition}</li>
+            {box.width >=6 ?<li>Typ bramy 2: {gate2}</li> :null}
+            {box.width >=6 ?<li>Pozycja bramy:{box.gatePosition2}</li> :null}
+            <li>Okno: {box.window ? "Tak" : "Nie"}</li>
+            {box.window ? <><li>Okno po stronie: {box.windowPosition}</li></> :null} 
+            {box.window ? <><li>Pozycja okna {box.windowMeasure}cm</li></> :null}      
+            <li>Drzwi: {box.door ? "Tak" : "Nie"}</li>
+            {box.door ? <><li>Drzwi po stronie: {box.doorPosition}</li></> :null}
+            {box.door ? <><li>Pozycja drzwi {box.doorMeasure}cm</li></> :null}
+            <li>Świetlik: {box.glass ? "Tak" : "Nie"}</li>
+            {box.glass ? <><li>Świetlik po stronie: {box.glassPosition}</li></> :null}
+            {box.glass ? <><li>Pozycja świetlika {box.glassMeasure}cm</li></> :null}
+            <li>Orynnowanie: {box.gutter ? "Tak" : "Nie"}</li>
+            <li>Montaż: {box.mounting ? "Tak" : "Nie"}</li>
+            <li>Transport: {box.transport ? "Tak" : "Nie"}</li>
+            {name}
+          </ul> 
+        </div>
+        <div>
+          <h4>Dane kontaktowe:</h4>
+         <Input inputProps={ariaLabel}  placeholder="Imie" value={name} type="text" onChange={chandleChange} name="name" id="name"/>
+        </div>
+      </div>
+
+      </>
+    )
+  }
+
+  //COMOPONENTS
+
 
   return (
     <div id="canvas-container" className="w-[100vw] h-[90vh] relative">
@@ -314,6 +407,23 @@ function Test() {
             </button>
           </Box>
         </Modal>
+        <Modal
+          open={zamowienie}
+          onClose={!zamowienie}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <SendOrder />
+            <button
+              className="py-3 px-5 border-2 mt-2 rounded-md"
+              onClick={() => setZamowienie(false)}
+            >
+              Wyślij zamówienie
+            </button>
+          </Box>
+        </Modal>
+        
 
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Długość</InputLabel>
@@ -338,11 +448,14 @@ function Test() {
             color={color}
             current={current}
             setColor={setColor}
+            setColorRAL={setColorRAL}
             colorType={colorType}
             setColorType={setColorType}
             gateColor={gateColor}
+            setGateColorRAL={setGateColorRAL}
             setGateColor={setGateColor}
             gateColorType={gateColorType}
+            setRoofColorRAL={setRoofColorRAL}
             setGateColorType={setGateColorType}
             roofColor={roofColor}
             setRoofColor={setRoofColor}
@@ -350,6 +463,9 @@ function Test() {
             setDirection={setDirection}
             directionGate={directionGate}
             setDirectionGate={setDirectionGate}
+            roofColorType={roofColorType}
+            setRoofColorType={setRoofColorType}
+      
           />
         </BasicModal>
         <FormControl fullWidth>
@@ -436,6 +552,14 @@ function Test() {
       </div>
       {/* SETTING BOTTOM END */}
 
+      {/* SETTING RIGHT SIDE START */}
+      <div className="absolute bottom-5 right-10 z-10"> 
+        <Button onClick={()=>setZamowienie(true)} variant="contained" color="error" className="bg-red-500" size="large">Zamów Wycenę</Button>
+        <p className="text-white text-center">Zamów wycenę ustalonej konfiguracji</p>
+      </div>
+     
+      {/* SETTING RIGHT SIDE END */}
+
       <Canvas shadows camera={{ position: [10, 6, 2], fov: 30 }}>
         <Suspense fallback={null}>
           <Environment
@@ -454,7 +578,7 @@ function Test() {
             gateColor={gateColor}
             roofColor={roofColor}
             direction={direction}
-            directionGate={directionGate}
+            directionGate={directionGate}       
           />
           <OrbitControls
             minPolarAngle={0}
@@ -472,7 +596,7 @@ function Test() {
         </Suspense>
       </Canvas>
     </div>
-  );
+  )
 }
 
-export default Test;
+export default Test

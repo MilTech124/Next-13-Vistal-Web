@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import Tooltip from '@mui/material/Tooltip';
 
 function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColorType,
-    gateColor,setGateColor,roofColor,setRoofColor,direction,setDirection,directionGate,setDirectionGate}) {
+    gateColor,setGateColor,roofColor,setRoofColor,direction,setDirection,directionGate,setDirectionGate,setColorRAL,
+    setGateColorRAL,setRoofColorRAL,roofColorType,setRoofColorType}) {
     const borderStyle={
         boxShadow:'0px 0px 5px 5px',
     }
-    const [roofColorType,setRoofColorType]= useState("ocynkowa")
+   
     const colors = [
 		"#D4AC6E",
 		"#5D181F",
@@ -20,6 +21,19 @@ function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColo
 		"#A2A2A2",
 		"#FCFFFE",
     	]
+        const colorsRAL=[
+            "RAL 1002",
+            "RAL 3005",
+            "RAL 3011",
+            "RAL 5010",
+            "RAL 6020",
+            "RAL 7016",
+            "RAL 8004",
+            "RAL 8017",
+            "RAL 9005",
+            "RAL 9006",
+            "RAL 9010",
+        ]
   return (
     <>
 {/* PLATE MAIN COLOR */}    
@@ -36,20 +50,24 @@ function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColo
     </Tooltip>
     <Tooltip title="Przetloczenia">
         {direction==='Poziom' 
-        ?<button onClick={()=>{setDirection("Pion")}} className='w-10 h-10 transition-all'><img src='/configurator/icon/direction.svg'/></button>
-        : <button onClick={()=>{setDirection("Poziom")}} className='w-10 h-10 rotate-90 transition-all'><img src='/configurator/icon/direction.svg'/></button> }
-    </Tooltip>
+        ?<button onClick={()=>{setDirection("Pion")}} className='w-10 h-10 border-4  transition-all'><img src='/configurator/icon/Arrow.svg'/>Poziom</button>
+        : <button onClick={()=>{setDirection("Poziom")}} className='w-10 h-10 border-4 rotate-90  transition-all'><img src='/configurator/icon/Arrow.svg'/>Pion</button> }
+        
+    </Tooltip>  
     </div>
+  
+    
     {colorType==="acrilic"
     ?   <div>
             <p>Kolory</p>
             <div className='flex gap-1 flex-wrap'>
-        {colors.map((singleColor,index)=>{return <button key={index} onClick={()=>{setColor(singleColor)}} className={`p-5 w-5 h-5 border rounded-full`} 
+        {colors.map((singleColor,index)=>{return <div><button key={index} onClick={()=>{(setColor(singleColor), setColorRAL(colorsRAL[index]))}} className={`p-5 w-5 h-5 border rounded-full`} 
             style={{
                boxShadow:(color === singleColor) ? '0px 0px 3px 3px' : null,
                 backgroundColor: singleColor
             }}>
-           </button>}
+           </button>{colorsRAL[index]}
+           </div> }
            )}
             </div>
         </div>
@@ -59,10 +77,17 @@ function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColo
         ?   <div>
                 <p>Kolory</p>
                 <div className='flex gap-1'>
-                    <button onClick={()=>{setColor("dab")}} className='p-5 w-5 h-5 bg-orange-700 rounded-full'
-                     style={color==="dab" ? borderStyle : null}></button>
+                    <div>
+                        <button onClick={()=>{setColor("dab")}} className='p-5 w-5 h-5 bg-orange-700 rounded-full'
+                        style={color==="dab" ? borderStyle : null}></button>
+                        <p>Dąb</p>
+                    </div>
+                   <div>
                     <button onClick={()=>{setColor("orzech")}} className='p-5 w-5 h-5 bg-orange-900 rounded-full'
-                     style={color==="orzech" ? borderStyle : null}></button>               
+                        style={color==="orzech" ? borderStyle : null}></button> 
+                        <p>Orzech</p>
+                   </div>
+                                  
                 </div>
             </div>
         :null
@@ -83,8 +108,8 @@ function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColo
      </Tooltip>
      <Tooltip title="Przetloczenia">
         {directionGate==='Poziom'
-        ?<button onClick={()=>{setDirectionGate("Pion")}} className='w-10 h-10 transition-all'><img src='/configurator/icon/direction.svg'/></button>
-        : <button onClick={()=>{setDirectionGate("Poziom")}} className='w-10 h-10 rotate-90 transition-all'><img src='/configurator/icon/direction.svg'/></button> }
+        ?<button onClick={()=>{setDirectionGate("Pion")}} className='w-10 h-10 border-4  transition-all'><img src='/configurator/icon/Arrow.svg'/>Poziom</button>
+        : <button onClick={()=>{setDirectionGate("Poziom")}} className='w-10 h-10 border-4  rotate-90 transition-all'><img src='/configurator/icon/Arrow.svg'/>Pion</button> }
     </Tooltip>
      </div>
     </div>
@@ -92,13 +117,13 @@ function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColo
     ?<div>
             <p>Kolory</p>
             <div className='flex gap-1 flex-wrap'>
-               {colors.map((singleColor,index)=>{return <button key={index} onClick={()=>{setGateColor(singleColor)}}
+               {colors.map((singleColor,index)=>{return <div><button key={index} onClick={()=>{setGateColor(singleColor), setGateColorRAL(colorsRAL[index])}}
                 className={"p-5 w-5 h-5 border rounded-full"} 
                 style={{
                     boxShadow:(gateColor === singleColor) ? '0px 0px 3px 3px' : null,
                      backgroundColor: singleColor
                  }}>
-               </button>}
+               </button> {colorsRAL[index]}</div> }
                )}
             </div>
         </div>
@@ -109,10 +134,17 @@ function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColo
         ?   <div>
                 <p>Kolory</p>
                 <div className='flex gap-1'>
-                    <button onClick={()=>{setGateColor("dab")}} className='p-5 w-5 h-5 bg-orange-700 rounded-full'
-                     style={gateColor==="dab" ? borderStyle : null}></button>
-                    <button onClick={()=>{setGateColor("orzech")}} className='p-5 w-5 h-5 bg-orange-900 rounded-full'
-                     style={gateColor==="orzech" ? borderStyle : null}></button>               
+                    <div>
+                        <button onClick={()=>{setGateColor("dab")}} className='p-5 w-5 h-5 bg-orange-700 rounded-full'
+                        style={gateColor==="dab" ? borderStyle : null}></button>
+                        <p>Dąb</p>
+                    </div>
+                    <div>
+                        <button onClick={()=>{setGateColor("orzech")}} className='p-5 w-5 h-5 bg-orange-900 rounded-full'
+                        style={gateColor==="orzech" ? borderStyle : null}></button>   
+                        <p>Orzech</p>
+                    </div>
+                             
                 </div>
             </div>
         :null
@@ -138,13 +170,13 @@ function Colors({color,setColor,colorType,setColorType,gateColorType,setGateColo
     ?<div>
             <p>Kolory</p>
             <div className='flex gap-1 flex-wrap'>
-               {colors.map((singleColor,index)=>{return <button key={index} onClick={()=>{setRoofColor(singleColor)}}
+               {colors.map((singleColor,index)=>{return <div><button key={index} onClick={()=>{setRoofColor(singleColor),setRoofColorRAL(colorsRAL[index])}}
                 className={"p-5 w-5 h-5 border rounded-full"} 
                 style={{
                     boxShadow:(roofColor === singleColor) ? '0px 0px 3px 3px' : null,
                      backgroundColor: singleColor
                  }}>
-               </button>}
+               </button>{colorsRAL[index]}</div>}
                )}
             </div>
         </div>
