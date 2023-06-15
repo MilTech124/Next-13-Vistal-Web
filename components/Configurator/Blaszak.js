@@ -119,7 +119,14 @@ export function Blaszak(props) {
    const wood = useTexture({
     map:"./configurator/texture/wood.jpg",
       })
-  wood.map.repeat.set(1.8*width/2.7,1) 
+      if(direction==="Poziom"){
+        wood.map.repeat.set(1.1,1)
+        wood.map.rotation = Math.PI/2 
+      }else{
+        wood.map.repeat.set(1.6*width/2.7,1)
+        wood.map.rotation = Math.PI/1
+      }
+  // wood.map.repeat.set(1.8*width/2.7,1) 
   wood.map.wrapS = wood.map.wrapT = THREE.RepeatWrapping
  
   // MATERIAL WOOD

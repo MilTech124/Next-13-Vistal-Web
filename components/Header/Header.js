@@ -27,6 +27,10 @@ function Header() {
       link: "/wycena",
     },
     {
+      name: t("Konfigurator 3D"),
+      link: "/konfigurator",
+    },
+    {
       name: t("Realizacje"),
       link: "/realizacje",
     },

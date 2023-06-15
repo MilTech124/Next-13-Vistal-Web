@@ -74,7 +74,7 @@ function Hero({ data,Products}) {
                 className="hover:scale-110 transition-all"
               >
                 <div className="flex items-center gap-1 cursor-pointer">
-                  <img src="/svg/calculator.svg" />
+                  <img className="animate-bounce" src="/svg/calculator.svg" />
                   {t("Konfigurator")}
                 </div>
               </Link>

@@ -10,6 +10,7 @@ import BasicModal from "../components/Configurator/Dialog"
 import SendOrder from "../components/Configurator/SendOrder"
 import { motion } from "framer-motion"
 import { useRouter } from "next/router"
+import { toast } from 'react-toastify';
 
 import Hello from "../components/Configurator/Hello"
 
@@ -25,6 +26,7 @@ import FormControlLabel from "@mui/material/FormControlLabel"
 import Slider from "@mui/material/Slider"
 import Radio from "@mui/material/Radio"
 import RadioGroup from '@mui/material/RadioGroup';
+import Alert from "@mui/material/Alert"
 
 
 import { Button} from "@mui/material"
@@ -40,8 +42,9 @@ function Test() {
     border: "2px solid #000",
     boxShadow: 24,
     p: 4,
+    
   }
-  const router= useRouter()
+  const router = useRouter()
   const [open, setOpen] = React.useState(true) 
   const [openModal2, setOpenModal2] = React.useState(false) 
   const ariaLabel = { 'aria-label': 'description' };
@@ -170,7 +173,17 @@ function Test() {
       gate2: gate2,
     }
     if (valuation.name === ""||valuation.surname === ""||valuation.email === ""||valuation.phone === ""||valuation.street === ""||valuation.city === ""||valuation.postCode === "") {
-      alert("Uzupełnij wszystkie pola")
+      toast.error('Uzupełnij wszystkie pola', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
+     
       return
     }
     emailjs
@@ -189,8 +202,19 @@ function Test() {
       }
     )
 
-  alert("Pomyslnie wysłano")
-  router.push("/")
+    toast.success('Pomyślnie wysłano wiadomość', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      });
+      alert("Pomyślnie wysłano wiadomość")
+
+      setOpenModal2(false)
 }
   // FUNCTION
  
@@ -582,15 +606,14 @@ function Test() {
       {/* SETTING BOTTOM RIGHT SIDE START */}
    
       <div className="absolute bottom-5 right-10 z-10"> 
-      <motion.div animate={{ scale: [1, 1.2, 1.2, 1, 1],
-                  }}
-    transition={{
-      duration: 5,
-      ease: "easeInOut",
-      times: [0, 0.2, 0.5, 0.8, 1],
-      repeat: Infinity,
-      repeatDelay: 5
-     }}>
+      <motion.div animate={{ scale: [1, 1.2, 1.2, 1, 1],}}
+          transition={{
+            duration: 5,
+            ease: "easeInOut",
+            times: [0, 0.2, 0.5, 0.8, 1],
+            repeat: Infinity,
+            repeatDelay: 5
+          }}>
         <Button onClick={()=>setOpenModal2(true)} variant="contained" color="error" className="bg-red-500" size="large">Zamów Wycenę</Button>
         </motion.div>
         <p className="text-white text-center">Zamów wycenę ustalonej konfiguracji</p>
