@@ -9,7 +9,6 @@ import RoofType from "../components/Configurator/RoofType"
 import BasicModal from "../components/Configurator/Dialog"
 import SendOrder from "../components/Configurator/SendOrder"
 import { motion } from "framer-motion"
-import { useRouter } from "next/router"
 import { toast } from 'react-toastify';
 
 import Hello from "../components/Configurator/Hello"
@@ -26,25 +25,27 @@ import FormControlLabel from "@mui/material/FormControlLabel"
 import Slider from "@mui/material/Slider"
 import Radio from "@mui/material/Radio"
 import RadioGroup from '@mui/material/RadioGroup';
-import Alert from "@mui/material/Alert"
+
 
 
 import { Button} from "@mui/material"
+import { useMediaQuery } from '@mui/material';
 
 function Test() {
+  const isMobile = useMediaQuery('(max-width:600px)'); // Ustalanie maksymalnej szerokości dla telefonów
   const style = {
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 600,
+    width: isMobile ? 400 : 600, // Ustawienie szerokości 400 dla telefonów, w przeciwnym razie 600
     bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,
     p: 4,
-    
+
   }
-  const router = useRouter()
+
   const [open, setOpen] = React.useState(true) 
   const [openModal2, setOpenModal2] = React.useState(false) 
   const ariaLabel = { 'aria-label': 'description' };
@@ -227,7 +228,7 @@ function Test() {
   return (
     <div id="canvas-container" className="w-[100vw] h-[90vh] relative">
       {/* SETTING LEFT SIDE START*/}
-      <div className="absolute top-5 flex flex-col z-50  bg-white/50 p-10 rounded-r-lg">
+      <div className="absolute top-5 flex flex-col z-50 bg-white/50 p-10 max-sm:mt-[20vh] max-sm:p-1 rounded-r-lg">
         {/* WINDOW SETTINGS        */}
         <FormControlLabel
           control={
@@ -405,8 +406,8 @@ function Test() {
       </div>
       {/* SETTING LEFT SIDE END*/}
       {/* SETTING RIGHT SIDE START*/}
-      <div className="absolute right-0 top-5 w-[200px] flex flex-col z-50 gap-2 bg-white/50 p-10 rounded-l-lg">
-        <FormControl fullWidth>
+      <div className="absolute right-0 top-5 w-[200px] max-sm:w-[120px] flex flex-col z-50 gap-2 bg-white/50 max-sm:p-1 p-10 rounded-l-lg">
+        <FormControl fullWidth >
           <InputLabel id="demo-simple-select-label">Szerokość</InputLabel>
           <Select
             name="width"
@@ -429,7 +430,7 @@ function Test() {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>
+          <Box sx={style} >
             <Hello />
             <button
               className="py-3 px-5 border-2 mt-2 rounded-md"
@@ -562,8 +563,8 @@ function Test() {
       {/* SETTING RIGHT SIDE END*/}
 
       {/* SETTING CENTER START */}
-      <div className="absolute  left-1/2 transform -translate-x-1/2 z-50  bg-white/50 p-5 rounded-b-lg">
-        <Gate gate={gate} setGate={setGate} />
+      <div className="absolute  left-1/2 transform -translate-x-1/2 z-50  bg-white/50 p-5 max-sm:p-1 rounded-b-lg">
+        <Gate gate={gate} setGate={setGate}/>
         <Select
           name="gatePosition"
           labelId="demo-simple-select-label"
@@ -614,9 +615,9 @@ function Test() {
             repeat: Infinity,
             repeatDelay: 5
           }}>
-        <Button onClick={()=>setOpenModal2(true)} variant="contained" color="error" className="bg-red-500" size="large">Zamów Wycenę</Button>
+        <Button onClick={()=>setOpenModal2(true)} variant="contained" color="error" className="bg-red-500 max-sm:mb-[50px]" size="large">Zamów Wycenę</Button>
         </motion.div>
-        <p className="text-white text-center">Zamów wycenę ustalonej konfiguracji</p>
+        <p className="text-white text-center max-sm:hidden">Zamów wycenę ustalonej konfiguracji</p>
       </div>
   
       {/* SETTING BOTTOM RIGHT SIDE END */}

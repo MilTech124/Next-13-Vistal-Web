@@ -19,6 +19,10 @@ function Header() {
       link: "/",
     },
     {
+      name:t("Sklep"),
+      link: "/sklep",
+    },
+    {
       name: t("O Nas"),
       link: "/onas",
     },
