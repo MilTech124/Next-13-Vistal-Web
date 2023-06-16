@@ -7,8 +7,11 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function Layout({ children }) {
   return (
     <>
-   
-      {/* Same as */}
+      
+      <Head>
+      <meta property="og:title" content="Vistal Garaże Blaszane"/>
+      <meta property="og:image" content="http://websites.mil-tech.pl/wp-content/uploads/2023/06/baner.jpg"/>
+      </Head>
       <ToastContainer />
       <Header />
       <main className="pt-[100px]">{children}</main>
