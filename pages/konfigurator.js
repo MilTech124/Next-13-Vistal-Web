@@ -10,6 +10,7 @@ import BasicModal from "../components/Configurator/Dialog"
 import SendOrder from "../components/Configurator/SendOrder"
 import { motion } from "framer-motion"
 import { toast } from 'react-toastify';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import Hello from "../components/Configurator/Hello"
 
@@ -574,12 +575,12 @@ function Test() {
           onChange={onChange}
           className="w-full"
         >
-          <MenuItem value={"Lewa"}>Lewa</MenuItem>
-          <MenuItem value={"Środek"}>Środek</MenuItem>
-          <MenuItem value={"Prawa"}>Prawa</MenuItem>
+         {(box.gatePosition2!="Lewa" && box.gatePosition2!="Środek")     ?<MenuItem value={"Lewa"}>Lewa</MenuItem> :null}
+           {(box.gatePosition2!="Środek" && box.gatePosition2!="Lewa")  ? <MenuItem value={"Środek"}>Środek</MenuItem> :null}
+           {(box.gatePosition2!="Prawa" && box.gatePosition2!="Środek")  ? <MenuItem value={"Prawa"}>Prawa</MenuItem> :null}
         </Select>
         {/* //Gate 2 */}
-        {box.width >= 6 ? <Gate gate={gate2} setGate={setGate2} /> : null}
+        {box.width >= 6 ? <Gate gate={gate2} setGate={setGate2}/> : null}
         {box.width >= 6 ? (
           <Select
             name="gatePosition2"
@@ -591,9 +592,11 @@ function Test() {
             className="w-full"
           >
            {gatePosition!="Brak" ? <MenuItem value={"Brak"}>Brak</MenuItem> :null} 
-           {box.gatePosition!="Lewa" && box.width>=6  ?<MenuItem value={"Lewa"}>Lewa</MenuItem> :null}
-           {box.gatePosition!="Środek" && box.width>=6 ? <MenuItem value={"Środek"}>Środek</MenuItem> :null}
-            <MenuItem value={"Prawa"}>Prawa</MenuItem>
+           {box.gatePosition!="Lewa" && box.gatePosition!="Środek" && box.width>=6 ?<MenuItem value={"Lewa"}>Lewa</MenuItem> :null}
+           {box.gatePosition!="Środek" && box.gatePosition!="Lewa" && box.gatePosition!="Prawa" && box.width>=6 ? <MenuItem value={"Środek"}>Środek</MenuItem> :null}
+
+           {box.gatePosition!="Prawa" && box.gatePosition!="Środek" && box.width>=6  ? <MenuItem value={"Prawa"}>Prawa</MenuItem> :null}
+            
           </Select>
         ) : null}
       </div>
@@ -621,9 +624,9 @@ function Test() {
       </div>
   
       {/* SETTING BOTTOM RIGHT SIDE END */}
-
+      <Suspense fallback={ <CircularProgress />}>
       <Canvas shadows camera={{ position: [10, 6, 2], fov: 30 }}>
-        <Suspense fallback={null}>
+ 
           <Environment
             files={env}
             ground={{ height: 5, radius: 40, scale: 20 }}
@@ -655,8 +658,9 @@ function Test() {
             blur={2.5}
             far={8}
           />
-        </Suspense>
+  
       </Canvas>
+      </Suspense>
     </div>
   )
 }
