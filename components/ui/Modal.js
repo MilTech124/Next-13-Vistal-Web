@@ -25,9 +25,10 @@ function Modal() {
 
             <div className="flex justify-around pt-10">
               <a href="tel:+48 693 344 132">
-                {" "}
-                <div className="bg-slate-600 p-2 rounded-md hover:bg-yellow-500 transition-all cursor-pointer">
+                
+                <div className="bg-slate-600 p-2 flex flex-col rounded-md hover:bg-yellow-500 transition-all cursor-pointer">
                   <img src="/svg/wphone.svg" />
+                  <p className="text-white">+48 693 344 132</p>
                 </div>
               </a>
               

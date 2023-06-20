@@ -4,6 +4,7 @@ import { Bounce } from "react-awesome-reveal";
 
 // TRANSLATION
 import { useTranslation } from 'next-i18next'
+import Link from "next/link";
 
 function Footer() {
   const { t } = useTranslation("footer")
@@ -65,10 +66,10 @@ function Footer() {
                   >
                     <img src="/svg/fwhite.svg" />
                   </a>
-                  <div className="text-sm">
+                  <Link className="text-sm hover:rotate-6 transition-all" href="/polityka" >
                     <img src="/svg/politic.svg" />
                    {t("Polityka prywatności")}
-                  </div>
+                  </Link>
                 </div>
               </div>
             </div>

@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import ColorsOfGarage from "../components/Home/ColorsOfGarage";
 import Hero from "../components/Home/Hero";
+import WhyVistal from "../components/Home/WhyVistal";
 import MakeGround from "../components/Home/MakeGround";
 import PopularGarage from "../components/Home/PopularGarage";
 import { Fade } from "react-awesome-reveal";
@@ -34,10 +35,12 @@ function Home({ data, garages }) {
       <Fade>
         <Hero data={data} Products={Products} />
       </Fade>
+      <WhyVistal />
+      <PopularGarage garages={garages} />
       <Fade>
         <MakeGround />
       </Fade>
-      <PopularGarage garages={garages} />
+      
       <Fade delay={100}>
         <ColorsOfGarage />
       </Fade>

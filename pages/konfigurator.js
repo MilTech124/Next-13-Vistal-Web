@@ -620,11 +620,11 @@ function Test() {
           }}>
         <Button onClick={()=>setOpenModal2(true)} variant="contained" color="error" className="bg-red-500 max-sm:mb-[50px]" size="large">Zamów Wycenę</Button>
         </motion.div>
-        <p className="text-white text-center max-sm:hidden">Zamów wycenę ustalonej konfiguracji</p>
+        <a href="https://mil-tech.pl/"><p className="text-white text-center max-sm:hidden">Realizacja konfiguratora MilTECH</p></a>
       </div>
   
       {/* SETTING BOTTOM RIGHT SIDE END */}
-      <Suspense fallback={ <CircularProgress />}>
+      <Suspense fallback={ <div className="loading-screen"><CircularProgress/></div>}>
       <Canvas shadows camera={{ position: [10, 6, 2], fov: 30 }}>
  
           <Environment
