@@ -38,10 +38,10 @@ function WhyVistal() {
           </div>
         </Fade>
         
-        <Fade delay={500}><Image width={800} height={556} className="max-w-[400px] basis-1/2" src="/svg/slupek.png"/></Fade>
+        <Fade delay={500}><Image width={800} height={556} className="max-w-[400px]  max-sm:max-w-[90vw] m-auto basis-1/2" src="/svg/slupek.png"/></Fade>
       </div>
       <div className="flex-1 m-auto md:flex md:gap-5 justify-center py-5 max-w-[1240px]">
-      <Fade delay={500}> <Image width={800} height={556} className="max-w-[600px] border-2 shadow-2xl drop-shadow-2xl basis-1/2" src="/svg/konfigurator.png"/></Fade>
+      <Fade delay={500}> <Image width={800} height={556} className="max-w-[600px] max-sm:max-w-[90vw] m-auto border-2 shadow-2xl drop-shadow-2xl basis-1/2" src="/svg/konfigurator.png"/></Fade>
       <Fade delay={300}>
         <div className="basis-1/2 flex flex-col items-center">
             <h3 className="text-2xl font-semibold text-center  py-2">Konfigurator Garażu</h3>
