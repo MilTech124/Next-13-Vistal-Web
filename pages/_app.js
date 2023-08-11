@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { store } from "../store/index";
 import Modal from "../components/ui/Modal";
 import { appWithTranslation } from 'next-i18next'
-
+import GoogleAnalytics from "../components/GoogleAnalytics";
 
 
 
@@ -12,6 +12,7 @@ import { appWithTranslation } from 'next-i18next'
 
   return (
     <Provider store={store}>
+      <GoogleAnalytics />
       <Layout>      
         <Modal></Modal>
         <Component {...pageProps} />

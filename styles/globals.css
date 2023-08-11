@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+h3{
+   @apply text-2xl font-bold text-center;
+}
+
 
 #make-ground li{
    padding-top:1.1rem ; 

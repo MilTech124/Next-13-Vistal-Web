@@ -7,7 +7,6 @@ import MakeGround from "../components/Home/MakeGround";
 import PopularGarage from "../components/Home/PopularGarage";
 import { Fade } from "react-awesome-reveal";
 import Head from "next/head";
-import { useState } from "react";
 import { useSelector } from "react-redux";
 
 
@@ -19,7 +18,18 @@ function Home({ data, garages }) {
 
   return (
     <>
-      <Head>
+      <Head>    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-CL17C3F05K">
+</script>
+<script>{`
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+
+ gtag('config', 'G-CL17C3F05K');
+ `}
+ 
+</script>  
         <meta charSet="utf-8" />
         <meta name="description" content="Firma zajmująca się produkcją oraz sprzedażą garaży blaszanych oferuje wysokiej jakości produkty, dostępne w różnych rozmiarach i kolorach" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
@@ -39,8 +49,7 @@ function Home({ data, garages }) {
       <PopularGarage garages={garages} />
       <Fade>
         <MakeGround />
-      </Fade>
-      
+      </Fade>      
       <Fade delay={100}>
         <ColorsOfGarage />
       </Fade>
