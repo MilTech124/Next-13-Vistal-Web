@@ -66,3 +66,12 @@ h3{
    z-index: 9999;
    transform: translate(-50%, -50%);
  }
+
+ .swiper-slide img{
+   transform: scale(1.1) 
+;
+ }
+ .swiper-slide-active img {
+   transform: scale(1.0) ;
+   transition: transform 3.0s ease-out;
+ }

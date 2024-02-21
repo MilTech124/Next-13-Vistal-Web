@@ -36,7 +36,7 @@ function Garage({ garage }) {
 
       {/* NAZWA GARAŻU */}
       <Link className="w-full h-full" href={`/sklep/${slug}`}>
-      <div className="text-left pl-5 mr-auto pt-5 bg-gray-500 h-full max-sm:items-center max-sm:flex text-white text-lg font-medium max-sm:text-xs">
+      <div className="text-left pl-5 mr-auto pt-5 bg-gray-500 hover:bg-gray-400 h-full max-sm:items-center max-sm:flex text-white text-lg font-medium max-sm:text-xs">
         <h3>{(locale==="pl") ? garage.acf.tytul
             : (locale==="sk") ? garage.acf['tytuł-sk']
             : (locale ==="hu") ? garage.acf['tytuł-hu']

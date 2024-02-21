@@ -20,6 +20,9 @@ import { useTranslation } from "next-i18next";
 
 function Hero({ data,Products}) {
   const { t } = useTranslation("index");
+  const { i18n } = useTranslation();
+
+  console.log(i18n.language);
 
   const dispatch = useDispatch();
   const changeProduct = (name) => {
@@ -27,12 +30,9 @@ function Hero({ data,Products}) {
   
   };
 
-  const css = { width: "100%", height: "94vh", objectFit: "cover" };
-  const ocynkowe = data.acf.photo_gallery["ocynkowe-glowna"][2];
-  const akrylowe = data.acf.photo_gallery["akrylowe-glowna"][1];
-  const drewnopodobne = data.acf.photo_gallery["drewnopodobne-glowna"][0];
-  const kojce = data.acf.photo_gallery["kojce-glowna"][4];
-  const warstwowe = data.acf.photo_gallery.warstwowe[3];
+  const css = { width: "100%", height: "94vh", objectFit:"cover", objectPosition: "center"  };
+  const drewnopodobne = data.acf.photo_gallery["slider-glowna"][0];
+
 
 
   return (
@@ -50,13 +50,14 @@ function Hero({ data,Products}) {
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper relative max-sm:h-[70vh]"
       >
-        <div className="absolute w-full text-white font-bold top-0 left-0 z-10 max-sm:flex-col-reverse  flex flex-row justify-between !important ">
-          <div className="bg-black/50 shadow-xl rounded-r-xl basis-2/3 p-[65px] max-sm:p-5 lg:mt-[30vh]">
-            <h1 className="text-[64px] max-sm:text-xl pb-5">
-              {t("Garaże Blaszane")}
+        <div className="absolute w-full text-slate-800 font-semibold top-0 left-0 z-10 max-sm:flex-col-reverse  flex flex-row justify-between !important ">
+          <div className="bg-white/50 backdrop-blur-sm  shadow-xl rounded-r-xl basis-2/3 p-[65px] max-sm:p-5 lg:mt-[30vh]">
+            <h1 className="text-[48px] max-sm:text-xl text-neutral-500 font-medium pb-5">
+              {i18n.language === "pl" ? <>Garaże Blaszane i <span className="text-red-800 font-bold">Warstwowe</span></> : t("Garaże Blaszane")}
+            
             </h1>
             <p
-              className="text-2xl max-sm:text-sm "
+              className="text-2xl  max-sm:text-sm "
               style={{ whiteSpace: "pre-wrap" }}
             >
               {t("text-under")}
@@ -109,9 +110,9 @@ function Hero({ data,Products}) {
             <Image
               src={item.full_image_url}
               style={css}
-              width="960"
-              height="720"
-              className="img-fluid"
+              width="1920"
+              height="1080"
+              className="img-fluid w-full h-full object-cover object-center  "
               alt={item.id}
               priority
             />

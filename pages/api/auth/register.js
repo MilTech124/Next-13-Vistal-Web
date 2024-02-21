@@ -9,7 +9,7 @@ const handler = async (req, res) => {
   if (req.method === "POST") {
     const { login, password } = req.body;
 
-    if (userExists(login)) {
+    if (await userExists(login)) {
       res.status(400).json({ message: "UserExistss" });
       return;
     }
@@ -21,14 +21,17 @@ const handler = async (req, res) => {
         login,
         password: hashedPass,
       });
+
       await user.save();
       res.status(200).json({
-        _id: user.id,
+        _id: user._id,
         login: user.login,
         role: user.role,
       });
     } catch (error) {
+      console.log(error);
       res.status(500).json({
+        message: "Error adding to db",
         error: error,
       });
     }
