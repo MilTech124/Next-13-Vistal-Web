@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
 import { useState } from "react";
 
-function dodawanie() {
+function Dodawanie() {
   const [form, setForm] = useState({
    garaz: null,
    cenaGarazu: null,
@@ -38,4 +38,4 @@ function dodawanie() {
   );
 }
 
-export default dodawanie;
+export default Dodawanie;
