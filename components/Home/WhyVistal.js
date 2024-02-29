@@ -74,11 +74,11 @@ function WhyVistal() {
               <b> drzwi, okna, bramy,</b> czy też <b>automatyka bram</b>.
             </p>
 
-            {/* <Bounce>
+            <Bounce>
               <Button variant="contained" className="bg-red-700 mt-5">
                 <Link href="/akcesoria">Więcej informacji</Link>
               </Button>
-            </Bounce> */}
+            </Bounce>
           </div>
         </Fade>
       </div>

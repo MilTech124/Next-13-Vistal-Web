@@ -75,3 +75,11 @@ h3{
    transform: scale(1.0) ;
    transition: transform 3.0s ease-out;
  }
+
+ .test{
+   filter: drop-shadow(16px 16px 20px red);
+ }
+ svg polygon {
+   transition: all 0.3s;
+  
+ }
