@@ -175,7 +175,7 @@ function Akcesoria() {
         <div class="p-4">
         <h2 id="poszycie" className="text-6xl text-center font-bold">Rodzaj garażu</h2>
         {poszycie.map((item) => (
-          <div>   
+          <div key={item.name}>   
                   <div className="flex max-md:flex-wrap-reverse items-center justify-evenly"> 
             <Image src={item.image} width={400} height={400} className="max-w-[400px] border-2 shadow-2xl drop-shadow-2xl  "/>
             <div className="mb-4 max-w-xl max-sm:text-sm">
@@ -189,7 +189,7 @@ function Akcesoria() {
 
         <h2 id="brama" className="text-6xl text-center font-bold">Bramy</h2>
         {bramy.map((item) => (
-          <div>   
+          <div key={item.name}>     
                  
             <div className="flex max-md:flex-wrap-reverse items-center justify-evenly"> 
             <div className="mb-4 max-w-xl max-sm:text-sm">
@@ -205,7 +205,7 @@ function Akcesoria() {
 
         <h2 id="drzwi2" className="text-6xl text-center font-bold">Drzwi</h2>
         {door.map((item) => (
-          <div>   
+          <div key={item.name}>      
                  
             <div className="flex max-md:flex-wrap-reverse items-center justify-evenly"> 
             <Image src={item.image} width={400} height={400} className="max-w-[400px] border-2 shadow-2xl drop-shadow-2xl  "/>
@@ -222,7 +222,7 @@ function Akcesoria() {
 
         <h2 id="okno" className="text-6xl text-center font-bold">Okno</h2>
         {window.map((item) => (
-          <div>   
+          <div key={item.name}>  
                  
             <div className="flex max-md:flex-wrap-reverse items-center justify-evenly"> 
             <div className="mb-4 max-w-xl max-sm:text-sm">
@@ -237,7 +237,7 @@ function Akcesoria() {
 
         <h2 id="obrobka" className="text-6xl text-center font-bold">Okucia</h2>
         {okucia.map((item) => (
-          <div>   
+          <div key={item.name}>      
                  
             <div className="flex max-md:flex-wrap-reverse items-center justify-evenly"> 
             <Image src={item.image} width={400} height={400} className="max-w-[400px] border-2 shadow-2xl drop-shadow-2xl  "/>
@@ -253,7 +253,7 @@ function Akcesoria() {
 
         <h2 id="orynnowanie" className="text-6xl text-center font-bold">Rynny</h2>
         {rynny.map((item) => (
-          <div>   
+          <div key={item.name}>      
                  
             <div className="flex max-md:flex-wrap-reverse items-center justify-evenly"> 
             <div className="mb-4 max-w-xl max-sm:text-sm">
@@ -267,7 +267,7 @@ function Akcesoria() {
 
         <h2 className="text-6xl text-center font-bold">Nity</h2>
         {nity.map((item) => (
-          <div>   
+          <div key={item.name}>      
                  
             <div className="flex max-md:flex-wrap-reverse items-center justify-evenly"> 
             <Image src={item.image} width={400} height={400} className="max-w-[400px] border-2 shadow-2xl drop-shadow-2xl  "/>
@@ -283,7 +283,7 @@ function Akcesoria() {
 
         <h2 className="text-6xl text-center font-bold">Automatyka</h2>
         {automatyka.map((item) => (
-          <div>   
+          <div key={item.name}>      
                  
             <div className="flex max-md:flex-wrap-reverse items-center justify-evenly"> 
             <div className="mb-4 max-w-xl max-sm:text-sm">
@@ -297,7 +297,7 @@ function Akcesoria() {
 
         <h2 className="text-6xl text-center font-bold">Filc</h2>
         {filc.map((item) => (
-          <div>   
+          <div key={item.name}>      
                  
             <div className="flex max-md:flex-wrap-reverse items-center justify-evenly"> 
             <Image src={item.image} width={400} height={400} className="max-w-[400px] border-2 shadow-2xl drop-shadow-2xl  "/>
@@ -325,3 +325,15 @@ function Akcesoria() {
 }
 
 export default Akcesoria;
+
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
+export const getStaticProps = async ({ locale }) => {
+ 
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common", "footer","menu","kontakt"],null,['pl','sk'])),  
+    },
+  
+  };
+};
