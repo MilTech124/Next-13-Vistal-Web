@@ -7,7 +7,7 @@ function Akcesoria() {
     {
       name: "Bramy Segmentowe",
       description: "Bramy segmentowe to nowoczesne rozwiązanie w dziedzinie bram garażowych, które zyskuje coraz większą popularność. Składają się z poziomych paneli, które są połączone ze sobą za pomocą zawiasów. Dzięki temu konstrukcja bramy może płynnie podnosić się i opuszczać, zajmując minimalną przestrzeń. Bramy segmentowe są wygodne w użytkowaniu i charakteryzują się estetycznym wyglądem, co sprawia, że są popularnym wyborem dla wielu właścicieli domów.",
-      image: "/images/akcesoria/brama.webp",
+      image: "/images/akcesoria/bramaSeg.webp",
     },
     {
       name: "Bramy Uchylne",
