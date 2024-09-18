@@ -32,7 +32,7 @@ function Header() {
     },
     {
       name: t("Konfigurator 3D"),
-      link: "/konfigurator",
+      link: "https://www.skonfiguruj-garaz.pl/konfigurator/vistal",
     },
     {
       name: t("Realizacje"),
