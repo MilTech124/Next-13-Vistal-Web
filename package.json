@@ -43,7 +43,7 @@
     "redux": "^4.2.0",
     "styled-components": "^5.3.6",
     "swiper": "^8.4.5",
-    "three": "^0.149.0"
+    "three": "^0.169.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
