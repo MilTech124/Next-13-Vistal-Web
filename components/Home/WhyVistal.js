@@ -46,7 +46,7 @@ function WhyVistal() {
             <Bounce>
               {" "}
               <Button variant="contained" className="bg-red-700 mt-5">
-                <Link href="/konfigurator">Konfigurator</Link>
+                <Link href="https://www.skonfiguruj-garaz.pl/konfigurator/vistal">Konfigurator</Link>
               </Button>
             </Bounce>
           </div>

@@ -27,9 +27,10 @@ function Header() {
       link: "/onas",
     },
     {
-      name: t("Wycena"),
-      link: "/wycena",
+      name: t("Akcesoria"),
+      link: "/akcesoria",
     },
+   
     {
       name: t("Konfigurator 3D"),
       link: "https://www.skonfiguruj-garaz.pl/konfigurator/vistal",
@@ -37,6 +38,10 @@ function Header() {
     {
       name: t("Realizacje"),
       link: "/realizacje",
+    },
+    {
+      name: t("FAQ"),
+      link: "/faq",
     },
     {
       name: t("Kontakt"),
