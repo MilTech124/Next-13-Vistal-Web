@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 // components/ContactCTA.js
 export default function ContactCTA() {
   return (
@@ -7,12 +9,12 @@ export default function ContactCTA() {
         <p className="text-lg mb-6">
           Skontaktuj się z nami, aby uzyskać szczegółowe informacje o naszych produktach i usługach.
         </p>
-        <a
+        <Link
           href="/kontakt"
           className="px-6 py-3 bg-white text-blue-500 font-medium rounded shadow hover:bg-gray-100 transition"
         >
           Skontaktuj się
-        </a>
+        </Link>
       </div>
     </section>
   );
